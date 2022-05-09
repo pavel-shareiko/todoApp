@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Logic.Utils;
+using System;
 using System.IO;
-using Logic.Utils;
 using Tasks;
 
 namespace Logic.Repositories
@@ -8,7 +8,7 @@ namespace Logic.Repositories
     public class DiaryFileRepository : IRepository<Diary>
     {
         private readonly string _filePath;
-        
+
         public DiaryFileRepository(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -22,7 +22,17 @@ namespace Logic.Repositories
 
         public void Save(Diary obj)
         {
-            var json = JsonHelper.Serialize(obj, false);
+            Save(obj, true);
+        }
+
+        public void Save(Diary obj, bool writeIndented)
+        {
+            if (obj is null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            var json = JsonHelper<Diary>.Serialize(obj, writeIndented);
             using (var sw = new StreamWriter(_filePath))
             {
                 sw.WriteLine(json);
@@ -31,7 +41,7 @@ namespace Logic.Repositories
 
         public Diary Read()
         {
-            return JsonHelper.DeserializeFromFile<Diary>(_filePath);
+            return JsonHelper<Diary>.DeserializeFromFile(_filePath);
         }
     }
 }

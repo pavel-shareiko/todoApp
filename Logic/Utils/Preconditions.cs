@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tasks.Utils
+namespace Logic.Utils
 {
 
     public static class Preconditions

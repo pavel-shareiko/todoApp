@@ -1,9 +1,11 @@
-﻿namespace Tasks.Tasks
+﻿namespace Logic.Tasks
 {
     public enum TaskImportance
     {
-        Default,
+        Low,
         Medium,
-        Important
+        High,
+        Urgent,
+        Critical
     }
 }

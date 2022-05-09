@@ -2,7 +2,7 @@
 {
     public enum Theme
     {
-        Default,
+        Windows,
         Light,
         Dark
     }

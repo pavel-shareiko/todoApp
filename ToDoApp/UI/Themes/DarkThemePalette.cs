@@ -6,7 +6,7 @@ namespace ToDoApp.UI.Themes
     {
         public Color GetAccentColor()
         {
-            return Color.FromArgb(31, 29, 54);
+            return Color.FromArgb(187, 134, 252);
         }
 
         public Color GetSecondaryColor()
@@ -16,12 +16,12 @@ namespace ToDoApp.UI.Themes
 
         public Color GetThirdColor()
         {
-            return Color.FromArgb(134, 72, 121);
+            return Color.FromArgb(30, 30, 30);
         }
 
         public Color GetBackgroundColor()
         {
-            return Color.FromArgb(233, 166, 166);
+            return Color.FromArgb(18, 18, 18);
         }
     }
 }

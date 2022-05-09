@@ -7,7 +7,7 @@ namespace ToDoApp.UI.Themes
     public class WindowsThemePalette : IColorPalette
     {
         private const float DefaultBrightnessMultiplier = 0.25F;
-        
+
         [DllImport("uxtheme.dll", EntryPoint = "#95")]
         private static extern uint GetImmersiveColorFromColorSetEx(uint dwImmersiveColorSet, uint dwImmersiveColorType,
             bool bIgnoreHighContrast, uint dwHighContrastCacheMode);
@@ -31,9 +31,9 @@ namespace ToDoApp.UI.Themes
         public Color GetSecondaryColor()
         {
             var primaryColor = GetAccentColor();
-            
-            return primaryColor.IsBright() 
-                ? primaryColor.Darken() 
+
+            return primaryColor.IsBright()
+                ? primaryColor.Darken()
                 : primaryColor.Lighten();
         }
 
@@ -41,9 +41,9 @@ namespace ToDoApp.UI.Themes
         {
             var primaryColor = GetAccentColor();
             var secondaryColor = GetSecondaryColor();
-            
-            return primaryColor.IsBright() 
-                ? secondaryColor.Darken(DefaultBrightnessMultiplier) 
+
+            return primaryColor.IsBright()
+                ? secondaryColor.Darken(DefaultBrightnessMultiplier)
                 : secondaryColor.Lighten(DefaultBrightnessMultiplier);
         }
 
@@ -51,12 +51,12 @@ namespace ToDoApp.UI.Themes
         {
             var primaryColor = GetAccentColor();
             var thirdColor = GetThirdColor();
-            
-            return primaryColor.IsBright() 
-                ? thirdColor.Darken(DefaultBrightnessMultiplier) 
+
+            return primaryColor.IsBright()
+                ? thirdColor.Darken(DefaultBrightnessMultiplier)
                 : thirdColor.Lighten(DefaultBrightnessMultiplier + 0.55F);
         }
-        
+
         private static Color ConvertDWordColorToRgb(uint colorSetEx)
         {
             var red = (byte)((0x000000FF & colorSetEx) >> 0);

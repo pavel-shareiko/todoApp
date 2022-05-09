@@ -1,13 +1,12 @@
-﻿using System.Globalization;
+﻿using Newtonsoft.Json;
+using System.Globalization;
 using System.IO;
-using Newtonsoft.Json;
-using Tasks.Utils;
 
 namespace Logic.Utils
 {
-    public static class JsonHelper
+    public static class JsonHelper<T> where T : new()
     {
-        public static string Serialize<T>(T obj, bool writeIndented)
+        public static string Serialize(T obj, bool writeIndented)
         {
             var settings = new JsonSerializerSettings()
             {
@@ -20,12 +19,12 @@ namespace Logic.Utils
             return JsonConvert.SerializeObject(obj, settings);
         }
 
-        public static T DeserializeFromFile<T>(string path)
+        public static T DeserializeFromFile(string path)
         {
             Preconditions.RequireNonEmptyString(path);
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException("File not found");
+                return new T();
             }
 
             using (var sr = new StreamReader(path))

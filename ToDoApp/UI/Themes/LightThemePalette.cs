@@ -6,14 +6,14 @@ namespace ToDoApp.UI.Themes
     {
         public Color GetAccentColor()
         {
-            return rgb(73, 84, 100);
+            return rgb(31, 29, 54);
         }
 
         public Color GetSecondaryColor()
         {
             return rgb(187, 191, 202);
         }
-        
+
         public Color GetThirdColor()
         {
             return rgb(232, 232, 232);

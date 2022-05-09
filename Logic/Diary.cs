@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Logic.Tasks;
+using Logic.Utils;
+using System.Collections.Generic;
 using System.Linq;
-using Tasks.Tasks;
-using Tasks.Utils;
 
 namespace Tasks
 {
