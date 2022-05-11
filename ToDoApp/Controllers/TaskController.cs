@@ -1,6 +1,7 @@
 ﻿using Logic.Utils;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace ToDoApp.Controls
         private readonly Panel tasksPanel;
         private int _page = 1;
 
+        public event EventHandler TasksLoading;
+        public event EventHandler<TasksLoadedEventArgs> TasksLoaded;
+
         public bool IsLoggingEnabled { get; set; } = true;
         public bool IsLoading { get; private set; }
         public TaskView SelectedItem { get; set; }
@@ -28,7 +32,7 @@ namespace ToDoApp.Controls
                 {
                     return;
                 }
-                
+
                 var prevValue = _page;
                 if (value < 1)
                 {
@@ -62,7 +66,7 @@ namespace ToDoApp.Controls
 
         public async void ReloadTasksAsync()
         {
-            var tasksToShow = await TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage);
+            var tasksToShow = await TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage, new TaskComparer());
             if (tasksToShow.Count == 0)
             {
                 tasksPanel.Controls.Clear();
@@ -70,7 +74,7 @@ namespace ToDoApp.Controls
                 return;
             }
 
-            if(tasksToShow.Count == 1 || _page == 0)
+            if (tasksToShow.Count == 1 || _page == 0)
             {
                 _page = 1;
             }
@@ -78,7 +82,7 @@ namespace ToDoApp.Controls
             tasksPanel.Controls.Clear();
 
             var controls = tasksPanel.Controls;
-            IsLoading = true;
+            OnTasksLoading();
 
             await Task.Run(() =>
             {
@@ -108,11 +112,11 @@ namespace ToDoApp.Controls
                 {
                     this.LogException(e);
                     MessageBox.Show($"An error occurred while loading the tasks.\n Error: {e.Message}", "Warning", MessageBoxButtons.OK);
-                    IsLoading = false;
+                    OnTasksLoaded(new TasksLoadedEventArgs(false));
                 }
             });
 
-            IsLoading = false;
+            OnTasksLoaded(new TasksLoadedEventArgs(true));
         }
 
         private void ShowNoTasksLabel()
@@ -155,6 +159,64 @@ namespace ToDoApp.Controls
             SelectedItem = taskView;
             SelectedItem.Hightlight();
         }
+
+        protected virtual void OnTasksLoading()
+        {
+            IsLoading = true;
+            TasksLoading?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnTasksLoaded(TasksLoadedEventArgs args)
+        {
+            IsLoading = false;
+            TasksLoaded?.Invoke(this, args);
+        }
+    }
+
+    public class TasksLoadedEventArgs : EventArgs
+    {
+        public bool Successful { get; }
+        public TasksLoadedEventArgs(bool isSuccessful)
+        {
+            Successful = isSuccessful;
+        }
+    }
+
+    public class TaskComparer : IComparer<Logic.Tasks.Task>
+    {
+        public int Compare(Logic.Tasks.Task x, Logic.Tasks.Task y)
+        {
+            // The comparison should be reversed because the list is sorted in descending order
+            // The most important factor is th deadline, then comes the importance, and then the creation date
+
+            if (x.DeadLine.HasValue && !y.DeadLine.HasValue)
+            {
+                return 1;
+            }
+
+            if (!x.DeadLine.HasValue && y.DeadLine.HasValue)
+            {
+                return -1;
+            }
+            
+            if (!x.DeadLine.HasValue && !y.DeadLine.HasValue)
+            {
+                goto importanceComparison;
+            }
+
+            if (x.DeadLine.Value.Date != y.DeadLine.Value.Date)
+            {
+                return y.DeadLine.Value.Date.CompareTo(x.DeadLine.Value.Date);
+            }
+            
+        importanceComparison:
+            
+            if (x.Importance != y.Importance)
+            {
+                return x.Importance.CompareTo(y.Importance);
+            }
+
+            return y.CreationDate.CompareTo(x.CreationDate);
+        }
     }
 }
-

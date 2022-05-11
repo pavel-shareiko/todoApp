@@ -3,7 +3,7 @@ using ToDoApp.UI.Themes;
 
 namespace ToDoApp.Forms
 {
-    partial class SettingsForm
+    partial class SettingsScreen
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

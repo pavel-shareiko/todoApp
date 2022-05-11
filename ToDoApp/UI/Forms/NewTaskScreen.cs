@@ -7,57 +7,54 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.UI;
-using ToDoApp.UI.Controls;
 
 namespace ToDoApp.Forms
 {
-    public partial class EditTaskForm : Form, ILoggable
+    public partial class NewTaskScreen : Form, ILoggable
     {
-        private Task _originTask;
-        private Task _currentTask;
-
-        public bool IsLoggingEnabled { get; set; }
+        public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
+        private readonly Task creatingTask;
 
-        public EditTaskForm(Task task)
+        public NewTaskScreen()
         {
-            if (task == null)
-            {
-                throw new ArgumentNullException(nameof(task));
-            }
-            _originTask = task;
-            
-            _currentTask = new Task(_originTask);
-            
             InitializeComponent();
 
-            importanceComboBox.DataSource = Enum.GetValues(typeof(TaskImportance));
+            creatingTask = new Task();
 
-            taskBindingSource.DataSource = _currentTask;
-            deadLineDateTimePicker.MinDate = DateTime.Now;
+            taskBindingSource.DataSource = creatingTask;
+
+            var values = Enum.GetValues(typeof(TaskImportance));
+            var items = new object[values.Length];
+            for (int i = 0; i < values.Length; i++)
+            {
+                items[i] = values.GetValue(i);
+            }
+
+            importanceComboBox.Items.AddRange(items);
             importanceComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            deadLineDateTimePicker.MinDate = DateTime.Now;
+            deadLineDateTimePicker.Value = DateTime.Now;
 
             ApplyTheme();
         }
 
         private void ApplyTheme()
         {
-            var panels = this.Controls.OfType<Panel>().ToList();
+            headerLabel.ForeColor = ApplicationStyle.TextColor;
+            BackColor = ApplicationStyle.BackgroundColor;
 
-            panels.ForEach(p => p.BackColor = ApplicationStyle.BackgroundColor);
+            foreach (var label in contentPanel.Controls.OfType<Label>())
+            {
+                label.ForeColor = ApplicationStyle.TextColor;
+            }
 
-            panels.ForEach(p => p.Controls.OfType<Label>().ToList()
-                .ForEach(l => l.ForeColor = ApplicationStyle.TextColor));
-
-            panels.ForEach(p => p.Controls.OfType<RoundButton>().ToList()
-                .ForEach(b =>
-                {
-                    b.BackColor = ApplicationStyle.AccentColor;
-                    b.ForeColor = b.BackColor.GetContrastColor();
-                }));
+            createButton.BackColor = ApplicationStyle.AccentColor;
+            createButton.ForeColor = createButton.BackColor.GetContrastColor();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void createButton_Click(object sender, EventArgs e)
         {
             taskBindingSource.EndEdit();
 
@@ -72,7 +69,7 @@ namespace ToDoApp.Forms
 
             if (!deadLineDateTimePicker.Checked)
             {
-                _currentTask.DeadLine = null;
+                creatingTask.DeadLine = null;
             }
 
             if (!Validator.TryValidateObject(task, context, errors, true))
@@ -87,11 +84,12 @@ namespace ToDoApp.Forms
             }
 
             this.Log(LogLevel.Debug, "Validation succeeded");
-            _currentTask.CopyTo(_originTask);
 
-            MessageBox.Show("Task has been successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            TaskManager.Diary.AddTask(task);
+            MessageBox.Show("Task has been successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             taskBindingSource.Clear();
+
             Dispose();
             Close();
         }

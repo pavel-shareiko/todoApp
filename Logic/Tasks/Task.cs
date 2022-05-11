@@ -28,7 +28,7 @@ namespace Logic.Tasks
         }
         public DateTime? DeadLine { get; set; }
 
-        public DateTime? CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public Task()
         {

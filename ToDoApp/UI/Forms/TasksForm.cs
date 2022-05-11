@@ -18,6 +18,7 @@ namespace ToDoApp.Forms
 
             TaskController = new TaskController(dataViewPanel);
             TaskController.ReloadTasksAsync();
+            TaskController.TasksLoaded += OnTasksLoaded;
 
             UpdatePagesLabel();
 
@@ -35,13 +36,17 @@ namespace ToDoApp.Forms
                 x.ForeColor = x.BackColor.GetContrastColor();
             });
             controls.OfType<IconPictureBox>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.AccentColor);
+
+            nextPageButton.IconColor = ApplicationStyle.AccentColor;
+            prevPageButton.IconColor = ApplicationStyle.AccentColor;
+
+            pagesLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
         }
 
         private void newButton_Click(object sender, System.EventArgs e)
         {
-            new NewTaskForm().ShowDialog();
+            new NewTaskScreen().ShowDialog();
             TaskController.ReloadTasksAsync();
-            UpdatePagesLabel();
         }
         private void editButton_Click(object sender, System.EventArgs e)
         {
@@ -50,7 +55,7 @@ namespace ToDoApp.Forms
                 return;
             }
 
-            var editTaskForm = new EditTaskForm(TaskController.SelectedItem.Task);
+            var editTaskForm = new EditTaskScreen(TaskController.SelectedItem.Task);
 
             editTaskForm.ShowDialog();
             TaskController.ReloadTasksAsync();
@@ -70,7 +75,6 @@ namespace ToDoApp.Forms
                 TaskManager.RemoveTask(TaskController.SelectedItem.Task);
                 TaskController.ReloadTasksAsync();
             }
-            UpdatePagesLabel();
         }
 
         private void detailsButton_Click(object sender, System.EventArgs e)
@@ -100,5 +104,20 @@ namespace ToDoApp.Forms
             pagesLabel.Text = $"Page {TaskController.Page} of {TaskController.TotalPages}";
         }
 
+        private void OnTasksLoaded(object sender, TasksLoadedEventArgs args)
+        {
+            UpdatePagesLabel();
+        }
+
+        public new void Dispose()
+        {
+            TaskController.TasksLoaded -= OnTasksLoaded;
+            base.Dispose();
+        }
+
+        private void reloadButton_Click(object sender, EventArgs e)
+        {
+            TaskController.ReloadTasksAsync();
+        }
     }
 }

@@ -62,11 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="UI\Forms\EditTaskForm.cs">
+    <Compile Include="UI\Forms\EditTaskScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\EditTaskForm.Designer.cs">
-      <DependentUpon>EditTaskForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\EditTaskScreen.Designer.cs">
+      <DependentUpon>EditTaskScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -74,24 +74,30 @@
     <Compile Include="UI\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\NewTaskForm.cs">
+    <Compile Include="UI\Forms\MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\NewTaskForm.Designer.cs">
-      <DependentUpon>NewTaskForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\MainScreen.Designer.cs">
+      <DependentUpon>MainScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\TaskInfoForm.cs">
+    <Compile Include="UI\Forms\NewTaskScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\TaskInfoForm.Designer.cs">
-      <DependentUpon>TaskInfoForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\NewTaskScreen.Designer.cs">
+      <DependentUpon>NewTaskScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\TaskInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\TaskInfo.Designer.cs">
+      <DependentUpon>TaskInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="UI\Forms\SettingsForm.cs">
+    <Compile Include="UI\Forms\SettingsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\SettingsScreen.Designer.cs">
+      <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\Settings\SettingUpdate.cs" />
     <Compile Include="UI\Forms\Settings\SettingUpdateCollection.cs" />
@@ -122,20 +128,20 @@
     <Compile Include="UI\Themes\Theme.cs" />
     <Compile Include="UI\Themes\IColorPalette.cs" />
     <Compile Include="UI\Themes\ColorPaletteFactory.cs" />
-    <EmbeddedResource Include="UI\Forms\EditTaskForm.resx">
-      <DependentUpon>EditTaskForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\EditTaskScreen.resx">
+      <DependentUpon>EditTaskScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\NewTaskForm.resx">
-      <DependentUpon>NewTaskForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\NewTaskScreen.resx">
+      <DependentUpon>NewTaskScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SettingsScreen.resx">
+      <DependentUpon>SettingsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\TaskInfoForm.resx">
-      <DependentUpon>TaskInfoForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\TaskInfo.resx">
+      <DependentUpon>TaskInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\TasksForm.resx">
       <DependentUpon>TasksForm.cs</DependentUpon>

@@ -2,7 +2,7 @@
 
 namespace ToDoApp.Forms
 {
-    partial class NewTaskForm
+    partial class NewTaskScreen
     {
         /// <summary>
         /// Required designer variable.

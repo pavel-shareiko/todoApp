@@ -7,14 +7,14 @@ using ToDoApp.UI.Themes;
 
 namespace ToDoApp.Forms
 {
-    public partial class SettingsForm : UserControl, ILoggable
+    public partial class SettingsScreen : UserControl, ILoggable
     {
         public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
 
         private readonly SettingUpdateCollection _updates = new SettingUpdateCollection();
 
-        public SettingsForm()
+        public SettingsScreen()
         {
             InitializeComponent();
 

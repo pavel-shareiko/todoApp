@@ -9,7 +9,7 @@ using ToDoApp.Forms;
 
 namespace ToDoApp.UI.Controls
 {
-    public partial class TaskView : UserControl, ILoggable
+    public partial class TaskView : UserControl, ILoggable, IDisposable
     {
         private Task _task;
         private readonly TaskController controller;
@@ -52,7 +52,6 @@ namespace ToDoApp.UI.Controls
                 this.nameLabel.Text = task.Name;
                 this.descriptionLabel.Text = task.Description;
                 this.importanceLabel.Text = task.Importance.ToString();
-                this.createdOnLabel.Text = task.CreationDate.ToString();
 
                 if (!task.DeadLine.HasValue)
                 {
@@ -60,7 +59,7 @@ namespace ToDoApp.UI.Controls
                 }
                 else
                 {
-                    this.deadlineLabel.Text = task.DeadLine.Value.ToString();
+                    this.deadlineLabel.Text = task.DeadLine.Value.ToString("ddddd, dd MMMM, yyyy");
                 }
             }
             catch (Exception e)
@@ -123,6 +122,17 @@ namespace ToDoApp.UI.Controls
         {
             new TaskInfoForm(this.Task).ShowDialog();
             controller.Select(this);
+        }
+
+        public new void Dispose()
+        {
+            foreach (var control in taskLayout.Controls)
+            {
+                ((Control)control).MouseClick -= taskLayout_MouseClick;
+                ((Control)control).DoubleClick -= AllControls_MouseDoubleClick;
+            }
+            
+            base.Dispose();
         }
     }
 }

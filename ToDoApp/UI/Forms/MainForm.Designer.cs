@@ -48,7 +48,7 @@
             this.menuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuPanel.Location = new System.Drawing.Point(0, 0);
             this.menuPanel.Name = "menuPanel";
-            this.menuPanel.Size = new System.Drawing.Size(151, 561);
+            this.menuPanel.Size = new System.Drawing.Size(183, 606);
             this.menuPanel.TabIndex = 0;
             // 
             // settingsButton
@@ -69,7 +69,7 @@
             this.settingsButton.IsLoggingEnabled = true;
             this.settingsButton.Location = new System.Drawing.Point(0, 118);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(151, 59);
+            this.settingsButton.Size = new System.Drawing.Size(183, 59);
             this.settingsButton.TabIndex = 4;
             this.settingsButton.Text = "Settings";
             this.settingsButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -95,7 +95,7 @@
             this.tasksButton.IsLoggingEnabled = true;
             this.tasksButton.Location = new System.Drawing.Point(0, 59);
             this.tasksButton.Name = "tasksButton";
-            this.tasksButton.Size = new System.Drawing.Size(151, 59);
+            this.tasksButton.Size = new System.Drawing.Size(183, 59);
             this.tasksButton.TabIndex = 3;
             this.tasksButton.Text = "Tasks";
             this.tasksButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -121,7 +121,7 @@
             this.homeButton.IsLoggingEnabled = true;
             this.homeButton.Location = new System.Drawing.Point(0, 0);
             this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(151, 59);
+            this.homeButton.Size = new System.Drawing.Size(183, 59);
             this.homeButton.TabIndex = 0;
             this.homeButton.Text = "Home";
             this.homeButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -143,9 +143,9 @@
             this.exitButton.IconColor = System.Drawing.Color.Black;
             this.exitButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.exitButton.IsLoggingEnabled = true;
-            this.exitButton.Location = new System.Drawing.Point(0, 505);
+            this.exitButton.Location = new System.Drawing.Point(0, 550);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(151, 56);
+            this.exitButton.Size = new System.Drawing.Size(183, 56);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -156,9 +156,9 @@
             // 
             this.contentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(151, 0);
+            this.contentPanel.Location = new System.Drawing.Point(183, 0);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(702, 561);
+            this.contentPanel.Size = new System.Drawing.Size(967, 606);
             this.contentPanel.TabIndex = 1;
             // 
             // MainForm
@@ -166,11 +166,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(853, 561);
+            this.ClientSize = new System.Drawing.Size(1150, 606);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.menuPanel);
             this.Location = new System.Drawing.Point(15, 15);
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(1166, 645);
             this.Name = "MainForm";
             this.Text = "ToDo App";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

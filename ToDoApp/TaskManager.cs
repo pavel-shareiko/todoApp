@@ -29,7 +29,7 @@ namespace ToDoApp
             repository.Save(Diary);
         }
 
-        public static async System.Threading.Tasks.Task<List<Task>> GetTasksAsync(int offset, int count)
+        public static async System.Threading.Tasks.Task<List<Task>> GetTasksAsync(int offset, int count, IComparer<Task> comparer = null)
         {
             var tasks = Tasks.ToList();
             
@@ -40,14 +40,19 @@ namespace ToDoApp
 
             return await System.Threading.Tasks.Task.Run(() =>
             {
+                if (comparer != null)
+                {
+                    tasks.Sort(comparer);
+                }
+
                 if (tasks.Count < offset + count)
                 {
                     return tasks.GetRange(offset, tasks.Count - offset);
                 }
 
                 return Tasks
-                .Skip(offset)
-                .Take(count).ToList();
+                        .Skip(offset)
+                        .Take(count).ToList();
             });
         }
 
