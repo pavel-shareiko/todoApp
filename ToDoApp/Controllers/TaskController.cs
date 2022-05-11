@@ -1,9 +1,9 @@
-﻿using Logic.Utils;
+﻿using Logic.Tasks;
+using Logic.Utils;
 using NLog;
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
@@ -11,15 +11,31 @@ using ToDoApp.UI.UserControls;
 
 namespace ToDoApp.Controls
 {
-    public class TaskController : ILoggable
+    public class TaskController : ILoggable, IDisposable
     {
-        private const int TasksPerPage = 10;
         private readonly Panel tasksPanel;
         private int _page = 1;
+        private int _pageSize = 10;
+        private readonly Func<Task, bool> selector = null;
 
         public event EventHandler TasksLoading;
         public event EventHandler<TasksLoadedEventArgs> TasksLoaded;
 
+        public int PageSize
+        {
+            get => _pageSize;
+
+            set
+            {
+                if (value < 1)
+                {
+                    throw new ArgumentException("Page size must be greater than 0");
+                }
+
+                _pageSize = value;
+            }
+        }
+        public bool ReloadOnTaskCompleted { get; private set; }
         public bool IsLoggingEnabled { get; set; } = true;
         public bool IsLoading { get; private set; }
         public TaskView SelectedItem { get; set; }
@@ -55,14 +71,18 @@ namespace ToDoApp.Controls
             }
         }
 
-        public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)TasksPerPage);
+        public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)PageSize);
 
         public Logger Logger => LogManager.GetCurrentClassLogger();
 
-        public TaskController(Panel tasksPanel)
+        public TaskController(Panel tasksPanel, bool reloadOnTaskCompleted = false, Func<Logic.Tasks.Task, bool> selector = null)
         {
             this.tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
+            this.selector = selector;
+            ReloadOnTaskCompleted = reloadOnTaskCompleted;
         }
+
+        public int GetTasksCount(Func<Logic.Tasks.Task, bool> selector = null) => TaskManager.GetTasksCount(selector);
 
         public void Select(TaskView taskView)
         {
@@ -90,9 +110,21 @@ namespace ToDoApp.Controls
             SelectedItem.Hightlight();
         }
 
-        public async void ReloadTasksAsync(Func<Logic.Tasks.Task, bool> selector = null)
+        public void Delete(TaskView selectedItem)
         {
-            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage, new TaskComparer(), selector);
+            if (selectedItem == null)
+            {
+                this.Log(LogLevel.Error, $"{nameof(selectedItem)} cannot be null");
+                throw new ArgumentNullException(nameof(selectedItem));
+            }
+
+            TaskManager.RemoveTask(selectedItem.Task);
+            ReloadTasksAsync();
+        }
+
+        public async void ReloadTasksAsync()
+        {
+            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * PageSize, PageSize, new TaskComparer(), selector);
             tasksPanel.Controls.Clear();
             var tasksToShow = await tasksToShowTask;
 
@@ -110,7 +142,7 @@ namespace ToDoApp.Controls
             var controls = tasksPanel.Controls;
             OnTasksLoading();
 
-            await Task.Run(() =>
+            await System.Threading.Tasks.Task.Run(() =>
             {
                 try
                 {
@@ -161,10 +193,26 @@ namespace ToDoApp.Controls
             noTasksLabel.Font = new Font(noTasksLabel.Font.FontFamily, noTasksLabel.Font.Size + 2, FontStyle.Bold);
         }
 
+        public void Dispose()
+        {
+            tasksPanel.Controls.OfType<TaskView>().ToList().ForEach(x =>
+            {
+                x.Dispose();
+            });
+        }
+
         #region Events
+
         private Spinner spinner;
         protected virtual void OnTasksLoading()
         {
+            if (spinner != null)
+            {
+                spinner.Visible = false;
+                spinner.Dispose();
+                spinner = null;
+            }
+
             var bgColor = Color.Black;
             spinner = new Spinner()
             {
@@ -175,21 +223,24 @@ namespace ToDoApp.Controls
             tasksPanel.Controls.Add(spinner);
 
             IsLoading = true;
+
             TasksLoading?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnTasksLoaded(TasksLoadedEventArgs args)
         {
-            tasksPanel.Controls.Remove(spinner);
-            spinner.Visible = false;
-
-            spinner.Dispose();
-            spinner = null;
-
+            if (spinner != null)
+            {
+                tasksPanel.Controls.Remove(spinner);
+                spinner.Visible = false;
+                spinner.Dispose();
+                spinner = null;
+            }
 
             IsLoading = false;
             TasksLoaded?.Invoke(this, args);
         }
+
         #endregion
     }
 }

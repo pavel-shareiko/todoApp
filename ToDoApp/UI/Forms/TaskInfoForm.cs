@@ -14,7 +14,7 @@ namespace ToDoApp.Forms
             {
                 throw new ArgumentNullException(nameof(task));
             }
-            
+
             InitializeComponent();
             taskBindingSource.DataSource = task;
             ApplyTheme();

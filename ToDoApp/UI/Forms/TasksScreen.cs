@@ -71,8 +71,7 @@ namespace ToDoApp.Forms
 
             if (dialogResult == DialogResult.Yes)
             {
-                TaskManager.RemoveTask(TaskController.SelectedItem.Task);
-                TaskController.ReloadTasksAsync();
+                TaskController.Delete(TaskController.SelectedItem);
             }
         }
 

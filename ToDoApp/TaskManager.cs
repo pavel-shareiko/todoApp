@@ -32,7 +32,7 @@ namespace ToDoApp
         public static async System.Threading.Tasks.Task<List<Task>> GetTasksAsync(int offset, int count, IComparer<Task> comparer = null, Func<Task, bool> selector = null)
         {
             var tasks = Tasks.ToList();
-            
+
             if (tasks.Count < offset || tasks.Count == 0)
             {
                 return new List<Task>();
@@ -59,9 +59,11 @@ namespace ToDoApp
             });
         }
 
-        public static int GetTasksCount()
+        public static int GetTasksCount(Func<Task, bool> selector = null)
         {
-            return Diary.Count;
+            return selector == null
+                ? Diary.Count
+                : Tasks.Count(selector);
         }
 
         public static bool RemoveTask(Task task)

@@ -4,7 +4,6 @@ using NLog;
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Media;
 using System.Windows.Forms;
 using ToDoApp.Controls;
 using ToDoApp.Forms;
@@ -16,6 +15,7 @@ namespace ToDoApp.UI.Controls
         private Task _task;
         private readonly TaskController _controller;
         private bool _isActive;
+
         public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
         public Task Task

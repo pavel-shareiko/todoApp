@@ -15,18 +15,26 @@ namespace ToDoApp.Forms
     {
         public Logger Logger { get; } = LogManager.GetCurrentClassLogger();
         [Category("Logging")] public bool IsLoggingEnabled { get; set; } = true;
+        public UserControl CurrentScreen { get; private set; }
 
         private readonly UserPreferenceChangedEventHandler _userPreferenceChanged;
         private TasksScreen _tasksScreen;
+        private HomeScreen _homeScreen;
 
         public MainForm()
         {
             InitializeComponent();
 
             ApplyTheme();
-            _userPreferenceChanged = SystemEvents_UserPreferenceChanged;
-            SystemEvents.UserPreferenceChanged += _userPreferenceChanged;
-            Disposed += MainForm_Disposed;
+
+            if (Properties.Settings.Default.Theme == UI.Themes.Theme.Windows)
+            {
+                _userPreferenceChanged = SystemEvents_UserPreferenceChanged;
+                SystemEvents.UserPreferenceChanged += _userPreferenceChanged;
+                Disposed += MainForm_Disposed;
+            }
+
+            ShowHomeScreen();
 
             this.Log(LogLevel.Debug, "Main form initialized successfully");
         }
@@ -43,6 +51,35 @@ namespace ToDoApp.Forms
                 button.BackGroundColor = ApplicationStyle.ThirdColor;
                 button.TextColor = button.BackGroundColor.GetContrastColor();
             }
+        }
+
+        private void ShowHomeScreen()
+        {
+            if (_homeScreen == null)
+            {
+                _homeScreen = new HomeScreen();
+            }
+
+            CurrentScreen = _homeScreen;
+            _homeScreen.ApplyToPanel(contentPanel);
+        }
+
+        private void ShowTasksScreen()
+        {
+            if (_tasksScreen == null)
+            {
+                _tasksScreen = new TasksScreen();
+            }
+
+            CurrentScreen = _tasksScreen;
+            _tasksScreen.ApplyToPanel(contentPanel);
+        }
+
+        private void ShowSettingsScreen()
+        {
+            var settingsScreen = new SettingsScreen();
+            CurrentScreen = settingsScreen;
+            settingsScreen.ApplyToPanel(contentPanel);
         }
 
         #endregion
@@ -79,25 +116,36 @@ namespace ToDoApp.Forms
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            new HomeScreen().ApplyToPanel(contentPanel);
+            if (CurrentScreen is HomeScreen)
+            {
+                return;
+            }
+
+            ShowHomeScreen();
         }
 
         private void tasksButton_Click(object sender, EventArgs e)
         {
-            if (_tasksScreen == null)
+            if (CurrentScreen is TasksScreen)
             {
-                _tasksScreen = new TasksScreen();
+                return;
             }
 
-            _tasksScreen.ApplyToPanel(contentPanel);
+            ShowTasksScreen();
         }
 
-        private void settingsButton_Click(object sender, EventArgs e) => new SettingsScreen().ApplyToPanel(contentPanel);
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            if (CurrentScreen is SettingsScreen)
+            {
+                return;
+            }
+
+            ShowSettingsScreen();
+        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => TaskManager.Save();
 
         #endregion
-
-
     }
 }

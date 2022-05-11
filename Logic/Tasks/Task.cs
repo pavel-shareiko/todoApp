@@ -6,6 +6,7 @@ namespace Logic.Tasks
     public class Task
     {
         private TaskImportance _importance = TaskImportance.Low;
+        private bool isCompleted;
 
         [Required]
         [MaxLength(128)]
@@ -29,7 +30,15 @@ namespace Logic.Tasks
         public DateTime? DeadLine { get; set; }
 
         public DateTime CreationDate { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted
+        {
+            get => isCompleted;
+            set
+            {
+                isCompleted = value;
+            }
+        }
+
         public DateTime? CompletionDate { get; set; }
 
         public Task()
