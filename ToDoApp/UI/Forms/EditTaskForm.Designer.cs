@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.Forms
 {
-    partial class EditTaskScreen
+    partial class EditTaskForm
     {
         /// <summary>
         /// Required designer variable.
@@ -160,6 +160,7 @@
             // deadLineDateTimePicker
             // 
             this.deadLineDateTimePicker.CalendarFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deadLineDateTimePicker.Checked = false;
             this.deadLineDateTimePicker.CustomFormat = "ddddd | dd.MM.yyyy | hh:mm:ss tt";
             this.deadLineDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.taskBindingSource, "DeadLine", true));
             this.deadLineDateTimePicker.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

@@ -29,6 +29,8 @@ namespace Logic.Tasks
         public DateTime? DeadLine { get; set; }
 
         public DateTime CreationDate { get; set; }
+        public bool IsCompleted { get; set; }
+        public DateTime? CompletionDate { get; set; }
 
         public Task()
         {
@@ -62,6 +64,23 @@ namespace Logic.Tasks
             task.Importance = Importance;
             task.DeadLine = DeadLine;
             task.CreationDate = CreationDate;
+        }
+
+        public void Complete()
+        {
+            IsCompleted = true;
+            CompletionDate = DateTime.Now;
+        }
+
+        public void Uncomplete()
+        {
+            IsCompleted = false;
+            CompletionDate = null;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}, DeadLine: {DeadLine}, Importance: {Importance}, IsCompleted: {IsCompleted}";
         }
     }
 }

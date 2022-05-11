@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
+using ToDoApp.UI.Forms;
 
 namespace ToDoApp.Forms
 {
@@ -16,7 +17,7 @@ namespace ToDoApp.Forms
         [Category("Logging")] public bool IsLoggingEnabled { get; set; } = true;
 
         private readonly UserPreferenceChangedEventHandler _userPreferenceChanged;
-        private TasksForm _tasksForm;
+        private TasksScreen _tasksScreen;
 
         public MainForm()
         {
@@ -76,14 +77,19 @@ namespace ToDoApp.Forms
             Application.Exit();
         }
 
+        private void homeButton_Click(object sender, EventArgs e)
+        {
+            new HomeScreen().ApplyToPanel(contentPanel);
+        }
+
         private void tasksButton_Click(object sender, EventArgs e)
         {
-            if (_tasksForm == null)
+            if (_tasksScreen == null)
             {
-                _tasksForm = new TasksForm();
+                _tasksScreen = new TasksScreen();
             }
 
-            _tasksForm.ApplyToPanel(contentPanel);
+            _tasksScreen.ApplyToPanel(contentPanel);
         }
 
         private void settingsButton_Click(object sender, EventArgs e) => new SettingsScreen().ApplyToPanel(contentPanel);
@@ -91,5 +97,7 @@ namespace ToDoApp.Forms
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => TaskManager.Save();
 
         #endregion
+
+
     }
 }

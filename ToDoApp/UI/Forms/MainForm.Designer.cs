@@ -126,6 +126,7 @@
             this.homeButton.Text = "Home";
             this.homeButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
             this.homeButton.UseVisualStyleBackColor = false;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
             // exitButton
             // 

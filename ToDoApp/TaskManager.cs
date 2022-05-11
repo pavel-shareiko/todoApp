@@ -29,7 +29,7 @@ namespace ToDoApp
             repository.Save(Diary);
         }
 
-        public static async System.Threading.Tasks.Task<List<Task>> GetTasksAsync(int offset, int count, IComparer<Task> comparer = null)
+        public static async System.Threading.Tasks.Task<List<Task>> GetTasksAsync(int offset, int count, IComparer<Task> comparer = null, Func<Task, bool> selector = null)
         {
             var tasks = Tasks.ToList();
             
@@ -45,20 +45,23 @@ namespace ToDoApp
                     tasks.Sort(comparer);
                 }
 
+                if (selector != null)
+                {
+                    tasks = tasks.Where(selector).ToList();
+                }
+
                 if (tasks.Count < offset + count)
                 {
                     return tasks.GetRange(offset, tasks.Count - offset);
                 }
 
-                return Tasks
-                        .Skip(offset)
-                        .Take(count).ToList();
+                return tasks.Skip(offset).Take(count).ToList();
             });
         }
 
         public static int GetTasksCount()
         {
-            return Tasks.Count();
+            return Diary.Count;
         }
 
         public static bool RemoveTask(Task task)

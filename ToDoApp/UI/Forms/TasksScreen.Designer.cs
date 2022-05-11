@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.Forms
 {
-    partial class TasksForm
+    partial class TasksScreen
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.headerPanel = new System.Windows.Forms.Panel();
-            this.headerLabel = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.reloadButton = new ToDoApp.UI.Controls.RoundButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -40,36 +38,28 @@
             this.editButton = new ToDoApp.UI.Controls.RoundButton();
             this.deleteButton = new ToDoApp.UI.Controls.RoundButton();
             this.newButton = new ToDoApp.UI.Controls.RoundButton();
-            this.dataViewPanel = new System.Windows.Forms.Panel();
-            this.headerPanel.SuspendLayout();
+            this.contentPanel = new System.Windows.Forms.Panel();
+            this.dataGridViewPanel = new System.Windows.Forms.Panel();
+            this.tasksDataGridViewPanel = new System.Windows.Forms.Panel();
+            this.tableHeadersPanel = new System.Windows.Forms.Panel();
+            this.taskLayoutHeaders = new System.Windows.Forms.TableLayoutPanel();
+            this.descriptionLabel = new System.Windows.Forms.Label();
+            this.importanceLabel = new System.Windows.Forms.Label();
+            this.deadlineLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.completedLabel = new System.Windows.Forms.Label();
+            this.headerLabel = new System.Windows.Forms.Label();
+            this.headerPanel = new System.Windows.Forms.Panel();
             this.controlsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nextPageButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevPageButton)).BeginInit();
+            this.contentPanel.SuspendLayout();
+            this.dataGridViewPanel.SuspendLayout();
+            this.tableHeadersPanel.SuspendLayout();
+            this.taskLayoutHeaders.SuspendLayout();
+            this.headerPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // headerPanel
-            // 
-            this.headerPanel.Controls.Add(this.headerLabel);
-            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerPanel.Location = new System.Drawing.Point(0, 0);
-            this.headerPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(995, 58);
-            this.headerPanel.TabIndex = 0;
-            // 
-            // headerLabel
-            // 
-            this.headerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.headerLabel.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.headerLabel.Location = new System.Drawing.Point(0, 0);
-            this.headerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(995, 58);
-            this.headerLabel.TabIndex = 0;
-            this.headerLabel.Text = "Your Tasks";
-            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // controlsPanel
             // 
@@ -80,7 +70,7 @@
             this.controlsPanel.Controls.Add(this.deleteButton);
             this.controlsPanel.Controls.Add(this.newButton);
             this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.controlsPanel.Location = new System.Drawing.Point(0, 58);
+            this.controlsPanel.Location = new System.Drawing.Point(0, 47);
             this.controlsPanel.Margin = new System.Windows.Forms.Padding(4);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Padding = new System.Windows.Forms.Padding(0, 12, 18, 12);
@@ -272,43 +262,183 @@
             this.newButton.UseVisualStyleBackColor = false;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
-            // dataViewPanel
+            // contentPanel
             // 
-            this.dataViewPanel.AutoScroll = true;
-            this.dataViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataViewPanel.Location = new System.Drawing.Point(0, 121);
-            this.dataViewPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.dataViewPanel.Name = "dataViewPanel";
-            this.dataViewPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.dataViewPanel.Size = new System.Drawing.Size(995, 492);
-            this.dataViewPanel.TabIndex = 2;
+            this.contentPanel.AutoScroll = true;
+            this.contentPanel.Controls.Add(this.dataGridViewPanel);
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 110);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.contentPanel.Size = new System.Drawing.Size(995, 503);
+            this.contentPanel.TabIndex = 2;
             // 
-            // TasksForm
+            // dataGridViewPanel
+            // 
+            this.dataGridViewPanel.Controls.Add(this.tasksDataGridViewPanel);
+            this.dataGridViewPanel.Controls.Add(this.tableHeadersPanel);
+            this.dataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPanel.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewPanel.Name = "dataGridViewPanel";
+            this.dataGridViewPanel.Size = new System.Drawing.Size(979, 487);
+            this.dataGridViewPanel.TabIndex = 0;
+            // 
+            // tasksDataGridViewPanel
+            // 
+            this.tasksDataGridViewPanel.AutoScroll = true;
+            this.tasksDataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tasksDataGridViewPanel.Location = new System.Drawing.Point(0, 47);
+            this.tasksDataGridViewPanel.Name = "tasksDataGridViewPanel";
+            this.tasksDataGridViewPanel.Size = new System.Drawing.Size(979, 440);
+            this.tasksDataGridViewPanel.TabIndex = 1;
+            // 
+            // tableHeadersPanel
+            // 
+            this.tableHeadersPanel.Controls.Add(this.taskLayoutHeaders);
+            this.tableHeadersPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableHeadersPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableHeadersPanel.Name = "tableHeadersPanel";
+            this.tableHeadersPanel.Size = new System.Drawing.Size(979, 47);
+            this.tableHeadersPanel.TabIndex = 0;
+            // 
+            // taskLayoutHeaders
+            // 
+            this.taskLayoutHeaders.ColumnCount = 5;
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62905F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.56449F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.17743F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62903F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.taskLayoutHeaders.Controls.Add(this.descriptionLabel, 1, 0);
+            this.taskLayoutHeaders.Controls.Add(this.importanceLabel, 2, 0);
+            this.taskLayoutHeaders.Controls.Add(this.deadlineLabel, 3, 0);
+            this.taskLayoutHeaders.Controls.Add(this.nameLabel, 0, 0);
+            this.taskLayoutHeaders.Controls.Add(this.completedLabel, 4, 0);
+            this.taskLayoutHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskLayoutHeaders.Location = new System.Drawing.Point(0, 0);
+            this.taskLayoutHeaders.Name = "taskLayoutHeaders";
+            this.taskLayoutHeaders.RowCount = 1;
+            this.taskLayoutHeaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.taskLayoutHeaders.Size = new System.Drawing.Size(979, 47);
+            this.taskLayoutHeaders.TabIndex = 1;
+            // 
+            // descriptionLabel
+            // 
+            this.descriptionLabel.AutoEllipsis = true;
+            this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.descriptionLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.descriptionLabel.Location = new System.Drawing.Point(219, 0);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(348, 47);
+            this.descriptionLabel.TabIndex = 1;
+            this.descriptionLabel.Tag = "Description";
+            this.descriptionLabel.Text = "Task description";
+            this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // importanceLabel
+            // 
+            this.importanceLabel.AutoEllipsis = true;
+            this.importanceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.importanceLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.importanceLabel.Location = new System.Drawing.Point(573, 0);
+            this.importanceLabel.Name = "importanceLabel";
+            this.importanceLabel.Size = new System.Drawing.Size(124, 47);
+            this.importanceLabel.TabIndex = 2;
+            this.importanceLabel.Tag = "Importance";
+            this.importanceLabel.Text = "Importance";
+            this.importanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // deadlineLabel
+            // 
+            this.deadlineLabel.AutoEllipsis = true;
+            this.deadlineLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deadlineLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deadlineLabel.Location = new System.Drawing.Point(703, 0);
+            this.deadlineLabel.Name = "deadlineLabel";
+            this.deadlineLabel.Size = new System.Drawing.Size(210, 47);
+            this.deadlineLabel.TabIndex = 3;
+            this.deadlineLabel.Tag = "Deadline";
+            this.deadlineLabel.Text = "Deadline";
+            this.deadlineLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoEllipsis = true;
+            this.nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nameLabel.Location = new System.Drawing.Point(3, 0);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(210, 47);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Tag = "Name";
+            this.nameLabel.Text = "Task name";
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // completedLabel
+            // 
+            this.completedLabel.AutoSize = true;
+            this.completedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.completedLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.completedLabel.Location = new System.Drawing.Point(919, 0);
+            this.completedLabel.Name = "completedLabel";
+            this.completedLabel.Size = new System.Drawing.Size(57, 47);
+            this.completedLabel.TabIndex = 4;
+            this.completedLabel.Text = "Completed";
+            this.completedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // headerLabel
+            // 
+            this.headerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.headerLabel.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.headerLabel.Location = new System.Drawing.Point(0, 0);
+            this.headerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.headerLabel.Name = "headerLabel";
+            this.headerLabel.Size = new System.Drawing.Size(995, 47);
+            this.headerLabel.TabIndex = 0;
+            this.headerLabel.Text = "Your Tasks";
+            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // headerPanel
+            // 
+            this.headerPanel.Controls.Add(this.headerLabel);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(995, 47);
+            this.headerPanel.TabIndex = 0;
+            // 
+            // TasksScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataViewPanel);
+            this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.controlsPanel);
             this.Controls.Add(this.headerPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "TasksForm";
+            this.Name = "TasksScreen";
             this.Size = new System.Drawing.Size(995, 613);
-            this.headerPanel.ResumeLayout(false);
             this.controlsPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nextPageButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevPageButton)).EndInit();
+            this.contentPanel.ResumeLayout(false);
+            this.dataGridViewPanel.ResumeLayout(false);
+            this.tableHeadersPanel.ResumeLayout(false);
+            this.taskLayoutHeaders.ResumeLayout(false);
+            this.taskLayoutHeaders.PerformLayout();
+            this.headerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Panel controlsPanel;
-        private System.Windows.Forms.Panel dataViewPanel;
-        private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Panel contentPanel;
         private UI.Controls.RoundButton newButton;
         private UI.Controls.RoundButton editButton;
         private UI.Controls.RoundButton deleteButton;
@@ -318,5 +448,16 @@
         private System.Windows.Forms.Label pagesLabel;
         private System.Windows.Forms.Panel panel1;
         private UI.Controls.RoundButton reloadButton;
+        private System.Windows.Forms.Panel dataGridViewPanel;
+        private System.Windows.Forms.Panel tasksDataGridViewPanel;
+        private System.Windows.Forms.Panel tableHeadersPanel;
+        private System.Windows.Forms.TableLayoutPanel taskLayoutHeaders;
+        private System.Windows.Forms.Label descriptionLabel;
+        private System.Windows.Forms.Label importanceLabel;
+        private System.Windows.Forms.Label deadlineLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label completedLabel;
+        private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Panel headerPanel;
     }
 }

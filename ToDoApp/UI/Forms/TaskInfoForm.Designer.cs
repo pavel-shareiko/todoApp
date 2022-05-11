@@ -205,6 +205,7 @@
             // descriptionTextBox
             // 
             this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionTextBox.CausesValidation = false;
             this.descriptionTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taskBindingSource, "Description", true));
             this.descriptionTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,9 +214,11 @@
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
             this.descriptionTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.descriptionTextBox.ShortcutsEnabled = false;
             this.descriptionTextBox.Size = new System.Drawing.Size(431, 264);
             this.descriptionTextBox.TabIndex = 10;
             this.descriptionTextBox.Text = "";
+            this.descriptionTextBox.Enter += new System.EventHandler(this.descriptionTextBox_Enter);
             // 
             // TaskInfoForm
             // 

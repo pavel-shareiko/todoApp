@@ -1,13 +1,13 @@
 ﻿using Logic.Utils;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
+using ToDoApp.UI.UserControls;
 
 namespace ToDoApp.Controls
 {
@@ -64,22 +64,48 @@ namespace ToDoApp.Controls
             this.tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
         }
 
-        public async void ReloadTasksAsync()
+        public void Select(TaskView taskView)
         {
-            var tasksToShow = await TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage, new TaskComparer());
+            if (taskView == null)
+            {
+                throw new ArgumentNullException(nameof(taskView));
+            }
+
+            if (SelectedItem == taskView)
+            {
+                taskView.Unhighlight();
+                SelectedItem = null;
+                return;
+            }
+
+            if (SelectedItem == null)
+            {
+                SelectedItem = taskView;
+                taskView.Hightlight();
+                return;
+            }
+
+            SelectedItem.Unhighlight();
+            SelectedItem = taskView;
+            SelectedItem.Hightlight();
+        }
+
+        public async void ReloadTasksAsync(Func<Logic.Tasks.Task, bool> selector = null)
+        {
+            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage, new TaskComparer(), selector);
+            tasksPanel.Controls.Clear();
+            var tasksToShow = await tasksToShowTask;
+
             if (tasksToShow.Count == 0)
             {
-                tasksPanel.Controls.Clear();
                 ShowNoTasksLabel();
                 return;
             }
 
-            if (tasksToShow.Count == 1 || _page == 0)
+            if (_page == 0)
             {
                 _page = 1;
             }
-
-            tasksPanel.Controls.Clear();
 
             var controls = tasksPanel.Controls;
             OnTasksLoading();
@@ -88,9 +114,10 @@ namespace ToDoApp.Controls
             {
                 try
                 {
-                    foreach (var task in tasksToShow)
+                    // Tasks are being displayed in reversed order, so to display them in the correct order, we iterate the list from the end
+                    for (int i = tasksToShow.Count - 1; i >= 0; --i)
                     {
-                        var view = new TaskView(task, this)
+                        var view = new TaskView(tasksToShow[i], this)
                         {
                             BackColor = ApplicationStyle.BackgroundColor,
                             ForeColor = ApplicationStyle.TextColor,
@@ -128,95 +155,41 @@ namespace ToDoApp.Controls
                 Parent = tasksPanel,
                 Dock = DockStyle.Fill,
                 TextAlign = ContentAlignment.TopCenter,
-                ForeColor = tasksPanel.BackColor.GetContrastColor()
+                ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor()
             };
 
             noTasksLabel.Font = new Font(noTasksLabel.Font.FontFamily, noTasksLabel.Font.Size + 2, FontStyle.Bold);
         }
 
-        public void Select(TaskView taskView)
-        {
-            if (taskView == null)
-            {
-                throw new ArgumentNullException(nameof(taskView));
-            }
-
-            if (SelectedItem == taskView)
-            {
-                taskView.Unhighlight();
-                SelectedItem = null;
-                return;
-            }
-
-            if (SelectedItem == null)
-            {
-                SelectedItem = taskView;
-                taskView.Hightlight();
-                return;
-            }
-
-            SelectedItem.Unhighlight();
-            SelectedItem = taskView;
-            SelectedItem.Hightlight();
-        }
-
+        #region Events
+        private Spinner spinner;
         protected virtual void OnTasksLoading()
         {
+            var bgColor = Color.Black;
+            spinner = new Spinner()
+            {
+                BackColor = Color.FromArgb(30, bgColor.R, bgColor.G, bgColor.B),
+                Size = tasksPanel.Size,
+                Visible = true
+            };
+            tasksPanel.Controls.Add(spinner);
+
             IsLoading = true;
             TasksLoading?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnTasksLoaded(TasksLoadedEventArgs args)
         {
+            tasksPanel.Controls.Remove(spinner);
+            spinner.Visible = false;
+
+            spinner.Dispose();
+            spinner = null;
+
+
             IsLoading = false;
             TasksLoaded?.Invoke(this, args);
         }
-    }
-
-    public class TasksLoadedEventArgs : EventArgs
-    {
-        public bool Successful { get; }
-        public TasksLoadedEventArgs(bool isSuccessful)
-        {
-            Successful = isSuccessful;
-        }
-    }
-
-    public class TaskComparer : IComparer<Logic.Tasks.Task>
-    {
-        public int Compare(Logic.Tasks.Task x, Logic.Tasks.Task y)
-        {
-            // The comparison should be reversed because the list is sorted in descending order
-            // The most important factor is th deadline, then comes the importance, and then the creation date
-
-            if (x.DeadLine.HasValue && !y.DeadLine.HasValue)
-            {
-                return 1;
-            }
-
-            if (!x.DeadLine.HasValue && y.DeadLine.HasValue)
-            {
-                return -1;
-            }
-            
-            if (!x.DeadLine.HasValue && !y.DeadLine.HasValue)
-            {
-                goto importanceComparison;
-            }
-
-            if (x.DeadLine.Value.Date != y.DeadLine.Value.Date)
-            {
-                return y.DeadLine.Value.Date.CompareTo(x.DeadLine.Value.Date);
-            }
-            
-        importanceComparison:
-            
-            if (x.Importance != y.Importance)
-            {
-                return x.Importance.CompareTo(y.Importance);
-            }
-
-            return y.CreationDate.CompareTo(x.CreationDate);
-        }
+        #endregion
     }
 }

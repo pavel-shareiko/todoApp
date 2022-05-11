@@ -1,22 +1,21 @@
 ﻿using FontAwesome.Sharp;
 using System;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ToDoApp.Controls;
 using ToDoApp.UI;
-using ToDoApp.UI.Controls;
+
 
 namespace ToDoApp.Forms
 {
-    public partial class TasksForm : UserControl
+    public partial class TasksScreen : UserControl, IDisposable
     {
         public TaskController TaskController { get; }
-        public TasksForm()
+        public TasksScreen()
         {
             InitializeComponent();
 
-            TaskController = new TaskController(dataViewPanel);
+            TaskController = new TaskController(tasksDataGridViewPanel);
             TaskController.ReloadTasksAsync();
             TaskController.TasksLoaded += OnTasksLoaded;
 
@@ -35,12 +34,12 @@ namespace ToDoApp.Forms
                 x.BackColor = ApplicationStyle.AccentColor;
                 x.ForeColor = x.BackColor.GetContrastColor();
             });
-            controls.OfType<IconPictureBox>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.AccentColor);
-
-            nextPageButton.IconColor = ApplicationStyle.AccentColor;
-            prevPageButton.IconColor = ApplicationStyle.AccentColor;
+            controls.OfType<IconPictureBox>().ToList().ForEach(x => x.IconColor = ApplicationStyle.AccentColor);
 
             pagesLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
+
+            taskLayoutHeaders.Controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
+            tasksDataGridViewPanel.BackColor = ApplicationStyle.BackgroundColor;
         }
 
         private void newButton_Click(object sender, System.EventArgs e)
@@ -55,7 +54,7 @@ namespace ToDoApp.Forms
                 return;
             }
 
-            var editTaskForm = new EditTaskScreen(TaskController.SelectedItem.Task);
+            var editTaskForm = new EditTaskForm(TaskController.SelectedItem.Task);
 
             editTaskForm.ShowDialog();
             TaskController.ReloadTasksAsync();
@@ -100,7 +99,7 @@ namespace ToDoApp.Forms
         }
 
         private void UpdatePagesLabel()
-        {            
+        {
             pagesLabel.Text = $"Page {TaskController.Page} of {TaskController.TotalPages}";
         }
 

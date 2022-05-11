@@ -7,11 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.UI;
-using ToDoApp.UI.Controls;
 
 namespace ToDoApp.Forms
 {
-    public partial class EditTaskScreen : Form, ILoggable
+    public partial class EditTaskForm : Form, ILoggable
     {
         private readonly Task _originTask;
         private readonly Task _currentTask;
@@ -19,7 +18,7 @@ namespace ToDoApp.Forms
         public bool IsLoggingEnabled { get; set; }
         public Logger Logger => LogManager.GetCurrentClassLogger();
 
-        public EditTaskScreen(Task task)
+        public EditTaskForm(Task task)
         {
             if (task == null)
             {
@@ -34,8 +33,9 @@ namespace ToDoApp.Forms
             importanceComboBox.DataSource = Enum.GetValues(typeof(TaskImportance));
 
             taskBindingSource.DataSource = _currentTask;
-            deadLineDateTimePicker.MinDate = DateTime.Now;
+            deadLineDateTimePicker.MinDate = DateTime.Now.Date;
             importanceComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            deadLineDateTimePicker.Checked = task.DeadLine.HasValue;
 
             ApplyTheme();
         }

@@ -11,6 +11,7 @@ namespace Tasks
         private readonly List<Task> _tasks;
 
         public IEnumerable<Task> Tasks => _tasks.AsEnumerable();
+        public int Count => _tasks.Count;
 
         public Diary()
         {

@@ -3,6 +3,8 @@ using Logic.Utils;
 using NLog;
 using System;
 using System.Drawing;
+using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 using ToDoApp.Controls;
 using ToDoApp.Forms;
@@ -12,8 +14,8 @@ namespace ToDoApp.UI.Controls
     public partial class TaskView : UserControl, ILoggable, IDisposable
     {
         private Task _task;
-        private readonly TaskController controller;
-
+        private readonly TaskController _controller;
+        private bool _isActive;
         public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
         public Task Task
@@ -21,13 +23,27 @@ namespace ToDoApp.UI.Controls
             get => _task;
             set
             {
-                if (value == null)
+                _task = value ?? throw new ArgumentNullException(nameof(value));
+                BindValues(value);
+            }
+        }
+        public bool IsActive
+        {
+            get => _isActive;
+
+            set
+            {
+                if (value)
                 {
-                    throw new ArgumentNullException(nameof(value));
+                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Regular));
+                }
+                else
+                {
+                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Strikeout | FontStyle.Italic));
+                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = Color.Gray);
                 }
 
-                _task = value;
-                BindValues(value);
+                _isActive = value;
             }
         }
 
@@ -36,7 +52,9 @@ namespace ToDoApp.UI.Controls
             InitializeComponent();
 
             this.Task = task ?? throw new ArgumentNullException(nameof(task));
-            this.controller = controller ?? throw new ArgumentNullException(nameof(controller));
+            this._controller = controller ?? throw new ArgumentNullException(nameof(controller));
+            this.IsActive = !task.IsCompleted;
+            this.completedCheckBox.Checked = task.IsCompleted;
 
             foreach (var control in taskLayout.Controls)
             {
@@ -69,7 +87,7 @@ namespace ToDoApp.UI.Controls
         }
         private void taskLayout_MouseClick(object sender, MouseEventArgs e)
         {
-            controller.Select(this);
+            _controller.Select(this);
         }
 
         private Color savedBackColor;
@@ -121,7 +139,7 @@ namespace ToDoApp.UI.Controls
         private void AllControls_MouseDoubleClick(object sender, EventArgs e)
         {
             new TaskInfoForm(this.Task).ShowDialog();
-            controller.Select(this);
+            _controller.Select(this);
         }
 
         public new void Dispose()
@@ -131,8 +149,22 @@ namespace ToDoApp.UI.Controls
                 ((Control)control).MouseClick -= taskLayout_MouseClick;
                 ((Control)control).DoubleClick -= AllControls_MouseDoubleClick;
             }
-            
+
             base.Dispose();
+        }
+
+        private void completedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.completedCheckBox.Checked)
+            {
+                _task.Complete();
+                IsActive = false;
+            }
+            else
+            {
+                _task.Uncomplete();
+                IsActive = true;
+            }
         }
     }
 }

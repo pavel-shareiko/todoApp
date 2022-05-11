@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ToDoApp.UI.Forms
 {
-    public partial class MainScreen : Form
+    public partial class HomeScreen : UserControl
     {
-        public MainScreen()
+        public HomeScreen()
         {
             InitializeComponent();
         }
