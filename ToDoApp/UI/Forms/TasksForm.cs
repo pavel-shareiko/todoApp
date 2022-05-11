@@ -11,13 +11,13 @@ namespace ToDoApp.Forms
 {
     public partial class TasksForm : UserControl
     {
-        public TaskController TaskViewController { get; }
+        public TaskController TaskController { get; }
         public TasksForm()
         {
             InitializeComponent();
 
-            TaskViewController = new TaskController(dataViewPanel);
-            TaskViewController.LoadTasksAsync();
+            TaskController = new TaskController(dataViewPanel);
+            TaskController.ReloadTasksAsync();
 
             UpdatePagesLabel();
 
@@ -40,24 +40,25 @@ namespace ToDoApp.Forms
         private void newButton_Click(object sender, System.EventArgs e)
         {
             new NewTaskForm().ShowDialog();
-            TaskViewController.LoadTasksAsync();
+            TaskController.ReloadTasksAsync();
+            UpdatePagesLabel();
         }
         private void editButton_Click(object sender, System.EventArgs e)
         {
-            if (TaskViewController.SelectedItem == null)
+            if (TaskController.SelectedItem == null)
             {
                 return;
             }
 
-            var editTaskForm = new EditTaskForm(TaskViewController.SelectedItem.Task);
+            var editTaskForm = new EditTaskForm(TaskController.SelectedItem.Task);
 
             editTaskForm.ShowDialog();
-            TaskViewController.LoadTasksAsync();
+            TaskController.ReloadTasksAsync();
         }
 
         private void deleteButton_Click(object sender, System.EventArgs e)
         {
-            if (TaskViewController.SelectedItem == null)
+            if (TaskController.SelectedItem == null)
             {
                 return;
             }
@@ -66,36 +67,37 @@ namespace ToDoApp.Forms
 
             if (dialogResult == DialogResult.Yes)
             {
-                TaskManager.Diary.RemoveTask(TaskViewController.SelectedItem.Task);
-                TaskViewController.LoadTasksAsync();
+                TaskManager.RemoveTask(TaskController.SelectedItem.Task);
+                TaskController.ReloadTasksAsync();
             }
+            UpdatePagesLabel();
         }
 
         private void detailsButton_Click(object sender, System.EventArgs e)
         {
-            if (TaskViewController.SelectedItem == null)
+            if (TaskController.SelectedItem == null)
             {
                 return;
             }
 
-            new TaskInfoForm(TaskViewController.SelectedItem.Task).ShowDialog();
+            new TaskInfoForm(TaskController.SelectedItem.Task).ShowDialog();
         }
 
         private void nextPageButton_Click(object sender, System.EventArgs e)
         {
-            TaskViewController.Page++;
+            TaskController.Page++;
             UpdatePagesLabel();
         }
 
         private void prevPageButton_Click(object sender, System.EventArgs e)
         {
-            TaskViewController.Page--;
+            TaskController.Page--;
             UpdatePagesLabel();
         }
 
         private void UpdatePagesLabel()
-        {
-            pagesLabel.Text = $"Page {TaskViewController.Page} of {TaskViewController.TotalPages}";
+        {            
+            pagesLabel.Text = $"Page {TaskController.Page} of {TaskController.TotalPages}";
         }
 
     }

@@ -12,6 +12,10 @@ namespace ToDoApp.Controls
 {
     public class TaskController : ILoggable
     {
+        private const int TasksPerPage = 10;
+        private readonly Panel tasksPanel;
+        private int _page = 1;
+
         public bool IsLoggingEnabled { get; set; } = true;
         public bool IsLoading { get; private set; }
         public TaskView SelectedItem { get; set; }
@@ -28,7 +32,7 @@ namespace ToDoApp.Controls
                 var prevValue = _page;
                 if (value < 1)
                 {
-                    _page = 1;
+                    _page = TotalPages == 0 ? 0 : 1;
                 }
                 else if (value >= TotalPages)
                 {
@@ -41,7 +45,7 @@ namespace ToDoApp.Controls
 
                 if (prevValue != _page)
                 {
-                    LoadTasksAsync();
+                    ReloadTasksAsync();
                 }
 
             }
@@ -51,23 +55,24 @@ namespace ToDoApp.Controls
 
         public Logger Logger => LogManager.GetCurrentClassLogger();
 
-        private readonly Panel tasksPanel;
-        private const int TasksPerPage = 10;
-
-        private int _page = 1;
-
         public TaskController(Panel tasksPanel)
         {
             this.tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
         }
 
-        public async void LoadTasksAsync()
+        public async void ReloadTasksAsync()
         {
             var tasksToShow = await TaskManager.GetTasksAsync((Page - 1) * TasksPerPage, TasksPerPage);
             if (tasksToShow.Count == 0)
             {
+                tasksPanel.Controls.Clear();
                 ShowNoTasksLabel();
                 return;
+            }
+
+            if(tasksToShow.Count == 1 || _page == 0)
+            {
+                _page = 1;
             }
 
             tasksPanel.Controls.Clear();
@@ -148,7 +153,7 @@ namespace ToDoApp.Controls
 
             SelectedItem.Unhighlight();
             SelectedItem = taskView;
-            taskView.Hightlight();
+            SelectedItem.Hightlight();
         }
     }
 }

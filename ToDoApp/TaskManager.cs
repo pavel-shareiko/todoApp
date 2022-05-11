@@ -55,5 +55,10 @@ namespace ToDoApp
         {
             return Tasks.Count();
         }
+
+        public static bool RemoveTask(Task task)
+        {
+            return Diary.RemoveTask(task);
+        }
     }
 }
