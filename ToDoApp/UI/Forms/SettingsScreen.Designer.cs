@@ -86,9 +86,11 @@ namespace ToDoApp.Forms
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.saveButton.IconChar = FontAwesome.Sharp.IconChar.Save;
             this.saveButton.IconColor = System.Drawing.Color.White;
             this.saveButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.saveButton.IconSize = 20;
+            this.saveButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.saveButton.IsLoggingEnabled = true;
             this.saveButton.Location = new System.Drawing.Point(747, 5);
             this.saveButton.Name = "saveButton";
@@ -135,14 +137,14 @@ namespace ToDoApp.Forms
             this.themeLabel.TabIndex = 0;
             this.themeLabel.Text = "Theme";
             // 
-            // SettingsUserControl
+            // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.controlsPanel);
             this.Controls.Add(this.headerPanel);
-            this.Name = "SettingsUserControl";
+            this.Name = "SettingsScreen";
             this.Size = new System.Drawing.Size(853, 555);
             this.headerPanel.ResumeLayout(false);
             this.controlsPanel.ResumeLayout(false);

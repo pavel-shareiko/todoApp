@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controls;
 using ToDoApp.UI;
-
+using ToDoApp.UI.Controls;
 
 namespace ToDoApp.Forms
 {
@@ -29,17 +29,19 @@ namespace ToDoApp.Forms
             var controls = this.Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
 
             controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.TextColor);
-            controls.OfType<Button>().ToList().ForEach(x =>
+            controls.OfType<RoundButton>().ToList().ForEach(x =>
             {
                 x.BackColor = ApplicationStyle.AccentColor;
                 x.ForeColor = x.BackColor.GetContrastColor();
+                x.IconColor = x.ForeColor;
             });
-            controls.OfType<IconPictureBox>().ToList().ForEach(x => x.IconColor = ApplicationStyle.AccentColor);
 
             pagesLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
 
             taskLayoutHeaders.Controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
             tasksDataGridViewPanel.BackColor = ApplicationStyle.BackgroundColor;
+
+            paginationPanel.Controls.OfType<IconPictureBox>().ToList().ForEach(x => x.IconColor = ApplicationStyle.AccentColor);
         }
 
         private void newButton_Click(object sender, System.EventArgs e)

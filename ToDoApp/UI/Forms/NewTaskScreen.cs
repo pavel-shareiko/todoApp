@@ -52,6 +52,7 @@ namespace ToDoApp.Forms
 
             createButton.BackColor = ApplicationStyle.AccentColor;
             createButton.ForeColor = createButton.BackColor.GetContrastColor();
+            createButton.IconColor = createButton.ForeColor;
         }
 
         private void createButton_Click(object sender, EventArgs e)

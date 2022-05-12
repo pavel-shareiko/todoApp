@@ -234,9 +234,11 @@
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.saveButton.IconChar = FontAwesome.Sharp.IconChar.Save;
             this.saveButton.IconColor = System.Drawing.Color.White;
             this.saveButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.saveButton.IconSize = 25;
+            this.saveButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.saveButton.IsLoggingEnabled = true;
             this.saveButton.Location = new System.Drawing.Point(488, 10);
             this.saveButton.Name = "saveButton";

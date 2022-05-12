@@ -50,6 +50,7 @@ namespace ToDoApp.Forms
             {
                 button.BackGroundColor = ApplicationStyle.ThirdColor;
                 button.TextColor = button.BackGroundColor.GetContrastColor();
+                button.IconColor = button.TextColor;
             }
         }
 

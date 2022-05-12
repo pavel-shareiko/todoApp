@@ -39,20 +39,20 @@ namespace ToDoApp.Forms
             this.headerLabel = new System.Windows.Forms.Label();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
+            this.taskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.controlsPanel = new System.Windows.Forms.Panel();
+            this.createButton = new ToDoApp.UI.Controls.RoundButton();
             this.deadLineDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.importanceComboBox = new System.Windows.Forms.ComboBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.taskBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.createButton = new ToDoApp.UI.Controls.RoundButton();
             deadLineLabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             importanceLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.contentPanel.SuspendLayout();
-            this.controlsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskBindingSource)).BeginInit();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // deadLineLabel
@@ -150,6 +150,10 @@ namespace ToDoApp.Forms
             this.descriptionTextBox.TabIndex = 9;
             this.descriptionTextBox.Text = "";
             // 
+            // taskBindingSource
+            // 
+            this.taskBindingSource.DataSource = typeof(Logic.Tasks.Task);
+            // 
             // controlsPanel
             // 
             this.controlsPanel.Controls.Add(this.createButton);
@@ -160,6 +164,34 @@ namespace ToDoApp.Forms
             this.controlsPanel.Padding = new System.Windows.Forms.Padding(0, 6, 12, 6);
             this.controlsPanel.Size = new System.Drawing.Size(633, 64);
             this.controlsPanel.TabIndex = 8;
+            // 
+            // createButton
+            // 
+            this.createButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(134)))), ((int)(((byte)(252)))));
+            this.createButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(134)))), ((int)(((byte)(252)))));
+            this.createButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.createButton.BorderRadius = 40;
+            this.createButton.BorderSize = 0;
+            this.createButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.createButton.FlatAppearance.BorderSize = 0;
+            this.createButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.createButton.ForeColor = System.Drawing.Color.White;
+            this.createButton.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
+            this.createButton.IconColor = System.Drawing.Color.White;
+            this.createButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.createButton.IconSize = 30;
+            this.createButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.createButton.IsLoggingEnabled = true;
+            this.createButton.Location = new System.Drawing.Point(474, 6);
+            this.createButton.Margin = new System.Windows.Forms.Padding(4);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(147, 52);
+            this.createButton.TabIndex = 5;
+            this.createButton.Text = "Create";
+            this.createButton.TextColor = System.Drawing.Color.White;
+            this.createButton.UseVisualStyleBackColor = false;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // deadLineDateTimePicker
             // 
@@ -195,36 +227,6 @@ namespace ToDoApp.Forms
             this.nameTextBox.Size = new System.Drawing.Size(298, 21);
             this.nameTextBox.TabIndex = 1;
             // 
-            // taskBindingSource
-            // 
-            this.taskBindingSource.DataSource = typeof(Logic.Tasks.Task);
-            // 
-            // createButton
-            // 
-            this.createButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(134)))), ((int)(((byte)(252)))));
-            this.createButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(134)))), ((int)(((byte)(252)))));
-            this.createButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.createButton.BorderRadius = 40;
-            this.createButton.BorderSize = 0;
-            this.createButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.createButton.FlatAppearance.BorderSize = 0;
-            this.createButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.createButton.ForeColor = System.Drawing.Color.White;
-            this.createButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.createButton.IconColor = System.Drawing.Color.White;
-            this.createButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.createButton.IsLoggingEnabled = true;
-            this.createButton.Location = new System.Drawing.Point(474, 6);
-            this.createButton.Margin = new System.Windows.Forms.Padding(4);
-            this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(147, 52);
-            this.createButton.TabIndex = 5;
-            this.createButton.Text = "Create";
-            this.createButton.TextColor = System.Drawing.Color.White;
-            this.createButton.UseVisualStyleBackColor = false;
-            this.createButton.Click += new System.EventHandler(this.createButton_Click);
-            // 
             // NewTaskScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -239,8 +241,8 @@ namespace ToDoApp.Forms
             this.panel1.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.contentPanel.PerformLayout();
-            this.controlsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.taskBindingSource)).EndInit();
+            this.controlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

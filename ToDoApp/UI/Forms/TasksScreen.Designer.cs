@@ -30,7 +30,7 @@
         {
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.reloadButton = new ToDoApp.UI.Controls.RoundButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.paginationPanel = new System.Windows.Forms.Panel();
             this.pagesLabel = new System.Windows.Forms.Label();
             this.nextPageButton = new FontAwesome.Sharp.IconPictureBox();
             this.prevPageButton = new FontAwesome.Sharp.IconPictureBox();
@@ -51,7 +51,7 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.controlsPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.paginationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nextPageButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevPageButton)).BeginInit();
             this.contentPanel.SuspendLayout();
@@ -64,7 +64,7 @@
             // controlsPanel
             // 
             this.controlsPanel.Controls.Add(this.reloadButton);
-            this.controlsPanel.Controls.Add(this.panel1);
+            this.controlsPanel.Controls.Add(this.paginationPanel);
             this.controlsPanel.Controls.Add(this.detailsButton);
             this.controlsPanel.Controls.Add(this.editButton);
             this.controlsPanel.Controls.Add(this.deleteButton);
@@ -89,32 +89,35 @@
             this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.reloadButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.reloadButton.ForeColor = System.Drawing.Color.White;
-            this.reloadButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.reloadButton.IconChar = FontAwesome.Sharp.IconChar.Sync;
             this.reloadButton.IconColor = System.Drawing.Color.White;
             this.reloadButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.reloadButton.IconSize = 22;
+            this.reloadButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.reloadButton.IsLoggingEnabled = true;
-            this.reloadButton.Location = new System.Drawing.Point(607, 12);
+            this.reloadButton.Location = new System.Drawing.Point(382, 12);
             this.reloadButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
             this.reloadButton.Name = "reloadButton";
-            this.reloadButton.Size = new System.Drawing.Size(74, 39);
+            this.reloadButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.reloadButton.Size = new System.Drawing.Size(119, 39);
             this.reloadButton.TabIndex = 8;
             this.reloadButton.Text = "Reload";
             this.reloadButton.TextColor = System.Drawing.Color.White;
             this.reloadButton.UseVisualStyleBackColor = false;
             this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
             // 
-            // panel1
+            // paginationPanel
             // 
-            this.panel1.Controls.Add(this.pagesLabel);
-            this.panel1.Controls.Add(this.nextPageButton);
-            this.panel1.Controls.Add(this.prevPageButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 12);
-            this.panel1.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(267, 39);
-            this.panel1.TabIndex = 7;
+            this.paginationPanel.Controls.Add(this.pagesLabel);
+            this.paginationPanel.Controls.Add(this.nextPageButton);
+            this.paginationPanel.Controls.Add(this.prevPageButton);
+            this.paginationPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.paginationPanel.Location = new System.Drawing.Point(0, 12);
+            this.paginationPanel.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.paginationPanel.Name = "paginationPanel";
+            this.paginationPanel.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.paginationPanel.Size = new System.Drawing.Size(267, 39);
+            this.paginationPanel.TabIndex = 7;
             // 
             // pagesLabel
             // 
@@ -170,14 +173,17 @@
             this.detailsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.detailsButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.detailsButton.ForeColor = System.Drawing.Color.White;
-            this.detailsButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.detailsButton.IconChar = FontAwesome.Sharp.IconChar.ListAlt;
             this.detailsButton.IconColor = System.Drawing.Color.White;
             this.detailsButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.detailsButton.IconSize = 22;
+            this.detailsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.detailsButton.IsLoggingEnabled = true;
-            this.detailsButton.Location = new System.Drawing.Point(681, 12);
+            this.detailsButton.Location = new System.Drawing.Point(501, 12);
             this.detailsButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
             this.detailsButton.Name = "detailsButton";
-            this.detailsButton.Size = new System.Drawing.Size(74, 39);
+            this.detailsButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.detailsButton.Size = new System.Drawing.Size(119, 39);
             this.detailsButton.TabIndex = 5;
             this.detailsButton.Text = "Details";
             this.detailsButton.TextColor = System.Drawing.Color.White;
@@ -196,14 +202,17 @@
             this.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.editButton.ForeColor = System.Drawing.Color.White;
-            this.editButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.editButton.IconChar = FontAwesome.Sharp.IconChar.PencilAlt;
             this.editButton.IconColor = System.Drawing.Color.White;
             this.editButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.editButton.IconSize = 22;
+            this.editButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.editButton.IsLoggingEnabled = true;
-            this.editButton.Location = new System.Drawing.Point(755, 12);
+            this.editButton.Location = new System.Drawing.Point(620, 12);
             this.editButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(74, 39);
+            this.editButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.editButton.Size = new System.Drawing.Size(119, 39);
             this.editButton.TabIndex = 2;
             this.editButton.Text = "Edit";
             this.editButton.TextColor = System.Drawing.Color.White;
@@ -222,14 +231,17 @@
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deleteButton.ForeColor = System.Drawing.Color.White;
-            this.deleteButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.deleteButton.IconChar = FontAwesome.Sharp.IconChar.Trash;
             this.deleteButton.IconColor = System.Drawing.Color.White;
             this.deleteButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.deleteButton.IconSize = 22;
+            this.deleteButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteButton.IsLoggingEnabled = true;
-            this.deleteButton.Location = new System.Drawing.Point(829, 12);
+            this.deleteButton.Location = new System.Drawing.Point(739, 12);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(74, 39);
+            this.deleteButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.deleteButton.Size = new System.Drawing.Size(119, 39);
             this.deleteButton.TabIndex = 1;
             this.deleteButton.Text = "Delete";
             this.deleteButton.TextColor = System.Drawing.Color.White;
@@ -248,14 +260,17 @@
             this.newButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.newButton.ForeColor = System.Drawing.Color.White;
-            this.newButton.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.newButton.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
             this.newButton.IconColor = System.Drawing.Color.White;
             this.newButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.newButton.IconSize = 25;
+            this.newButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.newButton.IsLoggingEnabled = true;
-            this.newButton.Location = new System.Drawing.Point(903, 12);
+            this.newButton.Location = new System.Drawing.Point(858, 12);
             this.newButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(74, 39);
+            this.newButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.newButton.Size = new System.Drawing.Size(119, 39);
             this.newButton.TabIndex = 0;
             this.newButton.Text = "New";
             this.newButton.TextColor = System.Drawing.Color.White;
@@ -309,7 +324,7 @@
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.56449F));
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.17743F));
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62903F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.taskLayoutHeaders.Controls.Add(this.descriptionLabel, 1, 0);
             this.taskLayoutHeaders.Controls.Add(this.importanceLabel, 2, 0);
             this.taskLayoutHeaders.Controls.Add(this.deadlineLabel, 3, 0);
@@ -330,7 +345,7 @@
             this.descriptionLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.descriptionLabel.Location = new System.Drawing.Point(219, 0);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(348, 47);
+            this.descriptionLabel.Size = new System.Drawing.Size(347, 47);
             this.descriptionLabel.TabIndex = 1;
             this.descriptionLabel.Tag = "Description";
             this.descriptionLabel.Text = "Task description";
@@ -341,9 +356,9 @@
             this.importanceLabel.AutoEllipsis = true;
             this.importanceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.importanceLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.importanceLabel.Location = new System.Drawing.Point(573, 0);
+            this.importanceLabel.Location = new System.Drawing.Point(572, 0);
             this.importanceLabel.Name = "importanceLabel";
-            this.importanceLabel.Size = new System.Drawing.Size(124, 47);
+            this.importanceLabel.Size = new System.Drawing.Size(123, 47);
             this.importanceLabel.TabIndex = 2;
             this.importanceLabel.Tag = "Importance";
             this.importanceLabel.Text = "Importance";
@@ -354,7 +369,7 @@
             this.deadlineLabel.AutoEllipsis = true;
             this.deadlineLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deadlineLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deadlineLabel.Location = new System.Drawing.Point(703, 0);
+            this.deadlineLabel.Location = new System.Drawing.Point(701, 0);
             this.deadlineLabel.Name = "deadlineLabel";
             this.deadlineLabel.Size = new System.Drawing.Size(210, 47);
             this.deadlineLabel.TabIndex = 3;
@@ -381,9 +396,9 @@
             this.completedLabel.AutoSize = true;
             this.completedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.completedLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.completedLabel.Location = new System.Drawing.Point(919, 0);
+            this.completedLabel.Location = new System.Drawing.Point(917, 0);
             this.completedLabel.Name = "completedLabel";
-            this.completedLabel.Size = new System.Drawing.Size(57, 47);
+            this.completedLabel.Size = new System.Drawing.Size(59, 47);
             this.completedLabel.TabIndex = 4;
             this.completedLabel.Text = "Completed";
             this.completedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -423,7 +438,7 @@
             this.Name = "TasksScreen";
             this.Size = new System.Drawing.Size(995, 613);
             this.controlsPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.paginationPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nextPageButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevPageButton)).EndInit();
             this.contentPanel.ResumeLayout(false);
@@ -446,7 +461,7 @@
         private FontAwesome.Sharp.IconPictureBox prevPageButton;
         private UI.Controls.RoundButton detailsButton;
         private System.Windows.Forms.Label pagesLabel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel paginationPanel;
         private UI.Controls.RoundButton reloadButton;
         private System.Windows.Forms.Panel dataGridViewPanel;
         private System.Windows.Forms.Panel tasksDataGridViewPanel;

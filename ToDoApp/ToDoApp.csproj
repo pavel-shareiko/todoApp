@@ -136,6 +136,9 @@
     <Compile Include="UI\Themes\Theme.cs" />
     <Compile Include="UI\Themes\IColorPalette.cs" />
     <Compile Include="UI\Themes\ColorPaletteFactory.cs" />
+    <EmbeddedResource Include="Controllers\TaskController.resx">
+      <DependentUpon>TaskController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\EditTaskForm.resx">
       <DependentUpon>EditTaskForm.cs</DependentUpon>
     </EmbeddedResource>

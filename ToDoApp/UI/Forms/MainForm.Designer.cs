@@ -30,11 +30,11 @@
         private void InitializeComponent()
         {
             this.menuPanel = new System.Windows.Forms.Panel();
+            this.contentPanel = new System.Windows.Forms.Panel();
             this.settingsButton = new ToDoApp.UI.Controls.RoundButton();
             this.tasksButton = new ToDoApp.UI.Controls.RoundButton();
             this.homeButton = new ToDoApp.UI.Controls.RoundButton();
             this.exitButton = new ToDoApp.UI.Controls.RoundButton();
-            this.contentPanel = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,15 @@
             this.menuPanel.Size = new System.Drawing.Size(183, 606);
             this.menuPanel.TabIndex = 0;
             // 
+            // contentPanel
+            // 
+            this.contentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(183, 0);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(967, 606);
+            this.contentPanel.TabIndex = 1;
+            // 
             // settingsButton
             // 
             this.settingsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(84)))), ((int)(((byte)(100)))));
@@ -63,9 +72,11 @@
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.settingsButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.settingsButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.settingsButton.IconColor = System.Drawing.Color.Black;
+            this.settingsButton.IconChar = FontAwesome.Sharp.IconChar.Wrench;
+            this.settingsButton.IconColor = System.Drawing.SystemColors.ButtonHighlight;
             this.settingsButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.settingsButton.IconSize = 30;
+            this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.settingsButton.IsLoggingEnabled = true;
             this.settingsButton.Location = new System.Drawing.Point(0, 118);
             this.settingsButton.Name = "settingsButton";
@@ -88,9 +99,10 @@
             this.tasksButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tasksButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tasksButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tasksButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.tasksButton.IconColor = System.Drawing.Color.Black;
+            this.tasksButton.IconChar = FontAwesome.Sharp.IconChar.ListUl;
+            this.tasksButton.IconColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tasksButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.tasksButton.IconSize = 30;
             this.tasksButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tasksButton.IsLoggingEnabled = true;
             this.tasksButton.Location = new System.Drawing.Point(0, 59);
@@ -114,9 +126,10 @@
             this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.homeButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.homeButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.homeButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.homeButton.IconColor = System.Drawing.Color.Black;
+            this.homeButton.IconChar = FontAwesome.Sharp.IconChar.Home;
+            this.homeButton.IconColor = System.Drawing.SystemColors.ButtonHighlight;
             this.homeButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.homeButton.IconSize = 30;
             this.homeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.homeButton.IsLoggingEnabled = true;
             this.homeButton.Location = new System.Drawing.Point(0, 0);
@@ -140,9 +153,11 @@
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exitButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exitButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.exitButton.IconColor = System.Drawing.Color.Black;
+            this.exitButton.IconChar = FontAwesome.Sharp.IconChar.Walking;
+            this.exitButton.IconColor = System.Drawing.SystemColors.ButtonHighlight;
             this.exitButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.exitButton.IconSize = 30;
+            this.exitButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitButton.IsLoggingEnabled = true;
             this.exitButton.Location = new System.Drawing.Point(0, 550);
             this.exitButton.Name = "exitButton";
@@ -153,15 +168,6 @@
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
-            // contentPanel
-            // 
-            this.contentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(183, 0);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(967, 606);
-            this.contentPanel.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -170,10 +176,12 @@
             this.ClientSize = new System.Drawing.Size(1150, 606);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.menuPanel);
+            this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Location = new System.Drawing.Point(15, 15);
             this.MinimumSize = new System.Drawing.Size(1166, 645);
             this.Name = "MainForm";
             this.Text = "ToDo App";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuPanel.ResumeLayout(false);
             this.ResumeLayout(false);

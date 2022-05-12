@@ -30,6 +30,7 @@ namespace ToDoApp.Forms
 
             saveButton.BackColor = ApplicationStyle.AccentColor;
             saveButton.ForeColor = saveButton.BackColor.GetContrastColor();
+            saveButton.IconColor = saveButton.ForeColor;
         }
 
         #region Event handlers
