@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Logic.Tasks
@@ -8,12 +9,13 @@ namespace Logic.Tasks
         private TaskImportance _importance = TaskImportance.Low;
         private bool isCompleted;
 
-        [Required]
-        [MaxLength(128)]
+        [Order, Required, MaxLength(128)]
         public string Name { get; set; }
+
+        [Order]
         public string Description { get; set; }
 
-        [Required]
+        [Order, Required]
         public TaskImportance Importance
         {
             get => _importance;
@@ -27,9 +29,14 @@ namespace Logic.Tasks
                 _importance = value;
             }
         }
+
+        [Order]
         public DateTime? DeadLine { get; set; }
 
+        [Order]
         public DateTime CreationDate { get; set; }
+
+        [Order]
         public bool IsCompleted
         {
             get => isCompleted;
@@ -39,6 +46,8 @@ namespace Logic.Tasks
             }
         }
 
+        [Order]
+        [DependsOn("IsCompleted")]
         public DateTime? CompletionDate { get; set; }
 
         public Task()

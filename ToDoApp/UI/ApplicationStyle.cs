@@ -16,6 +16,7 @@ namespace ToDoApp.UI
         public static Color BackgroundColor { get; private set; }
 
         public static Color TextColor => BackgroundColor.GetContrastColor();
+        public static Font Font => new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
 
         static ApplicationStyle()
         {
