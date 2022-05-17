@@ -34,8 +34,8 @@ namespace ToDoApp.Forms
             importanceComboBox.Items.AddRange(items);
             importanceComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            deadLineDateTimePicker.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
             deadLineDateTimePicker.MinDate = DateTime.Now;
-            deadLineDateTimePicker.Value = DateTime.Now;
 
             ApplyTheme();
         }
