@@ -2,6 +2,7 @@
 using Logic.Utils;
 using NLog;
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -41,6 +42,7 @@ namespace ToDoApp.UI.Controls
                 }
                 else
                 {
+                    _tmpColor = ForeColor;
                     this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Strikeout | FontStyle.Italic));
                     this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = Color.Gray);
                 }

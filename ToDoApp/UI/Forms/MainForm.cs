@@ -1,4 +1,5 @@
 ﻿using Logic.Utils;
+using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.Win32;
 using NLog;
 using System;
@@ -145,8 +146,11 @@ namespace ToDoApp.Forms
             ShowSettingsScreen();
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => TaskManager.Save();
-
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TaskManager.Save();
+            ToastNotificationManagerCompat.History.Clear();
+        }
         #endregion
     }
 }

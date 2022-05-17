@@ -66,6 +66,11 @@ namespace ToDoApp
                 : Tasks.Count(selector);
         }
 
+        public static Task GetTaskById(Guid id)
+        {
+            return Diary.Tasks.FirstOrDefault(t => t.Id == id);
+        }
+
         public static bool RemoveTask(Task task)
         {
             return Diary.RemoveTask(task);

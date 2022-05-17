@@ -47,6 +47,7 @@ namespace ToDoApp.UI.Forms
             ApplyThemeForPanel(headerPanel);
             ApplyThemeForPanel(contentPanel);
             ApplyThemeForPanel(greetingsPanel);
+            ApplyThemeForPanel(controlsPanel);
 
             allTasksGroupBox.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
             upcomingTasksGroupBox.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
@@ -60,6 +61,13 @@ namespace ToDoApp.UI.Forms
                 greetingsLabel.Text = $"Hi, {Environment.UserName}! You have {tasksCount} task(s) to do!";
             else
                 greetingsLabel.Text = $"Hi, {Environment.UserName}! There is no work for you at the moment, you can take a rest! :)";
+        }
+
+        private void reloadButton_Click(object sender, EventArgs e)
+        {
+            UpdateGreetingsLabel();
+            AllTasksController.ReloadTasksAsync();
+            UpcomingTasksController.ReloadTasksAsync();
         }
     }
 }
