@@ -2,6 +2,7 @@
 using Logic.Utils;
 using NLog;
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace ToDoApp.UI.Controls
                 BindValues(value);
             }
         }
+
+        private Color _tmpColor;
         public bool IsActive
         {
             get => _isActive;
@@ -36,9 +39,11 @@ namespace ToDoApp.UI.Controls
                 if (value)
                 {
                     this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Regular));
+                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = _tmpColor);
                 }
                 else
                 {
+                    _tmpColor = ForeColor;
                     this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Strikeout | FontStyle.Italic));
                     this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = Color.Gray);
                 }
@@ -61,6 +66,7 @@ namespace ToDoApp.UI.Controls
                 ((Control)control).MouseClick += taskLayout_MouseClick;
                 ((Control)control).DoubleClick += AllControls_MouseDoubleClick;
             }
+            _task.StateChanged += OnStateUpdate;
         }
 
         private void BindValues(Task task)
@@ -70,6 +76,8 @@ namespace ToDoApp.UI.Controls
                 this.nameLabel.Text = task.Name;
                 this.descriptionLabel.Text = task.Description;
                 this.importanceLabel.Text = task.Importance.ToString();
+                this.IsActive = !task.IsCompleted;
+                this.completedCheckBox.Checked = task.IsCompleted;
 
                 if (!task.DeadLine.HasValue)
                 {
@@ -142,6 +150,29 @@ namespace ToDoApp.UI.Controls
             _controller.Select(this);
         }
 
+        private void completedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.completedCheckBox.Checked)
+            {
+                _task.Complete();
+            }
+            else
+            {
+                _task.Uncomplete();
+            }
+        }
+
+        private void OnStateUpdate(object sender, StateChangedEventArgs args)
+        {
+            if (sender is Task task)
+                BindValues(task);
+        }
+
+        public void Rebind()
+        {
+            BindValues(_task);
+        }
+
         public new void Dispose()
         {
             foreach (var control in taskLayout.Controls)
@@ -150,21 +181,9 @@ namespace ToDoApp.UI.Controls
                 ((Control)control).DoubleClick -= AllControls_MouseDoubleClick;
             }
 
-            base.Dispose();
-        }
+            _task.StateChanged -= OnStateUpdate;
 
-        private void completedCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.completedCheckBox.Checked)
-            {
-                _task.Complete();
-                IsActive = false;
-            }
-            else
-            {
-                _task.Uncomplete();
-                IsActive = true;
-            }
+            base.Dispose();
         }
     }
 }

@@ -31,22 +31,22 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
-            this.greetingsLabel = new System.Windows.Forms.Label();
-            this.greetingsPanel = new System.Windows.Forms.Panel();
-            this.upcomingTasksGroupBox = new System.Windows.Forms.GroupBox();
-            this.upcomingTasksPanel = new System.Windows.Forms.Panel();
+            this.tasksSplitContainer = new System.Windows.Forms.SplitContainer();
             this.allTasksGroupBox = new System.Windows.Forms.GroupBox();
             this.allTasksPanel = new System.Windows.Forms.Panel();
-            this.tasksSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.upcomingTasksGroupBox = new System.Windows.Forms.GroupBox();
+            this.upcomingTasksPanel = new System.Windows.Forms.Panel();
+            this.greetingsPanel = new System.Windows.Forms.Panel();
+            this.greetingsLabel = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
-            this.greetingsPanel.SuspendLayout();
-            this.upcomingTasksGroupBox.SuspendLayout();
-            this.allTasksGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tasksSplitContainer)).BeginInit();
             this.tasksSplitContainer.Panel1.SuspendLayout();
             this.tasksSplitContainer.Panel2.SuspendLayout();
             this.tasksSplitContainer.SuspendLayout();
+            this.allTasksGroupBox.SuspendLayout();
+            this.upcomingTasksGroupBox.SuspendLayout();
+            this.greetingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -80,47 +80,23 @@
             this.contentPanel.Size = new System.Drawing.Size(955, 570);
             this.contentPanel.TabIndex = 2;
             // 
-            // greetingsLabel
+            // tasksSplitContainer
             // 
-            this.greetingsLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.greetingsLabel.AutoSize = true;
-            this.greetingsLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.greetingsLabel.Location = new System.Drawing.Point(0, 16);
-            this.greetingsLabel.Name = "greetingsLabel";
-            this.greetingsLabel.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.greetingsLabel.Size = new System.Drawing.Size(309, 21);
-            this.greetingsLabel.TabIndex = 0;
-            this.greetingsLabel.Text = "Hi, {name}! You have {n} tasks to do!";
-            this.greetingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tasksSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tasksSplitContainer.IsSplitterFixed = true;
+            this.tasksSplitContainer.Location = new System.Drawing.Point(0, 55);
+            this.tasksSplitContainer.Name = "tasksSplitContainer";
             // 
-            // greetingsPanel
+            // tasksSplitContainer.Panel1
             // 
-            this.greetingsPanel.Controls.Add(this.greetingsLabel);
-            this.greetingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.greetingsPanel.Location = new System.Drawing.Point(0, 0);
-            this.greetingsPanel.Name = "greetingsPanel";
-            this.greetingsPanel.Size = new System.Drawing.Size(955, 55);
-            this.greetingsPanel.TabIndex = 4;
+            this.tasksSplitContainer.Panel1.Controls.Add(this.allTasksGroupBox);
             // 
-            // upcomingTasksGroupBox
+            // tasksSplitContainer.Panel2
             // 
-            this.upcomingTasksGroupBox.Controls.Add(this.upcomingTasksPanel);
-            this.upcomingTasksGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.upcomingTasksGroupBox.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.upcomingTasksGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.upcomingTasksGroupBox.Name = "upcomingTasksGroupBox";
-            this.upcomingTasksGroupBox.Size = new System.Drawing.Size(470, 515);
-            this.upcomingTasksGroupBox.TabIndex = 2;
-            this.upcomingTasksGroupBox.TabStop = false;
-            this.upcomingTasksGroupBox.Text = "Upcoming tasks";
-            // 
-            // upcomingTasksPanel
-            // 
-            this.upcomingTasksPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.upcomingTasksPanel.Location = new System.Drawing.Point(3, 22);
-            this.upcomingTasksPanel.Name = "upcomingTasksPanel";
-            this.upcomingTasksPanel.Size = new System.Drawing.Size(464, 490);
-            this.upcomingTasksPanel.TabIndex = 0;
+            this.tasksSplitContainer.Panel2.Controls.Add(this.upcomingTasksGroupBox);
+            this.tasksSplitContainer.Size = new System.Drawing.Size(955, 515);
+            this.tasksSplitContainer.SplitterDistance = 481;
+            this.tasksSplitContainer.TabIndex = 1;
             // 
             // allTasksGroupBox
             // 
@@ -143,23 +119,47 @@
             this.allTasksPanel.Size = new System.Drawing.Size(475, 490);
             this.allTasksPanel.TabIndex = 0;
             // 
-            // tasksSplitContainer
+            // upcomingTasksGroupBox
             // 
-            this.tasksSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tasksSplitContainer.IsSplitterFixed = true;
-            this.tasksSplitContainer.Location = new System.Drawing.Point(0, 55);
-            this.tasksSplitContainer.Name = "tasksSplitContainer";
+            this.upcomingTasksGroupBox.Controls.Add(this.upcomingTasksPanel);
+            this.upcomingTasksGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.upcomingTasksGroupBox.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.upcomingTasksGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.upcomingTasksGroupBox.Name = "upcomingTasksGroupBox";
+            this.upcomingTasksGroupBox.Size = new System.Drawing.Size(470, 515);
+            this.upcomingTasksGroupBox.TabIndex = 2;
+            this.upcomingTasksGroupBox.TabStop = false;
+            this.upcomingTasksGroupBox.Text = "Upcoming tasks";
             // 
-            // tasksSplitContainer.Panel1
+            // upcomingTasksPanel
             // 
-            this.tasksSplitContainer.Panel1.Controls.Add(this.allTasksGroupBox);
+            this.upcomingTasksPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.upcomingTasksPanel.Location = new System.Drawing.Point(3, 22);
+            this.upcomingTasksPanel.Name = "upcomingTasksPanel";
+            this.upcomingTasksPanel.Size = new System.Drawing.Size(464, 490);
+            this.upcomingTasksPanel.TabIndex = 0;
             // 
-            // tasksSplitContainer.Panel2
+            // greetingsPanel
             // 
-            this.tasksSplitContainer.Panel2.Controls.Add(this.upcomingTasksGroupBox);
-            this.tasksSplitContainer.Size = new System.Drawing.Size(955, 515);
-            this.tasksSplitContainer.SplitterDistance = 481;
-            this.tasksSplitContainer.TabIndex = 1;
+            this.greetingsPanel.Controls.Add(this.greetingsLabel);
+            this.greetingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.greetingsPanel.Location = new System.Drawing.Point(0, 0);
+            this.greetingsPanel.Name = "greetingsPanel";
+            this.greetingsPanel.Size = new System.Drawing.Size(955, 55);
+            this.greetingsPanel.TabIndex = 4;
+            // 
+            // greetingsLabel
+            // 
+            this.greetingsLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.greetingsLabel.AutoSize = true;
+            this.greetingsLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.greetingsLabel.Location = new System.Drawing.Point(0, 16);
+            this.greetingsLabel.Name = "greetingsLabel";
+            this.greetingsLabel.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.greetingsLabel.Size = new System.Drawing.Size(309, 21);
+            this.greetingsLabel.TabIndex = 0;
+            this.greetingsLabel.Text = "Hi, {name}! You have {n} tasks to do!";
+            this.greetingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // HomeScreen
             // 
@@ -174,14 +174,14 @@
             this.Size = new System.Drawing.Size(955, 617);
             this.headerPanel.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
-            this.greetingsPanel.ResumeLayout(false);
-            this.greetingsPanel.PerformLayout();
-            this.upcomingTasksGroupBox.ResumeLayout(false);
-            this.allTasksGroupBox.ResumeLayout(false);
             this.tasksSplitContainer.Panel1.ResumeLayout(false);
             this.tasksSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tasksSplitContainer)).EndInit();
             this.tasksSplitContainer.ResumeLayout(false);
+            this.allTasksGroupBox.ResumeLayout(false);
+            this.upcomingTasksGroupBox.ResumeLayout(false);
+            this.greetingsPanel.ResumeLayout(false);
+            this.greetingsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }

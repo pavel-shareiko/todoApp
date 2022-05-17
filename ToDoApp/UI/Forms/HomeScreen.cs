@@ -10,19 +10,16 @@ namespace ToDoApp.UI.Forms
     {
         public TaskController AllTasksController { get; }
         public TaskController UpcomingTasksController { get; }
-        private string username;
         public HomeScreen()
         {
             InitializeComponent();
             ApplyTheme();
-
-            username = Environment.UserName;
-            UpcomingTasksController = new TaskController(upcomingTasksPanel, true,
+            UpcomingTasksController = new TaskController(upcomingTasksPanel,
                 task => !task.IsCompleted &&
                 task.DeadLine.HasValue &&
                 task.DeadLine.Value.Date <= DateTime.Today.Date.AddDays(7));
 
-            AllTasksController = new TaskController(allTasksPanel, true, task => task.IsCompleted == false);
+            AllTasksController = new TaskController(allTasksPanel, task => !task.IsCompleted);
 
             UpdateGreetingsLabel();
 
@@ -60,9 +57,9 @@ namespace ToDoApp.UI.Forms
             var tasksCount = UpcomingTasksController.GetTasksCount(t => !t.IsCompleted);
 
             if (tasksCount > 0)
-                greetingsLabel.Text = $"Hi, {username}! You have {tasksCount} task(s) to do!";
+                greetingsLabel.Text = $"Hi, {Environment.UserName}! You have {tasksCount} task(s) to do!";
             else
-                greetingsLabel.Text = $"Hi, {username}! There is no work for you at the moment, you can take a rest! :)";
+                greetingsLabel.Text = $"Hi, {Environment.UserName}! There is no work for you at the moment, you can take a rest! :)";
         }
     }
 }
