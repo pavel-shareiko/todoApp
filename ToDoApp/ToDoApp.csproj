@@ -105,8 +105,6 @@
     <Compile Include="UI\Forms\SettingsScreen.Designer.cs">
       <DependentUpon>SettingsScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Settings\SettingUpdate.cs" />
-    <Compile Include="UI\Forms\Settings\SettingUpdateCollection.cs" />
     <Compile Include="UI\Forms\TasksScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

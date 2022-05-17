@@ -36,11 +36,20 @@ namespace ToDoApp.Forms
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.saveButton = new ToDoApp.UI.Controls.RoundButton();
             this.settingsPanel = new System.Windows.Forms.Panel();
+            this.notifyBeforeNumUD = new System.Windows.Forms.NumericUpDown();
+            this.scanPeriodNumUD = new System.Windows.Forms.NumericUpDown();
+            this.pageSizeNumUD = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.themeSelector = new System.Windows.Forms.ComboBox();
             this.themeLabel = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.controlsPanel.SuspendLayout();
             this.settingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBeforeNumUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scanPeriodNumUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageSizeNumUD)).BeginInit();
             this.SuspendLayout();
             // 
             // headerPanel
@@ -104,6 +113,12 @@ namespace ToDoApp.Forms
             // settingsPanel
             // 
             this.settingsPanel.AutoScroll = true;
+            this.settingsPanel.Controls.Add(this.notifyBeforeNumUD);
+            this.settingsPanel.Controls.Add(this.scanPeriodNumUD);
+            this.settingsPanel.Controls.Add(this.pageSizeNumUD);
+            this.settingsPanel.Controls.Add(this.label3);
+            this.settingsPanel.Controls.Add(this.label2);
+            this.settingsPanel.Controls.Add(this.label1);
             this.settingsPanel.Controls.Add(this.themeSelector);
             this.settingsPanel.Controls.Add(this.themeLabel);
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -111,6 +126,93 @@ namespace ToDoApp.Forms
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(853, 457);
             this.settingsPanel.TabIndex = 3;
+            // 
+            // notifyBeforeNumUD
+            // 
+            this.notifyBeforeNumUD.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.notifyBeforeNumUD.Location = new System.Drawing.Point(271, 108);
+            this.notifyBeforeNumUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.notifyBeforeNumUD.Name = "notifyBeforeNumUD";
+            this.notifyBeforeNumUD.Size = new System.Drawing.Size(75, 23);
+            this.notifyBeforeNumUD.TabIndex = 7;
+            this.notifyBeforeNumUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.notifyBeforeNumUD.ValueChanged += new System.EventHandler(this.notifyBeforeNumUD_ValueChanged);
+            // 
+            // scanPeriodNumUD
+            // 
+            this.scanPeriodNumUD.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scanPeriodNumUD.Location = new System.Drawing.Point(271, 79);
+            this.scanPeriodNumUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.scanPeriodNumUD.Name = "scanPeriodNumUD";
+            this.scanPeriodNumUD.Size = new System.Drawing.Size(75, 23);
+            this.scanPeriodNumUD.TabIndex = 6;
+            this.scanPeriodNumUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.scanPeriodNumUD.ValueChanged += new System.EventHandler(this.scanPeriodNumUD_ValueChanged);
+            // 
+            // pageSizeNumUD
+            // 
+            this.pageSizeNumUD.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.pageSizeNumUD.Location = new System.Drawing.Point(271, 50);
+            this.pageSizeNumUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.pageSizeNumUD.Name = "pageSizeNumUD";
+            this.pageSizeNumUD.Size = new System.Drawing.Size(75, 23);
+            this.pageSizeNumUD.TabIndex = 5;
+            this.pageSizeNumUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.pageSizeNumUD.ValueChanged += new System.EventHandler(this.pageSizeNumUD_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(28, 108);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 21);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Notify before (minutes):";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(29, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(186, 21);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Scan period (seconds):";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(29, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 21);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Page size:";
             // 
             // themeSelector
             // 
@@ -121,9 +223,9 @@ namespace ToDoApp.Forms
             ToDoApp.UI.Themes.Theme.Light,
             ToDoApp.UI.Themes.Theme.Dark,
             ToDoApp.UI.Themes.Theme.Windows});
-            this.themeSelector.Location = new System.Drawing.Point(111, 22);
+            this.themeSelector.Location = new System.Drawing.Point(271, 19);
             this.themeSelector.Name = "themeSelector";
-            this.themeSelector.Size = new System.Drawing.Size(140, 25);
+            this.themeSelector.Size = new System.Drawing.Size(167, 25);
             this.themeSelector.TabIndex = 1;
             this.themeSelector.SelectionChangeCommitted += new System.EventHandler(this.themeSelector_SelectionChangeCommitted);
             // 
@@ -131,11 +233,11 @@ namespace ToDoApp.Forms
             // 
             this.themeLabel.AutoSize = true;
             this.themeLabel.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.themeLabel.Location = new System.Drawing.Point(29, 22);
+            this.themeLabel.Location = new System.Drawing.Point(29, 19);
             this.themeLabel.Name = "themeLabel";
-            this.themeLabel.Size = new System.Drawing.Size(63, 21);
+            this.themeLabel.Size = new System.Drawing.Size(67, 21);
             this.themeLabel.TabIndex = 0;
-            this.themeLabel.Text = "Theme";
+            this.themeLabel.Text = "Theme:";
             // 
             // SettingsScreen
             // 
@@ -150,6 +252,9 @@ namespace ToDoApp.Forms
             this.controlsPanel.ResumeLayout(false);
             this.settingsPanel.ResumeLayout(false);
             this.settingsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBeforeNumUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scanPeriodNumUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageSizeNumUD)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,5 +268,11 @@ namespace ToDoApp.Forms
         private System.Windows.Forms.Panel settingsPanel;
         private System.Windows.Forms.Label themeLabel;
         private System.Windows.Forms.ComboBox themeSelector;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown notifyBeforeNumUD;
+        private System.Windows.Forms.NumericUpDown scanPeriodNumUD;
+        private System.Windows.Forms.NumericUpDown pageSizeNumUD;
     }
 }
