@@ -58,5 +58,29 @@ namespace ToDoApp.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30000")]
+        public long ScanPeriod {
+            get {
+                return ((long)(this["ScanPeriod"]));
+            }
+            set {
+                this["ScanPeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int NotifyBefore {
+            get {
+                return ((int)(this["NotifyBefore"]));
+            }
+            set {
+                this["NotifyBefore"] = value;
+            }
+        }
     }
 }

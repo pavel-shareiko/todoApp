@@ -146,7 +146,6 @@ namespace ToDoApp.Forms
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) => TaskManager.Save();
-
         #endregion
     }
 }

@@ -83,6 +83,11 @@ namespace ToDoApp.Forms
                 throw new ArgumentNullException();
             }
 
+            if (property.GetCustomAttribute<HiddenAttribute>() != null)
+            {
+                return false;
+            }
+
             var dependsOnAttribute = property.GetCustomAttribute<DependsOnAttribute>();
             if (dependsOnAttribute != null)
             {

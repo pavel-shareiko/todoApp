@@ -109,9 +109,13 @@ namespace Logic.Tasks
             }
         }
 
+        [Hidden]
+        public Guid Id { get; set; }
+
         public Task()
         {
             CreationDate = DateTime.Now;
+            Id = Guid.NewGuid();
         }
 
         public Task(Task task)
@@ -126,6 +130,7 @@ namespace Logic.Tasks
             Importance = task.Importance;
             DeadLine = task.DeadLine;
             CreationDate = task.CreationDate;
+            Id = task.Id;
         }
 
         public void CopyTo(ref Task task)
@@ -141,6 +146,7 @@ namespace Logic.Tasks
             task.Importance = Importance;
             task.DeadLine = DeadLine;
             task.CreationDate = CreationDate;
+            task.Id = Id;
         }
 
         public void Complete()

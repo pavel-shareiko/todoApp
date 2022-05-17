@@ -61,5 +61,12 @@ namespace ToDoApp.UI.Forms
             else
                 greetingsLabel.Text = $"Hi, {Environment.UserName}! There is no work for you at the moment, you can take a rest! :)";
         }
+
+        private void reloadButton_Click(object sender, EventArgs e)
+        {
+            UpdateGreetingsLabel();
+            AllTasksController.ReloadTasksAsync();
+            UpcomingTasksController.ReloadTasksAsync();
+        }
     }
 }
