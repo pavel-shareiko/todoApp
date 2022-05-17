@@ -3,9 +3,7 @@ using Logic.Tasks;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading;
-using System.Windows;
 using ToDoApp.Forms;
 
 namespace ToDoApp.Services
@@ -56,7 +54,7 @@ namespace ToDoApp.Services
             int notifyBefore = Properties.Settings.Default.NotifyBefore;
             foreach (var task in tasks)
             {
-                if (DateTime.Now.Subtract(task.DeadLine.Value).TotalMinutes <= notifyBefore)
+                if (task.DeadLine.Value.Subtract(DateTime.Now).TotalMinutes <= notifyBefore)
                 {
                     Notify(task);
                 }
