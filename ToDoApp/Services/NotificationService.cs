@@ -73,6 +73,7 @@ namespace ToDoApp.Services
             new ToastContentBuilder()
                 .AddText($"Don't miss the '{task.Name.Humanize()}' task deadline!")
                 .AddText($"The deadline is in {deadlineHumanized}")
+                .AddText($"The task has {task.Importance.Humanize()} importance status")
 
                 .AddArgument("task", task.Id.ToString())
 

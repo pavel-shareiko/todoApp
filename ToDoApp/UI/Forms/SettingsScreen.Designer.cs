@@ -131,6 +131,11 @@ namespace ToDoApp.Forms
             // 
             this.notifyBeforeNumUD.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.notifyBeforeNumUD.Location = new System.Drawing.Point(271, 108);
+            this.notifyBeforeNumUD.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.notifyBeforeNumUD.Minimum = new decimal(new int[] {
             1,
             0,

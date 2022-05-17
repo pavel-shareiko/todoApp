@@ -44,7 +44,7 @@ namespace ToDoApp.Controls
 
             if (x.Importance != y.Importance)
             {
-                return x.Importance.CompareTo(y.Importance);
+                return y.Importance.CompareTo(x.Importance);
             }
 
             return x.CreationDate.CompareTo(y.CreationDate);

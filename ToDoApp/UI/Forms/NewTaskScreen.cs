@@ -72,6 +72,11 @@ namespace ToDoApp.Forms
             {
                 creatingTask.DeadLine = null;
             }
+            else
+            {
+                // nullable types winforms bug
+                creatingTask.DeadLine = deadLineDateTimePicker.Value;
+            }
 
             if (!Validator.TryValidateObject(task, context, errors, true))
             {
