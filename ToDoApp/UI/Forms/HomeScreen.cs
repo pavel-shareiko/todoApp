@@ -47,6 +47,7 @@ namespace ToDoApp.UI.Forms
             ApplyThemeForPanel(headerPanel);
             ApplyThemeForPanel(contentPanel);
             ApplyThemeForPanel(greetingsPanel);
+            ApplyThemeForPanel(controlsPanel);
 
             allTasksGroupBox.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
             upcomingTasksGroupBox.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();

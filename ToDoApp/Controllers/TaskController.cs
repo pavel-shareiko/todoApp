@@ -17,7 +17,7 @@ namespace ToDoApp.Controls
         private readonly Panel tasksPanel;
 
         private int _page = 1;
-        private int _pageSize = 10;
+        private int _pageSize = Properties.Settings.Default.PageSize;
         private readonly Func<Task, bool> selector;
         #endregion
 

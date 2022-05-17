@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Windows;
 using ToDoApp.Forms;
 
 namespace ToDoApp.Services
@@ -16,7 +17,6 @@ namespace ToDoApp.Services
     public class NotificationService
     {
         private readonly List<Task> _alreadyNotified = new List<Task>();
-        private readonly List<Task> _notificationQueue = new List<Task>();
         private Timer _timer;
         private static NotificationService _instance;
         public static NotificationService Instance
@@ -38,7 +38,7 @@ namespace ToDoApp.Services
 
         public void Start()
         {
-            _timer = new Timer(CheckDeadlinesAsync, null, 0, 30_000);
+            _timer = new Timer(CheckDeadlinesAsync, null, 5000, Properties.Settings.Default.ScanPeriod);
         }
 
         public void Stop()
@@ -70,7 +70,7 @@ namespace ToDoApp.Services
         private void Notify(Task task)
         {
             var deadlineHumanized = (task.DeadLine.Value - DateTime.Now).Humanize(
-                maxUnit: Humanizer.Localisation.TimeUnit.Week, 
+                maxUnit: Humanizer.Localisation.TimeUnit.Week,
                 minUnit: Humanizer.Localisation.TimeUnit.Second,
                 culture: new System.Globalization.CultureInfo("en-EN"));
 
@@ -78,15 +78,19 @@ namespace ToDoApp.Services
                 .AddText($"Don't miss the '{task.Name.Humanize()}' task deadline!")
                 .AddText($"The deadline is in {deadlineHumanized}")
 
+                .AddArgument("task", task.Id.ToString())
+
                 .AddButton(new ToastButton()
                     .SetContent("OK")
+                    .AddArgument("dontShowInfo")
                     .SetBackgroundActivation())
                 .AddButton(new ToastButton()
                     .SetContent("Details")
                     .SetBackgroundActivation())
 
                 .SetToastScenario(ToastScenario.Alarm)
-                .Show();
+
+                .Show(toast => toast.ExpirationTime = task.DeadLine.Value);
 
             lock (_alreadyNotified)
                 _alreadyNotified.Add(task);
@@ -94,13 +98,18 @@ namespace ToDoApp.Services
 
         private void OnNotificationClicked(ToastNotificationActivatedEventArgsCompat e)
         {
+            if (e.Argument.Contains("dontShowInfo"))
+            {
+                return;
+            }
+
             ToastArguments args = ToastArguments.Parse(e.Argument);
             var hasValue = args.TryGetValue("task", out var taskIdString);
             if (!hasValue)
             {
                 return;
             }
-            
+
             var taskId = Guid.Parse(taskIdString);
 
             var task = TaskManager.GetTaskById(taskId);

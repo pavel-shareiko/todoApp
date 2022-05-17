@@ -38,7 +38,7 @@
             this.upcomingTasksPanel = new System.Windows.Forms.Panel();
             this.greetingsPanel = new System.Windows.Forms.Panel();
             this.greetingsLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.controlsPanel = new System.Windows.Forms.Panel();
             this.reloadButton = new ToDoApp.UI.Controls.RoundButton();
             this.headerPanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
@@ -49,7 +49,7 @@
             this.allTasksGroupBox.SuspendLayout();
             this.upcomingTasksGroupBox.SuspendLayout();
             this.greetingsPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.controlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -76,7 +76,7 @@
             // contentPanel
             // 
             this.contentPanel.Controls.Add(this.tasksSplitContainer);
-            this.contentPanel.Controls.Add(this.panel1);
+            this.contentPanel.Controls.Add(this.controlsPanel);
             this.contentPanel.Controls.Add(this.greetingsPanel);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contentPanel.Location = new System.Drawing.Point(0, 47);
@@ -165,15 +165,15 @@
             this.greetingsLabel.Text = "Hi, {name}! You have {n} tasks to do!";
             this.greetingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // controlsPanel
             // 
-            this.panel1.Controls.Add(this.reloadButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 55);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(955, 48);
-            this.panel1.TabIndex = 1;
+            this.controlsPanel.Controls.Add(this.reloadButton);
+            this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.controlsPanel.Location = new System.Drawing.Point(0, 55);
+            this.controlsPanel.Name = "controlsPanel";
+            this.controlsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.controlsPanel.Size = new System.Drawing.Size(955, 48);
+            this.controlsPanel.TabIndex = 1;
             // 
             // reloadButton
             // 
@@ -225,7 +225,7 @@
             this.upcomingTasksGroupBox.ResumeLayout(false);
             this.greetingsPanel.ResumeLayout(false);
             this.greetingsPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.controlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -242,7 +242,7 @@
         private System.Windows.Forms.Panel allTasksPanel;
         private System.Windows.Forms.GroupBox upcomingTasksGroupBox;
         private System.Windows.Forms.Panel upcomingTasksPanel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel controlsPanel;
         private Controls.RoundButton reloadButton;
     }
 }
