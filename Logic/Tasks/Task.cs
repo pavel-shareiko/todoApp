@@ -8,12 +8,40 @@ namespace Logic.Tasks
     {
         private TaskImportance _importance = TaskImportance.Low;
         private bool isCompleted;
+        private string name;
+        private string description;
+        private DateTime? deadLine;
+        private DateTime creationDate;
+        private DateTime? completionDate;
+
+        public event EventHandler<StateChangedEventArgs> StateChanged;
 
         [Order, Required, MaxLength(128)]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                var oldValue = name;
+                name = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.CompletionStatusChanged, oldValue, value));
+            }
+        }
 
         [Order]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                var oldValue = description;
+                description = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.DescriptionChanged, oldValue, value));
+            }
+        }
 
         [Order, Required]
         public TaskImportance Importance
@@ -26,15 +54,35 @@ namespace Logic.Tasks
                     throw new ArgumentException($"{value} is not a valid task importance");
                 }
 
+                var oldValue = _importance;
                 _importance = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.ImportanceChanged, oldValue, value));
             }
         }
 
         [Order]
-        public DateTime? DeadLine { get; set; }
+        public DateTime? DeadLine
+        {
+            get { return deadLine; }
+            set
+            {
+                var oldValue = deadLine;
+                deadLine = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.DeadLineChanged, oldValue, value));
+            }
+        }
 
         [Order]
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate
+        {
+            get { return creationDate; }
+            set
+            {
+                var oldValue = creationDate;
+                creationDate = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.CreationDateChanged, oldValue, value));
+            }
+        }
 
         [Order]
         public bool IsCompleted
@@ -42,17 +90,32 @@ namespace Logic.Tasks
             get => isCompleted;
             set
             {
+                var oldValue = isCompleted;
                 isCompleted = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.CompletionStatusChanged, oldValue, value));
             }
         }
 
         [Order]
         [DependsOn("IsCompleted")]
-        public DateTime? CompletionDate { get; set; }
+        public DateTime? CompletionDate
+        {
+            get { return completionDate; }
+            set
+            {
+                var oldValue = completionDate;
+                completionDate = value;
+                OnStateChanged(new StateChangedEventArgs(StatusUpdate.CompletionDateChanged, oldValue, value));
+            }
+        }
+
+        [Hidden]
+        public Guid Id { get; set; }
 
         public Task()
         {
             CreationDate = DateTime.Now;
+            Id = Guid.NewGuid();
         }
 
         public Task(Task task)
@@ -67,9 +130,10 @@ namespace Logic.Tasks
             Importance = task.Importance;
             DeadLine = task.DeadLine;
             CreationDate = task.CreationDate;
+            Id = task.Id;
         }
 
-        public void CopyTo(Task task)
+        public void CopyTo(ref Task task)
         {
             if (task == null)
             {
@@ -82,6 +146,7 @@ namespace Logic.Tasks
             task.Importance = Importance;
             task.DeadLine = DeadLine;
             task.CreationDate = CreationDate;
+            task.Id = Id;
         }
 
         public void Complete()
@@ -99,6 +164,11 @@ namespace Logic.Tasks
         public override string ToString()
         {
             return $"{Name}, DeadLine: {DeadLine}, Importance: {Importance}, IsCompleted: {IsCompleted}";
+        }
+
+        protected virtual void OnStateChanged(StateChangedEventArgs e)
+        {
+            StateChanged?.Invoke(this, e);
         }
     }
 }

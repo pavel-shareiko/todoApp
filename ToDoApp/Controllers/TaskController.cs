@@ -13,14 +13,20 @@ namespace ToDoApp.Controls
 {
     public class TaskController : ILoggable, IDisposable
     {
+        #region Fields
         private readonly Panel tasksPanel;
-        private int _page = 1;
-        private int _pageSize = 10;
-        private readonly Func<Task, bool> selector = null;
 
+        private int _page = 1;
+        private int _pageSize = Properties.Settings.Default.PageSize;
+        private readonly Func<Task, bool> selector;
+        #endregion
+
+        #region Events
         public event EventHandler TasksLoading;
         public event EventHandler<TasksLoadedEventArgs> TasksLoaded;
+        #endregion
 
+        #region Properties
         public int PageSize
         {
             get => _pageSize;
@@ -35,7 +41,6 @@ namespace ToDoApp.Controls
                 _pageSize = value;
             }
         }
-        public bool ReloadOnTaskCompleted { get; private set; }
         public bool IsLoggingEnabled { get; set; } = true;
         public bool IsLoading { get; private set; }
         public TaskView SelectedItem { get; set; }
@@ -74,15 +79,19 @@ namespace ToDoApp.Controls
         public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)PageSize);
 
         public Logger Logger => LogManager.GetCurrentClassLogger();
+        #endregion
 
-        public TaskController(Panel tasksPanel, bool reloadOnTaskCompleted = false, Func<Logic.Tasks.Task, bool> selector = null)
+        #region Constructors
+
+        public TaskController(Panel tasksPanel, Func<Task, bool> selector = null)
         {
             this.tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
             this.selector = selector;
-            ReloadOnTaskCompleted = reloadOnTaskCompleted;
         }
+        #endregion
 
-        public int GetTasksCount(Func<Logic.Tasks.Task, bool> selector = null) => TaskManager.GetTasksCount(selector);
+        #region Methods
+        public int GetTasksCount(Func<Task, bool> selector = null) => TaskManager.GetTasksCount(selector);
 
         public void Select(TaskView taskView)
         {
@@ -149,13 +158,9 @@ namespace ToDoApp.Controls
                     // Tasks are being displayed in reversed order, so to display them in the correct order, we iterate the list from the end
                     for (int i = tasksToShow.Count - 1; i >= 0; --i)
                     {
-                        var view = new TaskView(tasksToShow[i], this)
-                        {
-                            BackColor = ApplicationStyle.BackgroundColor,
-                            ForeColor = ApplicationStyle.TextColor,
-                            Dock = DockStyle.Top
-                        };
+                        var view = CreateTaskViewForTask(tasksToShow[i]);
 
+                        // window descriptor can be not loaded yet
                         while (!tasksPanel.InvokeRequired)
                         {
                             System.Threading.Thread.Sleep(10);
@@ -176,21 +181,31 @@ namespace ToDoApp.Controls
             });
 
             OnTasksLoaded(new TasksLoadedEventArgs(true));
-        }
 
-        private void ShowNoTasksLabel()
-        {
-            var noTasksLabel = new Label
+            TaskView CreateTaskViewForTask(Task task)
             {
-                Text = "No tasks to show",
-                AutoSize = false,
-                Parent = tasksPanel,
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.TopCenter,
-                ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor()
-            };
+                return new TaskView(task, this)
+                {
+                    BackColor = ApplicationStyle.BackgroundColor,
+                    ForeColor = ApplicationStyle.TextColor,
+                    Dock = DockStyle.Top
+                };
+            }
 
-            noTasksLabel.Font = new Font(noTasksLabel.Font.FontFamily, noTasksLabel.Font.Size + 2, FontStyle.Bold);
+            void ShowNoTasksLabel()
+            {
+                var noTasksLabel = new Label
+                {
+                    Text = "No tasks to show",
+                    AutoSize = false,
+                    Parent = tasksPanel,
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.TopCenter,
+                    ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor()
+                };
+
+                noTasksLabel.Font = new Font(noTasksLabel.Font.FontFamily, noTasksLabel.Font.Size + 2, FontStyle.Bold);
+            }
         }
 
         public void Dispose()
@@ -200,8 +215,9 @@ namespace ToDoApp.Controls
                 x.Dispose();
             });
         }
+        #endregion
 
-        #region Events
+        #region Event handlers
 
         private Spinner spinner;
         protected virtual void OnTasksLoading()

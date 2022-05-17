@@ -12,8 +12,8 @@ namespace ToDoApp.Forms
 {
     public partial class EditTaskForm : Form, ILoggable
     {
-        private readonly Task _originTask;
-        private readonly Task _currentTask;
+        private Task _originTask;
+        private Task _currentTask;
 
         public bool IsLoggingEnabled { get; set; }
         public Logger Logger => LogManager.GetCurrentClassLogger();
@@ -86,7 +86,7 @@ namespace ToDoApp.Forms
             }
 
             this.Log(LogLevel.Debug, "Validation succeeded");
-            _currentTask.CopyTo(_originTask);
+            _currentTask.CopyTo(ref _originTask);
 
             MessageBox.Show("Task has been successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

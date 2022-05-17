@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System;
 using System.Windows.Forms;
+using ToDoApp.Services;
 
 namespace ToDoApp.Forms
 {
@@ -15,6 +16,7 @@ namespace ToDoApp.Forms
         static void Main()
         {
             Logger.Info("Application started");
+            NotificationService.Instance.Start();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
