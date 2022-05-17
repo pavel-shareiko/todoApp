@@ -108,7 +108,7 @@ namespace Logic.Tasks
                 OnStateChanged(new StateChangedEventArgs(StatusUpdate.CompletionDateChanged, oldValue, value));
             }
         }
-
+        
         [Hidden]
         public Guid Id { get; set; }
 

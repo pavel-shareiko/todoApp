@@ -144,9 +144,10 @@ namespace ToDoApp.Forms
             // 
             this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taskBindingSource, "Description", true));
+            this.descriptionTextBox.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.descriptionTextBox.Location = new System.Drawing.Point(150, 52);
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(298, 61);
+            this.descriptionTextBox.Size = new System.Drawing.Size(333, 61);
             this.descriptionTextBox.TabIndex = 9;
             this.descriptionTextBox.Text = "";
             // 
@@ -196,35 +197,37 @@ namespace ToDoApp.Forms
             // deadLineDateTimePicker
             // 
             this.deadLineDateTimePicker.CalendarFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deadLineDateTimePicker.Checked = false;
             this.deadLineDateTimePicker.CustomFormat = "ddddd | dd.MM.yyyy | hh:mm:ss tt";
             this.deadLineDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.taskBindingSource, "DeadLine", true));
-            this.deadLineDateTimePicker.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deadLineDateTimePicker.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deadLineDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.deadLineDateTimePicker.Location = new System.Drawing.Point(150, 160);
             this.deadLineDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.deadLineDateTimePicker.Name = "deadLineDateTimePicker";
             this.deadLineDateTimePicker.ShowCheckBox = true;
-            this.deadLineDateTimePicker.Size = new System.Drawing.Size(298, 21);
+            this.deadLineDateTimePicker.Size = new System.Drawing.Size(333, 23);
             this.deadLineDateTimePicker.TabIndex = 4;
+            this.deadLineDateTimePicker.Value = new System.DateTime(2022, 5, 17, 23, 8, 6, 0);
             // 
             // importanceComboBox
             // 
             this.importanceComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taskBindingSource, "Importance", true));
+            this.importanceComboBox.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.importanceComboBox.FormattingEnabled = true;
             this.importanceComboBox.Location = new System.Drawing.Point(150, 127);
             this.importanceComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.importanceComboBox.Name = "importanceComboBox";
-            this.importanceComboBox.Size = new System.Drawing.Size(298, 24);
+            this.importanceComboBox.Size = new System.Drawing.Size(333, 25);
             this.importanceComboBox.TabIndex = 3;
             // 
             // nameTextBox
             // 
             this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taskBindingSource, "Name", true));
+            this.nameTextBox.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.nameTextBox.Location = new System.Drawing.Point(150, 16);
             this.nameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(298, 21);
+            this.nameTextBox.Size = new System.Drawing.Size(333, 23);
             this.nameTextBox.TabIndex = 1;
             // 
             // NewTaskScreen

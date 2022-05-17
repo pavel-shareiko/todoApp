@@ -62,9 +62,9 @@ namespace ToDoApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30000")]
-        public long ScanPeriod {
+        public int ScanPeriod {
             get {
-                return ((long)(this["ScanPeriod"]));
+                return ((int)(this["ScanPeriod"]));
             }
             set {
                 this["ScanPeriod"] = value;

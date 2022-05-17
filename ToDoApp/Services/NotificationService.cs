@@ -10,10 +10,6 @@ using ToDoApp.Forms;
 
 namespace ToDoApp.Services
 {
-    // The class that should iterate over every task periodically.
-    // And notifies the user if the deadline of the task is approaching.
-    // Scan period and notification period are configurable.
-    // Class shouldn't send notifications for the same task twice.
     public class NotificationService
     {
         private readonly List<Task> _alreadyNotified = new List<Task>();
@@ -60,7 +56,7 @@ namespace ToDoApp.Services
             int notifyBefore = Properties.Settings.Default.NotifyBefore;
             foreach (var task in tasks)
             {
-                if (DateTime.Now.Subtract(task.DeadLine.Value).TotalHours <= notifyBefore)
+                if (DateTime.Now.Subtract(task.DeadLine.Value).TotalMinutes <= notifyBefore)
                 {
                     Notify(task);
                 }
@@ -77,6 +73,7 @@ namespace ToDoApp.Services
             new ToastContentBuilder()
                 .AddText($"Don't miss the '{task.Name.Humanize()}' task deadline!")
                 .AddText($"The deadline is in {deadlineHumanized}")
+                .AddText($"The task has {task.Importance.Humanize()} importance status")
 
                 .AddArgument("task", task.Id.ToString())
 
