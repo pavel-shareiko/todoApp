@@ -5,7 +5,6 @@
         Low,
         Medium,
         High,
-        Urgent,
         Critical
     }
 }
