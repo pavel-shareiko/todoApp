@@ -75,6 +75,8 @@ namespace ToDoApp.Controls
 
             }
         }
+        
+        public Func<Task, bool> Filter { get; internal set; }
 
         public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)PageSize);
 
@@ -133,7 +135,7 @@ namespace ToDoApp.Controls
 
         public async void ReloadTasksAsync()
         {
-            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * PageSize, PageSize, new TaskComparer(), selector);
+            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * PageSize, PageSize, new TaskComparer(), selector ?? Filter);
             tasksPanel.Controls.Clear();
             var tasksToShow = await tasksToShowTask;
 

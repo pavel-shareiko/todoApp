@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using Logic.Tasks;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,8 +21,29 @@ namespace ToDoApp.Forms
             TaskController.TasksLoaded += OnTasksLoaded;
 
             UpdatePagesLabel();
+            SetupFilterCms();
 
             ApplyTheme();
+        }
+
+        private void SetupFilterCms()
+        {
+            resetToolStripMenuItem.Click += (s, e) => TaskController.Filter = null;
+
+            filterToolStripMenuItem.Click += (s, e) => TaskController.ReloadTasksAsync();
+
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Completed", null, (s, e) => TaskController.Filter += t => t.IsCompleted));
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not Completed", null, (s, e) => TaskController.Filter = t => !t.IsCompleted));
+
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due today", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.Date));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due tomorrow", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddDays(1).Date));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this week", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddDays(7).Date));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this month", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddMonths(1).Date));
+
+            foreach (var importance in Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>())
+            {
+                importanceToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem(importance.ToString(), null, (s, e) => TaskController.Filter += t => t.Importance == importance));
+            }
         }
 
         private void ApplyTheme()
@@ -118,6 +140,11 @@ namespace ToDoApp.Forms
         private void reloadButton_Click(object sender, EventArgs e)
         {
             TaskController.ReloadTasksAsync();
+        }
+
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            filterButton.ContextMenuStrip?.Show(filterButton, new System.Drawing.Point(filterButton.Width / 2, filterButton.Height / 2));
         }
     }
 }
