@@ -4,65 +4,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ToDoApp.UI;
 using ToDoApp.UI.Themes;
 
-namespace ToDoApp.Forms
+namespace ToDoApp.Controllers
 {
-    public partial class SettingsScreen : UserControl, ILoggable
+    public class SettingsController : ILoggable
     {
+        public ComboBox ThemeComboBox { get; }
+        public NumericUpDown ScanPeriodControl { get; }
+        public NumericUpDown PageSizeControl { get; }
+        public NumericUpDown NotifyBeforeControl { get; }
+
         public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
 
         private readonly SettingUpdateCollection _updates = new SettingUpdateCollection();
 
-        public SettingsScreen()
+        public SettingsController(ComboBox themeComboBox, NumericUpDown scanPeriodNud, NumericUpDown pageSizeNud, NumericUpDown notifyBeforeNud)
         {
-            InitializeComponent();
-
-            themeSelector.SelectedItem = Properties.Settings.Default.Theme;
-            notifyBeforeNumUD.Text = Properties.Settings.Default.NotifyBefore.ToString();
-            scanPeriodNumUD.Text = (Properties.Settings.Default.ScanPeriod / 1000D).ToString();
-            pageSizeNumUD.Text = Properties.Settings.Default.PageSize.ToString();
-
-            ApplyTheme();
+            ThemeComboBox = themeComboBox;
+            ScanPeriodControl = scanPeriodNud;
+            PageSizeControl = pageSizeNud;
+            NotifyBeforeControl = notifyBeforeNud;
         }
 
-        private void ApplyTheme()
-        {
-            var controls = Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
-
-            controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
-            controls.OfType<Button>().ToList().ForEach(x =>
-            {
-                x.BackColor = ApplicationStyle.AccentColor;
-                x.ForeColor = x.BackColor.GetContrastColor();
-            });
-            controls.OfType<RichTextBox>().ToList().ForEach(x =>
-            {
-                x.BackColor = ApplicationStyle.BackgroundColor;
-                x.ForeColor = x.BackColor.GetContrastColor();
-            });
-        }
-
-        #region Event handlers
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            if (_updates.Count == 0)
-            {
-                this.Log(LogLevel.Debug, "Save button has been clicked, but no changes have been made.");
-                return;
-            }
-
-            SaveChanges();
-        }
-
-        private void themeSelector_SelectionChangeCommitted(object sender, EventArgs e)
+        public void OnThemeControlSelectionCommitted(object sender, EventArgs e)
         {
             try
             {
-                this.Log(LogLevel.Debug, $"Selected theme: {themeSelector.SelectedItem}, Current theme: {Properties.Settings.Default.Theme}");
-                var newTheme = (Theme)themeSelector.SelectedItem;
+                this.Log(LogLevel.Debug, $"Selected theme: {ThemeComboBox.SelectedItem}, Current theme: {Properties.Settings.Default.Theme}");
+                var newTheme = (Theme)ThemeComboBox.SelectedItem;
 
                 if (!Enum.IsDefined(typeof(Theme), newTheme))
                 {
@@ -70,7 +41,7 @@ namespace ToDoApp.Forms
                 }
 
                 var settingUpdate = new SettingUpdate(
-                    themeSelector,
+                    ThemeComboBox,
                     Properties.Settings.Default.Theme,
                     newTheme,
                     () => Properties.Settings.Default.Theme = newTheme);
@@ -82,10 +53,15 @@ namespace ToDoApp.Forms
                 this.LogException(ex);
             }
         }
-        #endregion
 
-        private void SaveChanges()
+        public void SaveChanges()
         {
+            if (_updates.Count == 0)
+            {
+                this.Log(LogLevel.Debug, "No settings to save");
+                return;
+            }
+
             try
             {
                 foreach (var update in _updates)
@@ -117,7 +93,7 @@ namespace ToDoApp.Forms
             }
         }
 
-        private void pageSizeNumUD_ValueChanged(object sender, EventArgs e)
+        public void OnPageSizeValueChanged(object sender, EventArgs e)
         {
             NumericUpDown control = (NumericUpDown)sender;
             var settingUpdate = new SettingUpdate(
@@ -129,7 +105,7 @@ namespace ToDoApp.Forms
             _updates.AddIfUnique(settingUpdate);
         }
 
-        private void scanPeriodNumUD_ValueChanged(object sender, EventArgs e)
+        public void OnScanPeriodValueChanged(object sender, EventArgs e)
         {
             NumericUpDown control = (NumericUpDown)sender;
             var settingUpdate = new SettingUpdate(
@@ -141,7 +117,7 @@ namespace ToDoApp.Forms
             _updates.AddIfUnique(settingUpdate);
         }
 
-        private void notifyBeforeNumUD_ValueChanged(object sender, EventArgs e)
+        public void OnNotifyBeforeValueChanged(object sender, EventArgs e)
         {
             NumericUpDown control = (NumericUpDown)sender;
             var settingUpdate = new SettingUpdate(
@@ -153,6 +129,7 @@ namespace ToDoApp.Forms
             _updates.AddIfUnique(settingUpdate);
         }
     }
+
 
     public class SettingUpdate
     {
@@ -231,5 +208,4 @@ namespace ToDoApp.Forms
             return _updates.GetEnumerator();
         }
     }
-
 }

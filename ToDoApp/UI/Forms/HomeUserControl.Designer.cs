@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.UI.Forms
 {
-    partial class HomeScreen
+    partial class HomeUserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

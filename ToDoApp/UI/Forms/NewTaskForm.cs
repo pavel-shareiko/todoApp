@@ -10,13 +10,13 @@ using ToDoApp.UI;
 
 namespace ToDoApp.Forms
 {
-    public partial class NewTaskScreen : Form, ILoggable
+    public partial class NewTaskForm : Form, ILoggable
     {
         public bool IsLoggingEnabled { get; set; } = true;
         public Logger Logger => LogManager.GetCurrentClassLogger();
         private readonly Task creatingTask;
 
-        public NewTaskScreen()
+        public NewTaskForm()
         {
             InitializeComponent();
 
@@ -89,7 +89,7 @@ namespace ToDoApp.Forms
                 return;
             }
 
-            this.Log(LogLevel.Debug, "Validation succeeded");
+            this.Log(LogLevel.Debug, $"New task has been successfully created. ID: {task.Id}");
 
             TaskManager.Diary.AddTask(task);
             MessageBox.Show("Task has been successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);

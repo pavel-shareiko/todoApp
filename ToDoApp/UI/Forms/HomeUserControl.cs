@@ -2,15 +2,15 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ToDoApp.Controls;
+using ToDoApp.Controllers;
 
 namespace ToDoApp.UI.Forms
 {
-    public partial class HomeScreen : UserControl
+    public partial class HomeUserControl : UserControl
     {
         public TaskController AllTasksController { get; }
         public TaskController UpcomingTasksController { get; }
-        public HomeScreen()
+        public HomeUserControl()
         {
             InitializeComponent();
             ApplyTheme();

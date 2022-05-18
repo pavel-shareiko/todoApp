@@ -5,11 +5,12 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoApp.Controls;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
 using ToDoApp.UI.UserControls;
 
-namespace ToDoApp.Controls
+namespace ToDoApp.Controllers
 {
     public class TaskController : ILoggable, IDisposable
     {
@@ -142,6 +143,7 @@ namespace ToDoApp.Controls
             if (tasksToShow.Count == 0)
             {
                 ShowNoTasksLabel();
+                OnTasksLoaded(new TasksLoadedEventArgs(true));
                 return;
             }
 

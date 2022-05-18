@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.Forms
 {
-    partial class TasksScreen
+    partial class TasksUserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -30,14 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.controlsPanel = new System.Windows.Forms.Panel();
+            this.filterButton = new ToDoApp.UI.Controls.RoundButton();
             this.filterCms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deadLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadButton = new ToDoApp.UI.Controls.RoundButton();
             this.paginationPanel = new System.Windows.Forms.Panel();
             this.pagesLabel = new System.Windows.Forms.Label();
             this.nextPageButton = new FontAwesome.Sharp.IconPictureBox();
             this.prevPageButton = new FontAwesome.Sharp.IconPictureBox();
+            this.detailsButton = new ToDoApp.UI.Controls.RoundButton();
+            this.editButton = new ToDoApp.UI.Controls.RoundButton();
+            this.deleteButton = new ToDoApp.UI.Controls.RoundButton();
+            this.newButton = new ToDoApp.UI.Controls.RoundButton();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.dataGridViewPanel = new System.Windows.Forms.Panel();
             this.tasksDataGridViewPanel = new System.Windows.Forms.Panel();
@@ -50,15 +59,6 @@
             this.completedLabel = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterButton = new ToDoApp.UI.Controls.RoundButton();
-            this.reloadButton = new ToDoApp.UI.Controls.RoundButton();
-            this.detailsButton = new ToDoApp.UI.Controls.RoundButton();
-            this.editButton = new ToDoApp.UI.Controls.RoundButton();
-            this.deleteButton = new ToDoApp.UI.Controls.RoundButton();
-            this.newButton = new ToDoApp.UI.Controls.RoundButton();
-            this.currentFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlsPanel.SuspendLayout();
             this.filterCms.SuspendLayout();
             this.paginationPanel.SuspendLayout();
@@ -88,6 +88,36 @@
             this.controlsPanel.Size = new System.Drawing.Size(1402, 63);
             this.controlsPanel.TabIndex = 1;
             // 
+            // filterButton
+            // 
+            this.filterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
+            this.filterButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
+            this.filterButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.filterButton.BorderRadius = 40;
+            this.filterButton.BorderSize = 0;
+            this.filterButton.ContextMenuStrip = this.filterCms;
+            this.filterButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.filterButton.FlatAppearance.BorderSize = 0;
+            this.filterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.filterButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.filterButton.ForeColor = System.Drawing.Color.White;
+            this.filterButton.IconChar = FontAwesome.Sharp.IconChar.Filter;
+            this.filterButton.IconColor = System.Drawing.Color.White;
+            this.filterButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.filterButton.IconSize = 22;
+            this.filterButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.filterButton.IsLoggingEnabled = true;
+            this.filterButton.Location = new System.Drawing.Point(670, 12);
+            this.filterButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.filterButton.Size = new System.Drawing.Size(119, 39);
+            this.filterButton.TabIndex = 9;
+            this.filterButton.Text = "Filter";
+            this.filterButton.TextColor = System.Drawing.Color.White;
+            this.filterButton.UseVisualStyleBackColor = false;
+            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
+            // 
             // filterCms
             // 
             this.filterCms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -99,6 +129,24 @@
             this.deadLineToolStripMenuItem});
             this.filterCms.Name = "filterCms";
             this.filterCms.Size = new System.Drawing.Size(173, 136);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.resetToolStripMenuItem.Text = "(Reset)";
+            // 
+            // currentFilterToolStripMenuItem
+            // 
+            this.currentFilterToolStripMenuItem.Name = "currentFilterToolStripMenuItem";
+            this.currentFilterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.currentFilterToolStripMenuItem.Text = "(Current Filter)";
+            // 
+            // filterToolStripMenuItem
+            // 
+            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.filterToolStripMenuItem.Text = "(Apply Filter)";
             // 
             // importanceToolStripMenuItem
             // 
@@ -117,6 +165,35 @@
             this.deadLineToolStripMenuItem.Name = "deadLineToolStripMenuItem";
             this.deadLineToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.deadLineToolStripMenuItem.Text = "DeadLine";
+            // 
+            // reloadButton
+            // 
+            this.reloadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
+            this.reloadButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
+            this.reloadButton.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.reloadButton.BorderRadius = 40;
+            this.reloadButton.BorderSize = 0;
+            this.reloadButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.reloadButton.FlatAppearance.BorderSize = 0;
+            this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reloadButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.reloadButton.ForeColor = System.Drawing.Color.White;
+            this.reloadButton.IconChar = FontAwesome.Sharp.IconChar.Sync;
+            this.reloadButton.IconColor = System.Drawing.Color.White;
+            this.reloadButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.reloadButton.IconSize = 22;
+            this.reloadButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.reloadButton.IsLoggingEnabled = true;
+            this.reloadButton.Location = new System.Drawing.Point(789, 12);
+            this.reloadButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
+            this.reloadButton.Name = "reloadButton";
+            this.reloadButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
+            this.reloadButton.Size = new System.Drawing.Size(119, 39);
+            this.reloadButton.TabIndex = 8;
+            this.reloadButton.Text = "Reload";
+            this.reloadButton.TextColor = System.Drawing.Color.White;
+            this.reloadButton.UseVisualStyleBackColor = false;
+            this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
             // 
             // paginationPanel
             // 
@@ -138,7 +215,7 @@
             this.pagesLabel.Name = "pagesLabel";
             this.pagesLabel.Size = new System.Drawing.Size(180, 21);
             this.pagesLabel.TabIndex = 6;
-            this.pagesLabel.Text = "Page {p} of {max}";
+            this.pagesLabel.Text = "Page 0 of 0";
             this.pagesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nextPageButton
@@ -172,226 +249,6 @@
             this.prevPageButton.TabIndex = 3;
             this.prevPageButton.TabStop = false;
             this.prevPageButton.Click += new System.EventHandler(this.prevPageButton_Click);
-            // 
-            // contentPanel
-            // 
-            this.contentPanel.AutoScroll = true;
-            this.contentPanel.Controls.Add(this.dataGridViewPanel);
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 110);
-            this.contentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.contentPanel.Size = new System.Drawing.Size(1402, 648);
-            this.contentPanel.TabIndex = 2;
-            // 
-            // dataGridViewPanel
-            // 
-            this.dataGridViewPanel.Controls.Add(this.tasksDataGridViewPanel);
-            this.dataGridViewPanel.Controls.Add(this.tableHeadersPanel);
-            this.dataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewPanel.Location = new System.Drawing.Point(8, 8);
-            this.dataGridViewPanel.Name = "dataGridViewPanel";
-            this.dataGridViewPanel.Size = new System.Drawing.Size(1386, 632);
-            this.dataGridViewPanel.TabIndex = 0;
-            // 
-            // tasksDataGridViewPanel
-            // 
-            this.tasksDataGridViewPanel.AutoScroll = true;
-            this.tasksDataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tasksDataGridViewPanel.Location = new System.Drawing.Point(0, 47);
-            this.tasksDataGridViewPanel.Name = "tasksDataGridViewPanel";
-            this.tasksDataGridViewPanel.Size = new System.Drawing.Size(1386, 585);
-            this.tasksDataGridViewPanel.TabIndex = 1;
-            // 
-            // tableHeadersPanel
-            // 
-            this.tableHeadersPanel.Controls.Add(this.taskLayoutHeaders);
-            this.tableHeadersPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableHeadersPanel.Location = new System.Drawing.Point(0, 0);
-            this.tableHeadersPanel.Name = "tableHeadersPanel";
-            this.tableHeadersPanel.Size = new System.Drawing.Size(1386, 47);
-            this.tableHeadersPanel.TabIndex = 0;
-            // 
-            // taskLayoutHeaders
-            // 
-            this.taskLayoutHeaders.ColumnCount = 5;
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62905F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.56449F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.17743F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62903F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
-            this.taskLayoutHeaders.Controls.Add(this.descriptionLabel, 1, 0);
-            this.taskLayoutHeaders.Controls.Add(this.importanceLabel, 2, 0);
-            this.taskLayoutHeaders.Controls.Add(this.deadlineLabel, 3, 0);
-            this.taskLayoutHeaders.Controls.Add(this.nameLabel, 0, 0);
-            this.taskLayoutHeaders.Controls.Add(this.completedLabel, 4, 0);
-            this.taskLayoutHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.taskLayoutHeaders.Location = new System.Drawing.Point(0, 0);
-            this.taskLayoutHeaders.Name = "taskLayoutHeaders";
-            this.taskLayoutHeaders.RowCount = 1;
-            this.taskLayoutHeaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.taskLayoutHeaders.Size = new System.Drawing.Size(1386, 47);
-            this.taskLayoutHeaders.TabIndex = 1;
-            // 
-            // descriptionLabel
-            // 
-            this.descriptionLabel.AutoEllipsis = true;
-            this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.descriptionLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.descriptionLabel.Location = new System.Drawing.Point(310, 0);
-            this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(496, 47);
-            this.descriptionLabel.TabIndex = 1;
-            this.descriptionLabel.Tag = "Description";
-            this.descriptionLabel.Text = "Task description";
-            this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // importanceLabel
-            // 
-            this.importanceLabel.AutoEllipsis = true;
-            this.importanceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.importanceLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.importanceLabel.Location = new System.Drawing.Point(812, 0);
-            this.importanceLabel.Name = "importanceLabel";
-            this.importanceLabel.Size = new System.Drawing.Size(178, 47);
-            this.importanceLabel.TabIndex = 2;
-            this.importanceLabel.Tag = "Importance";
-            this.importanceLabel.Text = "Importance";
-            this.importanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // deadlineLabel
-            // 
-            this.deadlineLabel.AutoEllipsis = true;
-            this.deadlineLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deadlineLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deadlineLabel.Location = new System.Drawing.Point(996, 0);
-            this.deadlineLabel.Name = "deadlineLabel";
-            this.deadlineLabel.Size = new System.Drawing.Size(301, 47);
-            this.deadlineLabel.TabIndex = 3;
-            this.deadlineLabel.Tag = "Deadline";
-            this.deadlineLabel.Text = "Deadline";
-            this.deadlineLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoEllipsis = true;
-            this.nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nameLabel.Location = new System.Drawing.Point(3, 0);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(301, 47);
-            this.nameLabel.TabIndex = 0;
-            this.nameLabel.Tag = "Name";
-            this.nameLabel.Text = "Task name";
-            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // completedLabel
-            // 
-            this.completedLabel.AutoSize = true;
-            this.completedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.completedLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.completedLabel.Location = new System.Drawing.Point(1303, 0);
-            this.completedLabel.Name = "completedLabel";
-            this.completedLabel.Size = new System.Drawing.Size(80, 47);
-            this.completedLabel.TabIndex = 4;
-            this.completedLabel.Text = "Completed";
-            this.completedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // headerLabel
-            // 
-            this.headerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.headerLabel.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.headerLabel.Location = new System.Drawing.Point(0, 0);
-            this.headerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(1402, 47);
-            this.headerLabel.TabIndex = 0;
-            this.headerLabel.Text = "Your Tasks";
-            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // headerPanel
-            // 
-            this.headerPanel.Controls.Add(this.headerLabel);
-            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerPanel.Location = new System.Drawing.Point(0, 0);
-            this.headerPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(1402, 47);
-            this.headerPanel.TabIndex = 0;
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.resetToolStripMenuItem.Text = "(Reset)";
-            // 
-            // filterToolStripMenuItem
-            // 
-            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.filterToolStripMenuItem.Text = "(Apply Filter)";
-            // 
-            // filterButton
-            // 
-            this.filterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
-            this.filterButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
-            this.filterButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.filterButton.BorderRadius = 40;
-            this.filterButton.BorderSize = 0;
-            this.filterButton.ContextMenuStrip = this.filterCms;
-            this.filterButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.filterButton.FlatAppearance.BorderSize = 0;
-            this.filterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.filterButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.filterButton.ForeColor = System.Drawing.Color.White;
-            this.filterButton.IconChar = FontAwesome.Sharp.IconChar.Filter;
-            this.filterButton.IconColor = System.Drawing.Color.White;
-            this.filterButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.filterButton.IconSize = 22;
-            this.filterButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.filterButton.IsLoggingEnabled = true;
-            this.filterButton.Location = new System.Drawing.Point(670, 12);
-            this.filterButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
-            this.filterButton.Name = "filterButton";
-            this.filterButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
-            this.filterButton.Size = new System.Drawing.Size(119, 39);
-            this.filterButton.TabIndex = 9;
-            this.filterButton.Text = "Filter";
-            this.filterButton.TextColor = System.Drawing.Color.White;
-            this.filterButton.UseVisualStyleBackColor = false;
-            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
-            // 
-            // reloadButton
-            // 
-            this.reloadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
-            this.reloadButton.BackGroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(29)))), ((int)(((byte)(54)))));
-            this.reloadButton.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.reloadButton.BorderRadius = 40;
-            this.reloadButton.BorderSize = 0;
-            this.reloadButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.reloadButton.FlatAppearance.BorderSize = 0;
-            this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reloadButton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.reloadButton.ForeColor = System.Drawing.Color.White;
-            this.reloadButton.IconChar = FontAwesome.Sharp.IconChar.Sync;
-            this.reloadButton.IconColor = System.Drawing.Color.White;
-            this.reloadButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.reloadButton.IconSize = 22;
-            this.reloadButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.reloadButton.IsLoggingEnabled = true;
-            this.reloadButton.Location = new System.Drawing.Point(789, 12);
-            this.reloadButton.Margin = new System.Windows.Forms.Padding(4, 4, 9, 4);
-            this.reloadButton.Name = "reloadButton";
-            this.reloadButton.Padding = new System.Windows.Forms.Padding(5, 3, 0, 0);
-            this.reloadButton.Size = new System.Drawing.Size(119, 39);
-            this.reloadButton.TabIndex = 8;
-            this.reloadButton.Text = "Reload";
-            this.reloadButton.TextColor = System.Drawing.Color.White;
-            this.reloadButton.UseVisualStyleBackColor = false;
-            this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
             // 
             // detailsButton
             // 
@@ -509,11 +366,154 @@
             this.newButton.UseVisualStyleBackColor = false;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
-            // currentFilterToolStripMenuItem
+            // contentPanel
             // 
-            this.currentFilterToolStripMenuItem.Name = "currentFilterToolStripMenuItem";
-            this.currentFilterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.currentFilterToolStripMenuItem.Text = "(Current Filter)";
+            this.contentPanel.AutoScroll = true;
+            this.contentPanel.Controls.Add(this.dataGridViewPanel);
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 110);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.contentPanel.Size = new System.Drawing.Size(1402, 648);
+            this.contentPanel.TabIndex = 2;
+            // 
+            // dataGridViewPanel
+            // 
+            this.dataGridViewPanel.Controls.Add(this.tasksDataGridViewPanel);
+            this.dataGridViewPanel.Controls.Add(this.tableHeadersPanel);
+            this.dataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPanel.Location = new System.Drawing.Point(8, 8);
+            this.dataGridViewPanel.Name = "dataGridViewPanel";
+            this.dataGridViewPanel.Size = new System.Drawing.Size(1386, 632);
+            this.dataGridViewPanel.TabIndex = 0;
+            // 
+            // tasksDataGridViewPanel
+            // 
+            this.tasksDataGridViewPanel.AutoScroll = true;
+            this.tasksDataGridViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tasksDataGridViewPanel.Location = new System.Drawing.Point(0, 47);
+            this.tasksDataGridViewPanel.Name = "tasksDataGridViewPanel";
+            this.tasksDataGridViewPanel.Size = new System.Drawing.Size(1386, 585);
+            this.tasksDataGridViewPanel.TabIndex = 1;
+            // 
+            // tableHeadersPanel
+            // 
+            this.tableHeadersPanel.Controls.Add(this.taskLayoutHeaders);
+            this.tableHeadersPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableHeadersPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableHeadersPanel.Name = "tableHeadersPanel";
+            this.tableHeadersPanel.Size = new System.Drawing.Size(1386, 47);
+            this.tableHeadersPanel.TabIndex = 0;
+            // 
+            // taskLayoutHeaders
+            // 
+            this.taskLayoutHeaders.ColumnCount = 5;
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62905F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.56449F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.17743F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62903F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.taskLayoutHeaders.Controls.Add(this.descriptionLabel, 1, 0);
+            this.taskLayoutHeaders.Controls.Add(this.importanceLabel, 2, 0);
+            this.taskLayoutHeaders.Controls.Add(this.deadlineLabel, 3, 0);
+            this.taskLayoutHeaders.Controls.Add(this.nameLabel, 0, 0);
+            this.taskLayoutHeaders.Controls.Add(this.completedLabel, 4, 0);
+            this.taskLayoutHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskLayoutHeaders.Location = new System.Drawing.Point(0, 0);
+            this.taskLayoutHeaders.Name = "taskLayoutHeaders";
+            this.taskLayoutHeaders.RowCount = 1;
+            this.taskLayoutHeaders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.taskLayoutHeaders.Size = new System.Drawing.Size(1386, 47);
+            this.taskLayoutHeaders.TabIndex = 1;
+            // 
+            // descriptionLabel
+            // 
+            this.descriptionLabel.AutoEllipsis = true;
+            this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.descriptionLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.descriptionLabel.Location = new System.Drawing.Point(310, 0);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(495, 47);
+            this.descriptionLabel.TabIndex = 1;
+            this.descriptionLabel.Tag = "Description";
+            this.descriptionLabel.Text = "Task description";
+            this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // importanceLabel
+            // 
+            this.importanceLabel.AutoEllipsis = true;
+            this.importanceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.importanceLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.importanceLabel.Location = new System.Drawing.Point(811, 0);
+            this.importanceLabel.Name = "importanceLabel";
+            this.importanceLabel.Size = new System.Drawing.Size(178, 47);
+            this.importanceLabel.TabIndex = 2;
+            this.importanceLabel.Tag = "Importance";
+            this.importanceLabel.Text = "Importance";
+            this.importanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // deadlineLabel
+            // 
+            this.deadlineLabel.AutoEllipsis = true;
+            this.deadlineLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deadlineLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deadlineLabel.Location = new System.Drawing.Point(995, 0);
+            this.deadlineLabel.Name = "deadlineLabel";
+            this.deadlineLabel.Size = new System.Drawing.Size(301, 47);
+            this.deadlineLabel.TabIndex = 3;
+            this.deadlineLabel.Tag = "Deadline";
+            this.deadlineLabel.Text = "Deadline";
+            this.deadlineLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoEllipsis = true;
+            this.nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nameLabel.Location = new System.Drawing.Point(3, 0);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(301, 47);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Tag = "Name";
+            this.nameLabel.Text = "Task name";
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // completedLabel
+            // 
+            this.completedLabel.AutoSize = true;
+            this.completedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.completedLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.completedLabel.Location = new System.Drawing.Point(1302, 0);
+            this.completedLabel.Name = "completedLabel";
+            this.completedLabel.Size = new System.Drawing.Size(81, 47);
+            this.completedLabel.TabIndex = 4;
+            this.completedLabel.Text = "Completed";
+            this.completedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // headerLabel
+            // 
+            this.headerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.headerLabel.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.headerLabel.Location = new System.Drawing.Point(0, 0);
+            this.headerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.headerLabel.Name = "headerLabel";
+            this.headerLabel.Size = new System.Drawing.Size(1402, 47);
+            this.headerLabel.TabIndex = 0;
+            this.headerLabel.Text = "Your Tasks";
+            this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // headerPanel
+            // 
+            this.headerPanel.Controls.Add(this.headerLabel);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(1402, 47);
+            this.headerPanel.TabIndex = 0;
             // 
             // TasksScreen
             // 

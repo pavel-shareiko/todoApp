@@ -56,6 +56,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Other\TaskComparer.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Other\TasksLoadedEventArgs.cs" />
@@ -67,11 +69,11 @@
     <Compile Include="UI\Forms\EditTaskForm.Designer.cs">
       <DependentUpon>EditTaskForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\HomeScreen.cs">
+    <Compile Include="UI\Forms\HomeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\HomeScreen.Designer.cs">
-      <DependentUpon>HomeScreen.cs</DependentUpon>
+    <Compile Include="UI\Forms\HomeUserControl.Designer.cs">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -79,11 +81,11 @@
     <Compile Include="UI\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\NewTaskScreen.cs">
+    <Compile Include="UI\Forms\NewTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\NewTaskScreen.Designer.cs">
-      <DependentUpon>NewTaskScreen.cs</DependentUpon>
+    <Compile Include="UI\Forms\NewTaskForm.Designer.cs">
+      <DependentUpon>NewTaskForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\TaskInfoForm.cs">
       <SubType>Form</SubType>
@@ -92,17 +94,17 @@
       <DependentUpon>TaskInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="UI\Forms\SettingsScreen.cs">
+    <Compile Include="UI\Forms\SettingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\SettingsScreen.Designer.cs">
-      <DependentUpon>SettingsScreen.cs</DependentUpon>
+    <Compile Include="UI\Forms\SettingsUserControl.Designer.cs">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\TasksScreen.cs">
+    <Compile Include="UI\Forms\TasksUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\TasksScreen.Designer.cs">
-      <DependentUpon>TasksScreen.cs</DependentUpon>
+    <Compile Include="UI\Forms\TasksUserControl.Designer.cs">
+      <DependentUpon>TasksUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\UserControls\RoundButton.cs">
@@ -136,23 +138,23 @@
     <EmbeddedResource Include="UI\Forms\EditTaskForm.resx">
       <DependentUpon>EditTaskForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\HomeScreen.resx">
-      <DependentUpon>HomeScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\HomeUserControl.resx">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\NewTaskScreen.resx">
-      <DependentUpon>NewTaskScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\NewTaskForm.resx">
+      <DependentUpon>NewTaskForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\SettingsScreen.resx">
-      <DependentUpon>SettingsScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SettingsUserControl.resx">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\TaskInfoForm.resx">
       <DependentUpon>TaskInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\TasksScreen.resx">
-      <DependentUpon>TasksScreen.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\TasksUserControl.resx">
+      <DependentUpon>TasksUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,8 +19,8 @@ namespace ToDoApp.Forms
         public UserControl CurrentScreen { get; private set; }
 
         private readonly UserPreferenceChangedEventHandler _userPreferenceChanged;
-        private TasksScreen _tasksScreen;
-        private HomeScreen _homeScreen;
+        private TasksUserControl _tasksScreen;
+        private HomeUserControl _homeScreen;
 
         public MainForm()
         {
@@ -59,7 +59,7 @@ namespace ToDoApp.Forms
         {
             if (_homeScreen == null)
             {
-                _homeScreen = new HomeScreen();
+                _homeScreen = new HomeUserControl();
             }
 
             CurrentScreen = _homeScreen;
@@ -70,7 +70,7 @@ namespace ToDoApp.Forms
         {
             if (_tasksScreen == null)
             {
-                _tasksScreen = new TasksScreen();
+                _tasksScreen = new TasksUserControl();
             }
 
             CurrentScreen = _tasksScreen;
@@ -79,7 +79,7 @@ namespace ToDoApp.Forms
 
         private void ShowSettingsScreen()
         {
-            var settingsScreen = new SettingsScreen();
+            var settingsScreen = new SettingsUserControl();
             CurrentScreen = settingsScreen;
             settingsScreen.ApplyToPanel(contentPanel);
         }
@@ -118,7 +118,7 @@ namespace ToDoApp.Forms
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            if (CurrentScreen is HomeScreen)
+            if (CurrentScreen is HomeUserControl)
             {
                 return;
             }
@@ -128,7 +128,7 @@ namespace ToDoApp.Forms
 
         private void tasksButton_Click(object sender, EventArgs e)
         {
-            if (CurrentScreen is TasksScreen)
+            if (CurrentScreen is TasksUserControl)
             {
                 return;
             }
@@ -138,7 +138,7 @@ namespace ToDoApp.Forms
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            if (CurrentScreen is SettingsScreen)
+            if (CurrentScreen is SettingsUserControl)
             {
                 return;
             }

@@ -3,7 +3,7 @@ using ToDoApp.UI.Themes;
 
 namespace ToDoApp.Forms
 {
-    partial class SettingsScreen
+    partial class SettingsUserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -149,7 +149,6 @@ namespace ToDoApp.Forms
             0,
             0,
             0});
-            this.notifyBeforeNumUD.ValueChanged += new System.EventHandler(this.notifyBeforeNumUD_ValueChanged);
             // 
             // scanPeriodNumUD
             // 
@@ -168,7 +167,6 @@ namespace ToDoApp.Forms
             0,
             0,
             0});
-            this.scanPeriodNumUD.ValueChanged += new System.EventHandler(this.scanPeriodNumUD_ValueChanged);
             // 
             // pageSizeNumUD
             // 
@@ -187,7 +185,6 @@ namespace ToDoApp.Forms
             0,
             0,
             0});
-            this.pageSizeNumUD.ValueChanged += new System.EventHandler(this.pageSizeNumUD_ValueChanged);
             // 
             // label3
             // 
@@ -232,7 +229,6 @@ namespace ToDoApp.Forms
             this.themeSelector.Name = "themeSelector";
             this.themeSelector.Size = new System.Drawing.Size(167, 25);
             this.themeSelector.TabIndex = 1;
-            this.themeSelector.SelectionChangeCommitted += new System.EventHandler(this.themeSelector_SelectionChangeCommitted);
             // 
             // themeLabel
             // 

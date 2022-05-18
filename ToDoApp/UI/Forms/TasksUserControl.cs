@@ -5,16 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoApp.Controllers;
 using ToDoApp.Controls;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
 
 namespace ToDoApp.Forms
 {
-    public partial class TasksScreen : UserControl, IDisposable
+    public partial class TasksUserControl : UserControl, IDisposable
     {
         public TaskController TaskController { get; }
-        public TasksScreen()
+        public PageController PageController { get; }
+        public TasksUserControl()
         {
             InitializeComponent();
 
@@ -22,7 +24,8 @@ namespace ToDoApp.Forms
             TaskController.ReloadTasksAsync();
             TaskController.TasksLoaded += OnTasksLoaded;
 
-            UpdatePagesLabel();
+            PageController = new PageController(TaskController, pagesLabel);
+
             SetupFilterCms();
 
             ApplyTheme();
@@ -99,7 +102,7 @@ namespace ToDoApp.Forms
 
         private void newButton_Click(object sender, System.EventArgs e)
         {
-            new NewTaskScreen().ShowDialog();
+            new NewTaskForm().ShowDialog();
             TaskController.ReloadTasksAsync();
         }
         private void editButton_Click(object sender, System.EventArgs e)
@@ -142,30 +145,17 @@ namespace ToDoApp.Forms
 
         private void nextPageButton_Click(object sender, System.EventArgs e)
         {
-            TaskController.Page++;
-            UpdatePagesLabel();
+            PageController.IncreasePage();
         }
 
         private void prevPageButton_Click(object sender, System.EventArgs e)
         {
-            TaskController.Page--;
-            UpdatePagesLabel();
-        }
-
-        private void UpdatePagesLabel()
-        {
-            pagesLabel.Text = $"Page {TaskController.Page} of {TaskController.TotalPages}";
+            PageController.DecreasePage();
         }
 
         private void OnTasksLoaded(object sender, TasksLoadedEventArgs args)
         {
-            UpdatePagesLabel();
-        }
-
-        public new void Dispose()
-        {
-            TaskController.TasksLoaded -= OnTasksLoaded;
-            base.Dispose();
+            PageController.UpdatePageControl();
         }
 
         private void reloadButton_Click(object sender, EventArgs e)
@@ -176,6 +166,12 @@ namespace ToDoApp.Forms
         private void filterButton_Click(object sender, EventArgs e)
         {
             filterButton.ContextMenuStrip?.Show(filterButton, new System.Drawing.Point(filterButton.Width / 2, filterButton.Height / 2));
+        }
+
+        public new void Dispose()
+        {
+            TaskController.TasksLoaded -= OnTasksLoaded;
+            base.Dispose();
         }
 
         private class FilterBuilder
