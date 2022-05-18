@@ -12,7 +12,7 @@ namespace Logic.Utils
 
             if (loggable.IsLoggingEnabled && loggable.Logger.IsEnabled(level))
             {
-                loggable.Logger.Log(level, method + "(): " + message);
+                loggable.Logger.Log(level, $"[{loggable.Logger.Name}.{method}]: {message}");
             }
         }
 
@@ -22,8 +22,7 @@ namespace Logic.Utils
 
             if (loggable.IsLoggingEnabled && loggable.Logger.IsEnabled(LogLevel.Error))
             {
-                loggable.Logger.Log(LogLevel.Error, e.Message);
-                loggable.Logger.Log(LogLevel.Error, e.StackTrace);
+                loggable.Logger.Error(e);
             }
         }
 
