@@ -1,6 +1,8 @@
 ﻿using FontAwesome.Sharp;
+using Humanizer;
 using Logic.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controls;
@@ -26,23 +28,52 @@ namespace ToDoApp.Forms
             ApplyTheme();
         }
 
+        private FilterBuilder filterBuilder;
         private void SetupFilterCms()
         {
-            resetToolStripMenuItem.Click += (s, e) => TaskController.Filter = null;
-
-            filterToolStripMenuItem.Click += (s, e) => TaskController.ReloadTasksAsync();
-
-            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Completed", null, (s, e) => TaskController.Filter += t => t.IsCompleted));
-            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not Completed", null, (s, e) => TaskController.Filter = t => !t.IsCompleted));
-
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due today", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.Date));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due tomorrow", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddDays(1).Date));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this week", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddDays(7).Date));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this month", null, (s, e) => TaskController.Filter += t => t.DeadLine?.Date <= DateTime.Now.AddMonths(1).Date));
-
-            foreach (var importance in Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>())
+            filterBuilder = new FilterBuilder();
+            resetToolStripMenuItem.Click += (s, e) =>
             {
-                importanceToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem(importance.ToString(), null, (s, e) => TaskController.Filter += t => t.Importance == importance));
+                filterBuilder.Reset();
+                TaskController.Filter = null;
+                TaskController.ReloadTasksAsync();
+            };
+
+            filterToolStripMenuItem.Click += (s, e) =>
+            {
+                var filter = filterBuilder.Build();
+                TaskController.Filter = filter;
+                TaskController.ReloadTasksAsync();
+            };
+
+            currentFilterToolStripMenuItem.Click += (s, e) => MessageBox.Show(filterBuilder.ToString(), "Info");
+
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
+                (s, e) => filterBuilder.RemoveConditionGroup("Status")));
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Completed", null, 
+                (s, e) => filterBuilder.AddCondition("Status", t => t.IsCompleted, "Task is completed")));
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not Completed", null, 
+                (s, e) => filterBuilder.AddCondition("Status", t => !t.IsCompleted, "Task is not completed")));
+
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
+                (s, e) => filterBuilder.RemoveConditionGroup("DeadLine")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not set", null, 
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => !t.DeadLine.HasValue, "Task has no deadline")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Today", null, 
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today, "Task is due today")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Tomorrow", null, 
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(1), "Task is due tomorrow")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this week", null, 
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(7), "Task is due this week")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this month", null, 
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(30), "Task is due this month")));
+
+            importanceToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
+                (s, e) => filterBuilder.RemoveConditionGroup("Importance")));
+            foreach (var importnace in Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>())
+            {
+                importanceToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem(importnace.Humanize(), null,
+                    (s, e) => filterBuilder.AddCondition("Importance", t => t.Importance == importnace, "Task importance is " + importnace.Humanize())));
             }
         }
 
@@ -145,6 +176,54 @@ namespace ToDoApp.Forms
         private void filterButton_Click(object sender, EventArgs e)
         {
             filterButton.ContextMenuStrip?.Show(filterButton, new System.Drawing.Point(filterButton.Width / 2, filterButton.Height / 2));
+        }
+
+        private class FilterBuilder
+        {
+            private readonly Dictionary<string, (Func<Task, bool> Condition, string Description)> conditions = new Dictionary<string, (Func<Task, bool>, string)>(StringComparer.OrdinalIgnoreCase);
+
+            public void AddCondition(string group, Func<Task, bool> condition, string description)
+            {
+                if (conditions.ContainsKey(group))
+                {
+                    conditions[group] = (condition, description);
+                }
+                else
+                {
+                    conditions.Add(group, (condition, description));
+                }
+            }
+
+            public Func<Task, bool> Build()
+            {
+                var conditions = this.conditions.Values.Select(x => x.Condition).ToArray();
+                return (task) => conditions.All(x => x(task));
+            }
+
+            public void Reset()
+            {
+                conditions?.Clear();
+            }
+
+            public void RemoveConditionGroup(string v)
+            {
+                conditions?.Remove(v);
+            }
+
+            public override string ToString()
+            {
+                if (conditions == null)
+                {
+                    return "No filter criteria are set";
+                }
+
+                if (conditions.Count == 0)
+                {
+                    return "No filter criteria are set";
+                }
+
+                return string.Join("\n", conditions.Select(x => x.Value.Description));
+            }
         }
     }
 }
