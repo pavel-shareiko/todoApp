@@ -7,7 +7,9 @@ namespace ToDoApp.UI
         public static T Clamp<T>(T min, T value, T max) where T : IComparable<T>
         {
             if (value.CompareTo(min) < 0)
+            {
                 return min;
+            }
 
             return value.CompareTo(max) > 0 ? max : value;
         }

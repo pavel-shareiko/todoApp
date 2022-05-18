@@ -103,14 +103,14 @@ namespace ToDoApp.UI.Controls
             base.OnPaint(pevent);
             pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            var rectSurface = new RectangleF(0, 0, this.Width, this.Height);
-            var rectBorder = new RectangleF(1, 1, this.Width - 0.8F, this.Height - 1);
+            var rectSurface = new RectangleF(0, 0, Width, Height);
+            var rectBorder = new RectangleF(1, 1, Width - 0.8F, Height - 1);
 
             if (BorderRadius > 2)
             {
                 using (var pathSurface = GetFigurePath(rectSurface, BorderRadius))
                 using (var pathBorder = GetFigurePath(rectBorder, BorderRadius - 1f))
-                using (var penSurface = new Pen(this.Parent.BackColor, 2))
+                using (var penSurface = new Pen(Parent.BackColor, 2))
                 using (var penBorder = new Pen(BorderColor, BorderSize))
                 {
                     penBorder.Alignment = PenAlignment.Inset;
@@ -132,7 +132,7 @@ namespace ToDoApp.UI.Controls
                     using (var penBorder = new Pen(BorderColor, BorderSize))
                     {
                         penBorder.Alignment = PenAlignment.Inset;
-                        pevent.Graphics.DrawRectangle(penBorder, 0, 0, this.Width - 1, this.Height - 1);
+                        pevent.Graphics.DrawRectangle(penBorder, 0, 0, Width - 1, Height - 1);
                     }
                 }
             }
@@ -152,7 +152,7 @@ namespace ToDoApp.UI.Controls
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            this.Log(LogLevel.Debug, $"{this.Name} clicked");
+            this.Log(LogLevel.Debug, $"{Name} clicked");
         }
 
         /// <summary>
@@ -161,12 +161,12 @@ namespace ToDoApp.UI.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // RoundButton
             // 
-            this.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(204)));
-            this.ResumeLayout(false);
+            Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            ResumeLayout(false);
 
         }
     }

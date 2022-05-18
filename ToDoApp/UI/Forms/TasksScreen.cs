@@ -50,22 +50,22 @@ namespace ToDoApp.Forms
 
             completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
                 (s, e) => filterBuilder.RemoveConditionGroup("Status")));
-            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Completed", null, 
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Completed", null,
                 (s, e) => filterBuilder.AddCondition("Status", t => t.IsCompleted, "Task is completed")));
-            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not Completed", null, 
+            completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not Completed", null,
                 (s, e) => filterBuilder.AddCondition("Status", t => !t.IsCompleted, "Task is not completed")));
 
             deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
                 (s, e) => filterBuilder.RemoveConditionGroup("DeadLine")));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not set", null, 
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not set", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => !t.DeadLine.HasValue, "Task has no deadline")));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Today", null, 
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Today", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today, "Task is due today")));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Tomorrow", null, 
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Tomorrow", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(1), "Task is due tomorrow")));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this week", null, 
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this week", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(7), "Task is due this week")));
-            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this month", null, 
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due this month", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today.AddDays(30), "Task is due this month")));
 
             importanceToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
@@ -79,7 +79,7 @@ namespace ToDoApp.Forms
 
         private void ApplyTheme()
         {
-            var controls = this.Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
+            var controls = Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
 
             controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.TextColor);
             controls.OfType<RoundButton>().ToList().ForEach(x =>

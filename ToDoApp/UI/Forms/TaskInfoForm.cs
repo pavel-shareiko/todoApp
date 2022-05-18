@@ -1,12 +1,12 @@
-﻿using Logic.Tasks;
+﻿using Humanizer;
+using Logic.Attributes;
+using Logic.Tasks;
 using System;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using ToDoApp.UI;
-using Humanizer;
-using System.Reflection;
-using System.Drawing;
-using Logic.Attributes;
 
 namespace ToDoApp.Forms
 {
@@ -21,10 +21,10 @@ namespace ToDoApp.Forms
 
             InitializeComponent();
             taskBindingSource.DataSource = task;
-            this.AutoScroll = true;
-            this.BackColor = ApplicationStyle.BackgroundColor;
-            this.infoPanel.BackColor = ApplicationStyle.BackgroundColor;
-            this.infoPanel.Padding = new Padding(10);
+            AutoScroll = true;
+            BackColor = ApplicationStyle.BackgroundColor;
+            infoPanel.BackColor = ApplicationStyle.BackgroundColor;
+            infoPanel.Padding = new Padding(10);
 
             ApplyTheme();
             ShowInfo();
@@ -135,7 +135,7 @@ namespace ToDoApp.Forms
 
         private void ApplyTheme()
         {
-            var panels = this.Controls.OfType<Panel>();
+            var panels = Controls.OfType<Panel>();
 
             panels.ToList().ForEach(p => p.BackColor = ApplicationStyle.BackgroundColor);
 

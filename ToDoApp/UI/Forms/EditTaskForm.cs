@@ -13,7 +13,7 @@ namespace ToDoApp.Forms
     public partial class EditTaskForm : Form, ILoggable
     {
         private Task _originTask;
-        private Task _currentTask;
+        private readonly Task _currentTask;
 
         public bool IsLoggingEnabled { get; set; }
         public Logger Logger => LogManager.GetCurrentClassLogger();
@@ -42,7 +42,7 @@ namespace ToDoApp.Forms
 
         private void ApplyTheme()
         {
-            var panels = this.Controls.OfType<Panel>();
+            var panels = Controls.OfType<Panel>();
 
             panels.ToList().ForEach(p => p.BackColor = ApplicationStyle.BackgroundColor);
 

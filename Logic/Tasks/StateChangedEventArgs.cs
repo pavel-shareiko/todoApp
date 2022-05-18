@@ -15,7 +15,7 @@ namespace Logic.Tasks
             NewValue = newValue;
         }
     }
-    
+
     public enum StatusUpdate
     {
         CompletionStatusChanged,

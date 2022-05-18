@@ -75,7 +75,7 @@ namespace ToDoApp.Controls
 
             }
         }
-        
+
         public Func<Task, bool> Filter { get; internal set; }
 
         public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)PageSize);

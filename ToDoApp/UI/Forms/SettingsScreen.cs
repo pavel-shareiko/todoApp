@@ -30,7 +30,7 @@ namespace ToDoApp.Forms
 
         private void ApplyTheme()
         {
-            var controls = this.Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
+            var controls = Controls.OfType<Panel>().SelectMany(x => x.Controls.OfType<Control>());
 
             controls.OfType<Label>().ToList().ForEach(x => x.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
             controls.OfType<Button>().ToList().ForEach(x =>

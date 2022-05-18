@@ -58,9 +58,13 @@ namespace ToDoApp.UI.Forms
             var tasksCount = UpcomingTasksController.GetTasksCount(t => !t.IsCompleted);
 
             if (tasksCount > 0)
+            {
                 greetingsLabel.Text = $"Hi, {Environment.UserName}! You have {tasksCount} task(s) to do!";
+            }
             else
+            {
                 greetingsLabel.Text = $"Hi, {Environment.UserName}! There is no work for you at the moment, you can take a rest! :)";
+            }
         }
 
         private void reloadButton_Click(object sender, EventArgs e)

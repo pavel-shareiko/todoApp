@@ -88,7 +88,9 @@ namespace ToDoApp.Services
                 .Show(toast => toast.ExpirationTime = task.DeadLine.Value);
 
             lock (_alreadyNotified)
+            {
                 _alreadyNotified.Add(task);
+            }
         }
 
         private void OnNotificationClicked(ToastNotificationActivatedEventArgsCompat e)

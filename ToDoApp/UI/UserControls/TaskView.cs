@@ -1,5 +1,4 @@
-﻿using Humanizer;
-using Logic.Tasks;
+﻿using Logic.Tasks;
 using Logic.Utils;
 using NLog;
 using System;
@@ -37,13 +36,13 @@ namespace ToDoApp.UI.Controls
             {
                 if (value)
                 {
-                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Regular));
-                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
+                    taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Regular));
+                    taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor());
                 }
                 else
                 {
-                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Strikeout | FontStyle.Italic));
-                    this.taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = Color.Gray);
+                    taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.Font = new Font(l.Font, FontStyle.Strikeout | FontStyle.Italic));
+                    taskLayout.Controls.OfType<Label>().ToList().ForEach(l => l.ForeColor = Color.Gray);
                 }
 
                 _isActive = value;
@@ -54,10 +53,10 @@ namespace ToDoApp.UI.Controls
         {
             InitializeComponent();
 
-            this._controller = controller ?? throw new ArgumentNullException(nameof(controller));
+            _controller = controller ?? throw new ArgumentNullException(nameof(controller));
 
             // causes BindValues()
-            this.Task = task ?? throw new ArgumentNullException(nameof(task));
+            Task = task ?? throw new ArgumentNullException(nameof(task));
             ApplyTheme();
 
             foreach (var control in taskLayout.Controls.Cast<Control>())
@@ -74,11 +73,11 @@ namespace ToDoApp.UI.Controls
             {
                 if (Task.DeadLine < DateTime.Now)
                 {
-                    this.deadlineLabel.ForeColor = Color.Red;
+                    deadlineLabel.ForeColor = Color.Red;
                 }
                 else
                 {
-                    this.deadlineLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
+                    deadlineLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
                 }
             }
         }
@@ -87,19 +86,19 @@ namespace ToDoApp.UI.Controls
         {
             try
             {
-                this.nameLabel.Text = task.Name;
-                this.descriptionLabel.Text = task.Description;
-                this.importanceLabel.Text = task.Importance.ToString();
-                this.IsActive = !task.IsCompleted;
-                this.completedCheckBox.Checked = task.IsCompleted;
+                nameLabel.Text = task.Name;
+                descriptionLabel.Text = task.Description;
+                importanceLabel.Text = task.Importance.ToString();
+                IsActive = !task.IsCompleted;
+                completedCheckBox.Checked = task.IsCompleted;
 
                 if (!task.DeadLine.HasValue)
                 {
-                    this.deadlineLabel.Text = "Not set";
+                    deadlineLabel.Text = "Not set";
                 }
                 else
                 {
-                    this.deadlineLabel.Text = task.DeadLine.Value.ToString("dddd, dd.MM.yyyy HH:mm");
+                    deadlineLabel.Text = task.DeadLine.Value.ToString("dddd, dd.MM.yyyy HH:mm");
                 }
             }
             catch (Exception e)
@@ -116,15 +115,15 @@ namespace ToDoApp.UI.Controls
         private Color savedForeColor;
         public void Unhighlight()
         {
-            this.BackColor = savedBackColor;
-            this.ForeColor = savedForeColor;
+            BackColor = savedBackColor;
+            ForeColor = savedForeColor;
         }
 
         public void Hightlight()
         {
-            savedBackColor = this.BackColor;
-            savedForeColor = this.ForeColor;
-            this.BackColor = GetHightlightColorFor(BackColor);
+            savedBackColor = BackColor;
+            savedForeColor = ForeColor;
+            BackColor = GetHightlightColorFor(BackColor);
         }
 
         private Color GetHightlightColorFor(Color color)
@@ -160,13 +159,13 @@ namespace ToDoApp.UI.Controls
 
         private void AllControls_MouseDoubleClick(object sender, EventArgs e)
         {
-            new TaskInfoForm(this.Task).ShowDialog();
+            new TaskInfoForm(Task).ShowDialog();
             _controller.Select(this);
         }
 
         private void completedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.completedCheckBox.Checked)
+            if (completedCheckBox.Checked)
             {
                 _task.Complete();
             }
@@ -179,7 +178,9 @@ namespace ToDoApp.UI.Controls
         private void OnStateUpdate(object sender, StateChangedEventArgs args)
         {
             if (sender is Task task)
+            {
                 BindValues(task);
+            }
         }
 
         public void Rebind()
