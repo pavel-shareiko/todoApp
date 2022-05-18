@@ -192,6 +192,8 @@ namespace ToDoApp.Forms
                 {
                     conditions.Add(group, (condition, description));
                 }
+
+                MessageBox.Show($"Filter has been updated", "Filter updated", MessageBoxButtons.OK);
             }
 
             public Func<Task, bool> Build()

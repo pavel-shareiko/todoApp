@@ -1,8 +1,8 @@
-﻿using Logic.Tasks;
+﻿using Humanizer;
+using Logic.Tasks;
 using Logic.Utils;
 using NLog;
 using System;
-using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -54,17 +54,33 @@ namespace ToDoApp.UI.Controls
         {
             InitializeComponent();
 
-            this.Task = task ?? throw new ArgumentNullException(nameof(task));
             this._controller = controller ?? throw new ArgumentNullException(nameof(controller));
-            this.IsActive = !task.IsCompleted;
-            this.completedCheckBox.Checked = task.IsCompleted;
 
-            foreach (var control in taskLayout.Controls)
+            // causes BindValues()
+            this.Task = task ?? throw new ArgumentNullException(nameof(task));
+            ApplyTheme();
+
+            foreach (var control in taskLayout.Controls.Cast<Control>())
             {
-                ((Control)control).MouseClick += taskLayout_MouseClick;
-                ((Control)control).DoubleClick += AllControls_MouseDoubleClick;
+                control.MouseClick += taskLayout_MouseClick;
+                control.DoubleClick += AllControls_MouseDoubleClick;
             }
             _task.StateChanged += OnStateUpdate;
+        }
+
+        private void ApplyTheme()
+        {
+            if (IsActive)
+            {
+                if (Task.DeadLine < DateTime.Now)
+                {
+                    this.deadlineLabel.ForeColor = Color.Red;
+                }
+                else
+                {
+                    this.deadlineLabel.ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor();
+                }
+            }
         }
 
         private void BindValues(Task task)
@@ -83,7 +99,7 @@ namespace ToDoApp.UI.Controls
                 }
                 else
                 {
-                    this.deadlineLabel.Text = task.DeadLine.Value.ToString("ddddd, dd MMMM, yyyy");
+                    this.deadlineLabel.Text = task.DeadLine.Value.ToString("dddd, dd.MM.yyyy HH:mm");
                 }
             }
             catch (Exception e)
@@ -116,7 +132,7 @@ namespace ToDoApp.UI.Controls
             switch (Properties.Settings.Default.Theme)
             {
                 case Themes.Theme.Light:
-                    return Color.AliceBlue;
+                    return Color.FromArgb(20, 125, 249, 255);
                 case Themes.Theme.Dark:
                     return Color.DarkSlateBlue;
                 default:
