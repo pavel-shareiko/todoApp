@@ -62,6 +62,10 @@ namespace ToDoApp.Forms
                 (s, e) => filterBuilder.RemoveConditionGroup("DeadLine")));
             deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Not set", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => !t.DeadLine.HasValue, "Task has no deadline")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Set", null,
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine.HasValue, "Task has a deadline")));
+            deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Overdue", null,
+                (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine.HasValue && t.DeadLine.Value < DateTime.Now, "Task overdue")));
             deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Today", null,
                 (s, e) => filterBuilder.AddCondition("DeadLine", t => t.DeadLine?.Date <= DateTime.Today, "Task is due today")));
             deadLineToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Due Tomorrow", null,
