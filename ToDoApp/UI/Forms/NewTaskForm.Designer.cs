@@ -230,7 +230,7 @@ namespace ToDoApp.Forms
             this.nameTextBox.Size = new System.Drawing.Size(333, 23);
             this.nameTextBox.TabIndex = 1;
             // 
-            // NewTaskScreen
+            // NewTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -239,8 +239,8 @@ namespace ToDoApp.Forms
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "NewTaskScreen";
-            this.Text = "NewTaskForm";
+            this.Name = "NewTaskForm";
+            this.Text = "Create task";
             this.panel1.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.contentPanel.PerformLayout();

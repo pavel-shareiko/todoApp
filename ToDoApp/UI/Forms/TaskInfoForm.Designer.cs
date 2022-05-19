@@ -85,9 +85,9 @@
             this.Controls.Add(this.contentPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(450, 0);
+            this.MinimumSize = new System.Drawing.Size(450, 39);
             this.Name = "TaskInfoForm";
-            this.Text = "TaskInfoForm";
+            this.Text = "Details";
             ((System.ComponentModel.ISupportInitialize)(this.taskBindingSource)).EndInit();
             this.contentPanel.ResumeLayout(false);
             this.ResumeLayout(false);

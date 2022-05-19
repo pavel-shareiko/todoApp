@@ -260,7 +260,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EditTaskForm";
-            this.Text = "EditTaskForm";
+            this.Text = "Edit task";
             ((System.ComponentModel.ISupportInitialize)(this.taskBindingSource)).EndInit();
             this.contentPanel.ResumeLayout(false);
             this.contentPanel.PerformLayout();
