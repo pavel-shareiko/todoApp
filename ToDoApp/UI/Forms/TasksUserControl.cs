@@ -34,7 +34,7 @@ namespace ToDoApp.Forms
         private FilterBuilder filterBuilder;
         private void SetupFilterCms()
         {
-            filterBuilder = new FilterBuilder();
+            filterBuilder = new FilterBuilder(TaskController);
             resetToolStripMenuItem.Click += (s, e) =>
             {
                 filterBuilder.Reset();
@@ -177,8 +177,14 @@ namespace ToDoApp.Forms
         private class FilterBuilder
         {
             private readonly Dictionary<string, (Func<Task, bool> Condition, string Description)> conditions = new Dictionary<string, (Func<Task, bool>, string)>(StringComparer.OrdinalIgnoreCase);
+            private readonly TaskController _controller;
 
-            public void AddCondition(string group, Func<Task, bool> condition, string description)
+            public FilterBuilder(TaskController controller)
+            {
+                _controller = controller;
+            }
+
+            public void AddCondition(string group, Func<Task, bool> condition, string description, bool autoApply = true)
             {
                 if (conditions.ContainsKey(group))
                 {
@@ -189,7 +195,16 @@ namespace ToDoApp.Forms
                     conditions.Add(group, (condition, description));
                 }
 
-                MessageBox.Show($"Filter has been updated", "Filter updated", MessageBoxButtons.OK);
+                if (autoApply)
+                {
+                    ApplyFilter();
+                }
+            }
+
+            private void ApplyFilter()
+            {
+                _controller.Filter = Build();
+                _controller.ReloadTasksAsync();
             }
 
             public Func<Task, bool> Build()
@@ -203,9 +218,13 @@ namespace ToDoApp.Forms
                 conditions?.Clear();
             }
 
-            public void RemoveConditionGroup(string v)
+            public void RemoveConditionGroup(string group, bool autoApply = true)
             {
-                conditions?.Remove(v);
+                conditions.Remove(group);
+                if (autoApply)
+                {
+                    ApplyFilter();
+                }
             }
 
             public override string ToString()
