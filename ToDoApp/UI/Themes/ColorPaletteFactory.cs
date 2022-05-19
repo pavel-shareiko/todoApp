@@ -19,7 +19,7 @@ namespace ToDoApp.UI.Themes
             switch (applicationTheme)
             {
                 case Theme.Windows:
-                    Logger.Debug($"{applicationTheme } Theme factory will be applied to the application");
+                    Logger.Debug($"{applicationTheme} Theme factory will be applied to the application");
                     return new WindowsThemePalette();
                 case Theme.Dark:
                     Logger.Debug($"{applicationTheme} Theme factory will be applied to the application");

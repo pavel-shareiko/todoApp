@@ -1,6 +1,5 @@
 ﻿using Logic.Utils;
 using Microsoft.Toolkit.Uwp.Notifications;
-using Microsoft.Win32;
 using NLog;
 using System;
 using System.ComponentModel;
@@ -18,7 +17,6 @@ namespace ToDoApp.Forms
         [Category("Logging")] public bool IsLoggingEnabled { get; set; } = true;
         public UserControl CurrentScreen { get; private set; }
 
-        private readonly UserPreferenceChangedEventHandler _userPreferenceChanged;
         private TasksUserControl _tasksScreen;
         private HomeUserControl _homeScreen;
 
@@ -27,13 +25,6 @@ namespace ToDoApp.Forms
             InitializeComponent();
 
             ApplyTheme();
-
-            if (Properties.Settings.Default.Theme == UI.Themes.Theme.Windows)
-            {
-                _userPreferenceChanged = SystemEvents_UserPreferenceChanged;
-                SystemEvents.UserPreferenceChanged += _userPreferenceChanged;
-                Disposed += MainForm_Disposed;
-            }
 
             ShowHomeScreen();
 
@@ -87,19 +78,6 @@ namespace ToDoApp.Forms
         #endregion
 
         #region Event handlers
-
-        private void MainForm_Disposed(object sender, EventArgs e)
-        {
-            SystemEvents.UserPreferenceChanged -= _userPreferenceChanged;
-        }
-
-        private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
-        {
-            if (e.Category == UserPreferenceCategory.General || e.Category == UserPreferenceCategory.VisualStyle)
-            {
-                ApplyTheme();
-            }
-        }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
