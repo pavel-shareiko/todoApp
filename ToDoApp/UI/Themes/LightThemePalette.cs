@@ -24,6 +24,11 @@ namespace ToDoApp.UI.Themes
             return rgb(244, 244, 242);
         }
 
+        public Color GetHighlightColor()
+        {
+            return Color.FromArgb(20, 125, 249, 255);
+        }
+
         private Color rgb(byte red, byte green, byte blue)
         {
             return Color.FromArgb(red, green, blue);

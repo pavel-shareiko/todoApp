@@ -8,6 +8,7 @@ namespace ToDoApp.UI.Themes
         Color GetSecondaryColor();
         Color GetThirdColor();
         Color GetBackgroundColor();
+        Color GetHighlightColor();
     }
 
 }

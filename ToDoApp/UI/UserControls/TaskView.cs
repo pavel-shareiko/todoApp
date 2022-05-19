@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controllers;
 using ToDoApp.Forms;
+using ToDoApp.UI.Themes;
 
 namespace ToDoApp.UI.Controls
 {
@@ -123,33 +124,7 @@ namespace ToDoApp.UI.Controls
         {
             savedBackColor = BackColor;
             savedForeColor = ForeColor;
-            BackColor = GetHightlightColorFor(BackColor);
-        }
-
-        private Color GetHightlightColorFor(Color color)
-        {
-            switch (Properties.Settings.Default.Theme)
-            {
-                case Themes.Theme.Light:
-                    return Color.FromArgb(20, 125, 249, 255);
-                case Themes.Theme.Dark:
-                    return Color.DarkSlateBlue;
-                default:
-                    return CalculateHightlightColorFor(color);
-            }
-        }
-
-        private Color CalculateHightlightColorFor(Color color)
-        {
-            var red = color.R;
-            var green = color.G;
-            var blue = color.B;
-
-            var newRed = (int)(red * 0.95);
-            var newGreen = (int)(green * 0.95);
-            var newBlue = (int)(blue * 0.95);
-
-            return Color.FromArgb(newRed, newGreen, newBlue);
+            BackColor = ApplicationStyle.HighlightColor;
         }
 
         private void taskLayout_MouseDoubleClick(object sender, MouseEventArgs e)

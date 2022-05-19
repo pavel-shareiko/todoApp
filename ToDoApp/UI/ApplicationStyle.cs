@@ -14,6 +14,7 @@ namespace ToDoApp.UI
         public static Color ThirdColor { get; private set; }
 
         public static Color BackgroundColor { get; private set; }
+        public static Color HighlightColor { get; private set; }
 
         public static Color TextColor => BackgroundColor.GetContrastColor();
         public static Font Font => new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -35,6 +36,7 @@ namespace ToDoApp.UI
             SecondaryColor = ApplicationColorPalette.GetSecondaryColor();
             ThirdColor = ApplicationColorPalette.GetThirdColor();
             BackgroundColor = ApplicationColorPalette.GetBackgroundColor();
+            HighlightColor = ApplicationColorPalette.GetHighlightColor();
         }
     }
 }

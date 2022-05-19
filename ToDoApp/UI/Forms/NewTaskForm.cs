@@ -95,6 +95,7 @@ namespace ToDoApp.Forms
             MessageBox.Show("Task has been successfully created", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             taskBindingSource.Clear();
+            System.Threading.Tasks.Task.Run(() => TaskManager.Save());
 
             Dispose();
             Close();

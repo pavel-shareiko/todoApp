@@ -44,5 +44,10 @@ namespace ToDoApp.UI.Themes
         {
             return _colorPalette.GetBackgroundColor();
         }
+
+        public Color GetHighlightColor()
+        {
+            return _colorPalette.GetHighlightColor();
+        }
     }
 }

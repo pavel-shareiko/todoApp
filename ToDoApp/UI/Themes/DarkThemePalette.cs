@@ -23,5 +23,10 @@ namespace ToDoApp.UI.Themes
         {
             return Color.FromArgb(18, 18, 18);
         }
+
+        public Color GetHighlightColor()
+        {
+            return Color.DarkSlateBlue;
+        }
     }
 }

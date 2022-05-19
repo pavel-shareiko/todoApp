@@ -91,6 +91,8 @@ namespace ToDoApp.Forms
             MessageBox.Show("Task has been successfully updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             taskBindingSource.Clear();
+            System.Threading.Tasks.Task.Run(() => TaskManager.Save());
+
             Dispose();
             Close();
         }
