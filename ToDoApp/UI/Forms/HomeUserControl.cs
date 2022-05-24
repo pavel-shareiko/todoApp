@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controllers;
 using ToDoApp.Extensions;
+using ToDoApp.Tasks;
 
 namespace ToDoApp.UI.Forms
 {
@@ -56,7 +57,7 @@ namespace ToDoApp.UI.Forms
 
         private void UpdateGreetingsLabel()
         {
-            var tasksCount = UpcomingTasksController.GetTasksCount(t => !t.IsCompleted);
+            var tasksCount = TaskManager.GetTasksCount(t => !t.IsCompleted);
 
             if (tasksCount > 0)
             {
@@ -68,7 +69,7 @@ namespace ToDoApp.UI.Forms
             }
         }
 
-        private void reloadButton_Click(object sender, EventArgs e)
+        private void OnReloadButtonClicked(object sender, EventArgs e)
         {
             UpdateGreetingsLabel();
             AllTasksController.ReloadTasksAsync();

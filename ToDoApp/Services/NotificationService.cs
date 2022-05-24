@@ -49,9 +49,11 @@ namespace ToDoApp.Services
             var tasks = await TaskManager.GetTasksAsync(0, int.MaxValue,
                 selector: task => task.DeadLine != null &&
                           task.DeadLine.Value > DateTime.Now &&
-                          !_alreadyNotified.Contains(task));
+                          !_alreadyNotified.Contains(task) &&
+                          !task.IsCompleted);
 
             int notifyBefore = Properties.Settings.Default.NotifyBefore;
+
             foreach (var task in tasks)
             {
                 if (task.DeadLine.Value.Subtract(DateTime.Now).TotalMinutes <= notifyBefore)
@@ -63,14 +65,11 @@ namespace ToDoApp.Services
 
         private void Notify(Task task)
         {
-            var deadlineHumanized = (task.DeadLine.Value - DateTime.Now).Humanize(
-                maxUnit: Humanizer.Localisation.TimeUnit.Week,
-                minUnit: Humanizer.Localisation.TimeUnit.Second,
-                culture: new System.Globalization.CultureInfo("en-EN"));
+            var deadlineHumanized = (task.DeadLine.Value - DateTime.Now).Humanize(culture: new System.Globalization.CultureInfo("en-EN"));
 
             new ToastContentBuilder()
                 .AddText($"Don't miss the '{task.Name.Humanize()}' task deadline!")
-                .AddText($"The deadline is in {deadlineHumanized}")
+                .AddText($"The deadline is in {deadlineHumanized} ({task.DeadLine?.ToString("dd MMMM, HH:mm")})")
                 .AddText($"The task has {task.Importance.Humanize()} importance status")
 
                 .AddArgument("task", task.Id.ToString())

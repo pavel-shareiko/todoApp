@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Globalization;
 using System.IO;
 using ToDoApp.Tasks;
 using ToDoApp.Utils;
@@ -27,21 +29,29 @@ namespace ToDoApp.Repositories
 
         public void Save(Diary obj, bool writeIndented)
         {
-            if (obj is null)
+            Preconditions.RequireNonNull(obj);
+            var settings = new JsonSerializerSettings()
             {
-                throw new ArgumentNullException(nameof(obj));
-            }
+                Formatting = writeIndented
+                    ? Formatting.Indented
+                    : Formatting.None,
+                Culture = CultureInfo.CurrentCulture,
+            };
 
-            var json = JsonHelper<Diary>.Serialize(obj, writeIndented);
-            using (var sw = new StreamWriter(_filePath))
-            {
-                sw.WriteLine(json);
-            }
+            var json = JsonConvert.SerializeObject(obj, settings);
+            File.WriteAllText(_filePath, json);
         }
 
         public Diary Read()
         {
-            return JsonHelper<Diary>.DeserializeFromFile(_filePath);
+            Preconditions.RequireNonEmptyString(_filePath);
+            if (!File.Exists(_filePath))
+            {
+                return new Diary();
+            }
+
+            var json = File.ReadAllText(_filePath);
+            return JsonConvert.DeserializeObject<Diary>(json);
         }
     }
 }

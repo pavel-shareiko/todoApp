@@ -80,7 +80,7 @@ namespace ToDoApp.Controllers
 
         public Func<Task, bool> Filter { get; internal set; }
 
-        public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount() / (double)PageSize);
+        public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount(Filter) / (double)PageSize);
 
         public Logger Logger => LogManager.GetCurrentClassLogger();
         #endregion
@@ -95,8 +95,6 @@ namespace ToDoApp.Controllers
         #endregion
 
         #region Methods
-        public int GetTasksCount(Func<Task, bool> selector = null) => TaskManager.GetTasksCount(selector);
-
         public void Select(TaskView taskView)
         {
             if (taskView == null)
@@ -123,15 +121,15 @@ namespace ToDoApp.Controllers
             SelectedItem.Hightlight();
         }
 
-        public void Delete(TaskView selectedItem)
+        public void Delete(TaskView taskView)
         {
-            if (selectedItem == null)
+            if (taskView == null)
             {
-                this.Log(LogLevel.Error, $"{nameof(selectedItem)} cannot be null");
-                throw new ArgumentNullException(nameof(selectedItem));
+                this.Log(LogLevel.Error, $"{nameof(taskView)} cannot be null");
+                throw new ArgumentNullException(nameof(taskView));
             }
 
-            TaskManager.RemoveTask(selectedItem.Task);
+            TaskManager.RemoveTask(taskView.Task);
             ReloadTasksAsync();
         }
 
@@ -219,6 +217,11 @@ namespace ToDoApp.Controllers
             {
                 x.Dispose();
             });
+        }
+
+        ~TaskController()
+        {
+            Dispose();
         }
         #endregion
 

@@ -7,7 +7,6 @@ using ToDoApp.Controllers;
 using ToDoApp.Extensions;
 using ToDoApp.Forms;
 using ToDoApp.Tasks;
-using ToDoApp.UI.Themes;
 using ToDoApp.Utils;
 
 namespace ToDoApp.UI.Controls
@@ -63,8 +62,8 @@ namespace ToDoApp.UI.Controls
 
             foreach (var control in taskLayout.Controls.Cast<Control>())
             {
-                control.MouseClick += taskLayout_MouseClick;
-                control.DoubleClick += AllControls_MouseDoubleClick;
+                control.MouseClick += OnTaskLayoutClicked;
+                control.DoubleClick += OnAnyControlDoubleClicked;
             }
             _task.StateChanged += OnStateUpdate;
         }
@@ -108,7 +107,7 @@ namespace ToDoApp.UI.Controls
                 this.LogException(e);
             }
         }
-        private void taskLayout_MouseClick(object sender, MouseEventArgs e)
+        private void OnTaskLayoutClicked(object sender, MouseEventArgs e)
         {
             _controller.Select(this);
         }
@@ -128,18 +127,18 @@ namespace ToDoApp.UI.Controls
             BackColor = ApplicationStyle.HighlightColor;
         }
 
-        private void taskLayout_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void OnTaskLayoutDoubleClicked(object sender, MouseEventArgs e)
         {
-            AllControls_MouseDoubleClick(sender, e);
+            OnAnyControlDoubleClicked(sender, e);
         }
 
-        private void AllControls_MouseDoubleClick(object sender, EventArgs e)
+        private void OnAnyControlDoubleClicked(object sender, EventArgs e)
         {
             new TaskInfoForm(Task).ShowDialog();
             _controller.Select(this);
         }
 
-        private void completedCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void OnCompletedCheckboxCheckedChanged(object sender, EventArgs e)
         {
             if (completedCheckBox.Checked)
             {
@@ -168,8 +167,8 @@ namespace ToDoApp.UI.Controls
         {
             foreach (var control in taskLayout.Controls)
             {
-                ((Control)control).MouseClick -= taskLayout_MouseClick;
-                ((Control)control).DoubleClick -= AllControls_MouseDoubleClick;
+                ((Control)control).MouseClick -= OnTaskLayoutClicked;
+                ((Control)control).DoubleClick -= OnAnyControlDoubleClicked;
             }
 
             _task.StateChanged -= OnStateUpdate;

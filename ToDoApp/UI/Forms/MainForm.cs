@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoApp.Controllers;
 using ToDoApp.Extensions;
 using ToDoApp.Tasks;
 using ToDoApp.UI;
@@ -17,18 +18,16 @@ namespace ToDoApp.Forms
     {
         public Logger Logger { get; } = LogManager.GetCurrentClassLogger();
         [Category("Logging")] public bool IsLoggingEnabled { get; set; } = true;
-        public UserControl CurrentScreen { get; private set; }
 
-        private TasksUserControl _tasksScreen;
-        private HomeUserControl _homeScreen;
+        private readonly MainFormController _controller;
 
         public MainForm()
         {
             InitializeComponent();
 
+            _controller = new MainFormController(contentPanel);
+            _controller.ShowHomeScreen();
             ApplyTheme();
-
-            ShowHomeScreen();
 
             this.Log(LogLevel.Debug, "Main form initialized successfully");
         }
@@ -47,41 +46,11 @@ namespace ToDoApp.Forms
                 button.IconColor = button.TextColor;
             }
         }
-
-        private void ShowHomeScreen()
-        {
-            if (_homeScreen == null)
-            {
-                _homeScreen = new HomeUserControl();
-            }
-
-            CurrentScreen = _homeScreen;
-            _homeScreen.ApplyToPanel(contentPanel);
-        }
-
-        private void ShowTasksScreen()
-        {
-            if (_tasksScreen == null)
-            {
-                _tasksScreen = new TasksUserControl();
-            }
-
-            CurrentScreen = _tasksScreen;
-            _tasksScreen.ApplyToPanel(contentPanel);
-        }
-
-        private void ShowSettingsScreen()
-        {
-            var settingsScreen = new SettingsUserControl();
-            CurrentScreen = settingsScreen;
-            settingsScreen.ApplyToPanel(contentPanel);
-        }
-
         #endregion
 
         #region Event handlers
 
-        private void exitButton_Click(object sender, EventArgs e)
+        private void OnExitButtonClicked(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -96,37 +65,22 @@ namespace ToDoApp.Forms
             Application.Exit();
         }
 
-        private void homeButton_Click(object sender, EventArgs e)
+        private void OnHomeButtonClicked(object sender, EventArgs e)
         {
-            if (CurrentScreen is HomeUserControl)
-            {
-                return;
-            }
-
-            ShowHomeScreen();
+            _controller.ShowHomeScreen();
         }
 
-        private void tasksButton_Click(object sender, EventArgs e)
+        private void OnTasksButtonClicked(object sender, EventArgs e)
         {
-            if (CurrentScreen is TasksUserControl)
-            {
-                return;
-            }
-
-            ShowTasksScreen();
+            _controller.ShowTasksScreen();
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
+        private void OnSettingsButtonClicked(object sender, EventArgs e)
         {
-            if (CurrentScreen is SettingsUserControl)
-            {
-                return;
-            }
-
-            ShowSettingsScreen();
+            _controller.ShowSettingsScreen();
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
             TaskManager.Save();
             ToastNotificationManagerCompat.History.Clear();

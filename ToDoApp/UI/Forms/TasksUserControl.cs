@@ -43,13 +43,6 @@ namespace ToDoApp.Forms
                 TaskController.ReloadTasksAsync();
             };
 
-            filterToolStripMenuItem.Click += (s, e) =>
-            {
-                var filter = filterBuilder.Build();
-                TaskController.Filter = filter;
-                TaskController.ReloadTasksAsync();
-            };
-
             currentFilterToolStripMenuItem.Click += (s, e) => MessageBox.Show(filterBuilder.ToString(), "Info");
 
             completionStatusToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("All", null,
@@ -105,12 +98,12 @@ namespace ToDoApp.Forms
             paginationPanel.Controls.OfType<IconPictureBox>().ToList().ForEach(x => x.IconColor = ApplicationStyle.AccentColor);
         }
 
-        private void newButton_Click(object sender, System.EventArgs e)
+        private void OnNewButtonClicked(object sender, System.EventArgs e)
         {
             new NewTaskForm().ShowDialog();
             TaskController.ReloadTasksAsync();
         }
-        private void editButton_Click(object sender, System.EventArgs e)
+        private void OnEditButtonClicked(object sender, System.EventArgs e)
         {
             if (TaskController.SelectedItem == null)
             {
@@ -123,7 +116,7 @@ namespace ToDoApp.Forms
             TaskController.ReloadTasksAsync();
         }
 
-        private void deleteButton_Click(object sender, System.EventArgs e)
+        private void OnDeleteButtonClicked(object sender, System.EventArgs e)
         {
             if (TaskController.SelectedItem == null)
             {
@@ -138,7 +131,7 @@ namespace ToDoApp.Forms
             }
         }
 
-        private void detailsButton_Click(object sender, System.EventArgs e)
+        private void OnDetailsButtonClicked(object sender, System.EventArgs e)
         {
             if (TaskController.SelectedItem == null)
             {
@@ -148,12 +141,12 @@ namespace ToDoApp.Forms
             new TaskInfoForm(TaskController.SelectedItem.Task).ShowDialog();
         }
 
-        private void nextPageButton_Click(object sender, System.EventArgs e)
+        private void OnNextPageButtonClicked(object sender, System.EventArgs e)
         {
             PageController.IncreasePage();
         }
 
-        private void prevPageButton_Click(object sender, System.EventArgs e)
+        private void OnPrevPageButtonClicked(object sender, System.EventArgs e)
         {
             PageController.DecreasePage();
         }
@@ -163,12 +156,12 @@ namespace ToDoApp.Forms
             PageController.UpdatePageControl();
         }
 
-        private void reloadButton_Click(object sender, EventArgs e)
+        private void OnReloadButtonClicked(object sender, EventArgs e)
         {
             TaskController.ReloadTasksAsync();
         }
 
-        private void filterButton_Click(object sender, EventArgs e)
+        private void OnFilterButtonClicked(object sender, EventArgs e)
         {
             filterButton.ContextMenuStrip?.Show(filterButton, new System.Drawing.Point(filterButton.Width / 2, filterButton.Height / 2));
         }

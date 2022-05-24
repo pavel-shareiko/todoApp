@@ -202,7 +202,7 @@
             this.reloadButton.Text = "Reload";
             this.reloadButton.TextColor = System.Drawing.Color.White;
             this.reloadButton.UseVisualStyleBackColor = false;
-            this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
+            this.reloadButton.Click += new System.EventHandler(this.OnReloadButtonClicked);
             // 
             // HomeScreen
             // 

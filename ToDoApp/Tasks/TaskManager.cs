@@ -9,21 +9,21 @@ namespace ToDoApp.Tasks
     {
         public static Diary Diary { get; private set; }
         public static IEnumerable<Task> Tasks => Diary.Tasks;
+        private static readonly IRepository<Diary> repository;
 
         static TaskManager()
         {
+            repository = new DiaryFileRepository(Properties.Settings.Default.DiarySaveFileName);
             Load();
         }
 
         public static void Load()
         {
-            var repository = new DiaryFileRepository(Properties.Settings.Default.DiarySaveFileName);
             Diary = repository.Read();
         }
 
         public static void Save()
         {
-            var repository = new DiaryFileRepository(Properties.Settings.Default.DiarySaveFileName);
             repository.Save(Diary);
         }
 

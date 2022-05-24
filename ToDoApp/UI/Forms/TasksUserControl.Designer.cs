@@ -34,7 +34,6 @@
             this.filterCms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deadLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,54 +115,47 @@
             this.filterButton.Text = "Filter";
             this.filterButton.TextColor = System.Drawing.Color.White;
             this.filterButton.UseVisualStyleBackColor = false;
-            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
+            this.filterButton.Click += new System.EventHandler(this.OnFilterButtonClicked);
             // 
             // filterCms
             // 
             this.filterCms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetToolStripMenuItem,
             this.currentFilterToolStripMenuItem,
-            this.filterToolStripMenuItem,
             this.importanceToolStripMenuItem,
             this.completionStatusToolStripMenuItem,
             this.deadLineToolStripMenuItem});
             this.filterCms.Name = "filterCms";
-            this.filterCms.Size = new System.Drawing.Size(173, 136);
+            this.filterCms.Size = new System.Drawing.Size(181, 136);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "(Reset)";
             // 
             // currentFilterToolStripMenuItem
             // 
             this.currentFilterToolStripMenuItem.Name = "currentFilterToolStripMenuItem";
-            this.currentFilterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.currentFilterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.currentFilterToolStripMenuItem.Text = "(Current Filter)";
-            // 
-            // filterToolStripMenuItem
-            // 
-            this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.filterToolStripMenuItem.Text = "(Apply Filter)";
             // 
             // importanceToolStripMenuItem
             // 
             this.importanceToolStripMenuItem.Name = "importanceToolStripMenuItem";
-            this.importanceToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.importanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importanceToolStripMenuItem.Text = "Importance";
             // 
             // completionStatusToolStripMenuItem
             // 
             this.completionStatusToolStripMenuItem.Name = "completionStatusToolStripMenuItem";
-            this.completionStatusToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.completionStatusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.completionStatusToolStripMenuItem.Text = "Completion Status";
             // 
             // deadLineToolStripMenuItem
             // 
             this.deadLineToolStripMenuItem.Name = "deadLineToolStripMenuItem";
-            this.deadLineToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.deadLineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deadLineToolStripMenuItem.Text = "DeadLine";
             // 
             // reloadButton
@@ -193,7 +185,7 @@
             this.reloadButton.Text = "Reload";
             this.reloadButton.TextColor = System.Drawing.Color.White;
             this.reloadButton.UseVisualStyleBackColor = false;
-            this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
+            this.reloadButton.Click += new System.EventHandler(this.OnReloadButtonClicked);
             // 
             // paginationPanel
             // 
@@ -232,7 +224,7 @@
             this.nextPageButton.Size = new System.Drawing.Size(28, 39);
             this.nextPageButton.TabIndex = 4;
             this.nextPageButton.TabStop = false;
-            this.nextPageButton.Click += new System.EventHandler(this.nextPageButton_Click);
+            this.nextPageButton.Click += new System.EventHandler(this.OnNextPageButtonClicked);
             // 
             // prevPageButton
             // 
@@ -248,7 +240,7 @@
             this.prevPageButton.Size = new System.Drawing.Size(28, 39);
             this.prevPageButton.TabIndex = 3;
             this.prevPageButton.TabStop = false;
-            this.prevPageButton.Click += new System.EventHandler(this.prevPageButton_Click);
+            this.prevPageButton.Click += new System.EventHandler(this.OnPrevPageButtonClicked);
             // 
             // detailsButton
             // 
@@ -277,7 +269,7 @@
             this.detailsButton.Text = "Details";
             this.detailsButton.TextColor = System.Drawing.Color.White;
             this.detailsButton.UseVisualStyleBackColor = false;
-            this.detailsButton.Click += new System.EventHandler(this.detailsButton_Click);
+            this.detailsButton.Click += new System.EventHandler(this.OnDetailsButtonClicked);
             // 
             // editButton
             // 
@@ -306,7 +298,7 @@
             this.editButton.Text = "Edit";
             this.editButton.TextColor = System.Drawing.Color.White;
             this.editButton.UseVisualStyleBackColor = false;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.OnEditButtonClicked);
             // 
             // deleteButton
             // 
@@ -335,7 +327,7 @@
             this.deleteButton.Text = "Delete";
             this.deleteButton.TextColor = System.Drawing.Color.White;
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.OnDeleteButtonClicked);
             // 
             // newButton
             // 
@@ -364,7 +356,7 @@
             this.newButton.Text = "New";
             this.newButton.TextColor = System.Drawing.Color.White;
             this.newButton.UseVisualStyleBackColor = false;
-            this.newButton.Click += new System.EventHandler(this.newButton_Click);
+            this.newButton.Click += new System.EventHandler(this.OnNewButtonClicked);
             // 
             // contentPanel
             // 
@@ -413,7 +405,7 @@
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.56449F));
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.17743F));
             this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.62903F));
-            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.taskLayoutHeaders.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.taskLayoutHeaders.Controls.Add(this.descriptionLabel, 1, 0);
             this.taskLayoutHeaders.Controls.Add(this.importanceLabel, 2, 0);
             this.taskLayoutHeaders.Controls.Add(this.deadlineLabel, 3, 0);
@@ -432,9 +424,9 @@
             this.descriptionLabel.AutoEllipsis = true;
             this.descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.descriptionLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.descriptionLabel.Location = new System.Drawing.Point(310, 0);
+            this.descriptionLabel.Location = new System.Drawing.Point(309, 0);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(495, 47);
+            this.descriptionLabel.Size = new System.Drawing.Size(494, 47);
             this.descriptionLabel.TabIndex = 1;
             this.descriptionLabel.Tag = "Description";
             this.descriptionLabel.Text = "Task description";
@@ -445,7 +437,7 @@
             this.importanceLabel.AutoEllipsis = true;
             this.importanceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.importanceLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.importanceLabel.Location = new System.Drawing.Point(811, 0);
+            this.importanceLabel.Location = new System.Drawing.Point(809, 0);
             this.importanceLabel.Name = "importanceLabel";
             this.importanceLabel.Size = new System.Drawing.Size(178, 47);
             this.importanceLabel.TabIndex = 2;
@@ -458,9 +450,9 @@
             this.deadlineLabel.AutoEllipsis = true;
             this.deadlineLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deadlineLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deadlineLabel.Location = new System.Drawing.Point(995, 0);
+            this.deadlineLabel.Location = new System.Drawing.Point(993, 0);
             this.deadlineLabel.Name = "deadlineLabel";
-            this.deadlineLabel.Size = new System.Drawing.Size(301, 47);
+            this.deadlineLabel.Size = new System.Drawing.Size(300, 47);
             this.deadlineLabel.TabIndex = 3;
             this.deadlineLabel.Tag = "Deadline";
             this.deadlineLabel.Text = "Deadline";
@@ -474,7 +466,7 @@
             this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.nameLabel.Location = new System.Drawing.Point(3, 0);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(301, 47);
+            this.nameLabel.Size = new System.Drawing.Size(300, 47);
             this.nameLabel.TabIndex = 0;
             this.nameLabel.Tag = "Name";
             this.nameLabel.Text = "Task name";
@@ -485,9 +477,9 @@
             this.completedLabel.AutoSize = true;
             this.completedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.completedLabel.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.completedLabel.Location = new System.Drawing.Point(1302, 0);
+            this.completedLabel.Location = new System.Drawing.Point(1299, 0);
             this.completedLabel.Name = "completedLabel";
-            this.completedLabel.Size = new System.Drawing.Size(81, 47);
+            this.completedLabel.Size = new System.Drawing.Size(84, 47);
             this.completedLabel.TabIndex = 4;
             this.completedLabel.Text = "Completed";
             this.completedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -515,7 +507,7 @@
             this.headerPanel.Size = new System.Drawing.Size(1402, 47);
             this.headerPanel.TabIndex = 0;
             // 
-            // TasksScreen
+            // TasksUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -524,7 +516,7 @@
             this.Controls.Add(this.headerPanel);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "TasksScreen";
+            this.Name = "TasksUserControl";
             this.Size = new System.Drawing.Size(1402, 758);
             this.controlsPanel.ResumeLayout(false);
             this.filterCms.ResumeLayout(false);
@@ -570,7 +562,6 @@
         private System.Windows.Forms.ToolStripMenuItem completionStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deadLineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentFilterToolStripMenuItem;
     }
 }

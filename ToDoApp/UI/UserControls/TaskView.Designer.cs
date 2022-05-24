@@ -58,8 +58,8 @@
             this.taskLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.taskLayout.Size = new System.Drawing.Size(545, 33);
             this.taskLayout.TabIndex = 0;
-            this.taskLayout.MouseClick += new System.Windows.Forms.MouseEventHandler(this.taskLayout_MouseClick);
-            this.taskLayout.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.taskLayout_MouseDoubleClick);
+            this.taskLayout.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnTaskLayoutClicked);
+            this.taskLayout.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnTaskLayoutDoubleClicked);
             // 
             // descriptionLabel
             // 
@@ -128,7 +128,7 @@
             this.completedCheckBox.Tag = "Is Completed";
             this.completedCheckBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.completedCheckBox.UseVisualStyleBackColor = true;
-            this.completedCheckBox.CheckedChanged += new System.EventHandler(this.completedCheckBox_CheckedChanged);
+            this.completedCheckBox.CheckedChanged += new System.EventHandler(this.OnCompletedCheckboxCheckedChanged);
             // 
             // TaskView
             // 

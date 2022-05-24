@@ -85,7 +85,7 @@
             this.settingsButton.Text = "Settings";
             this.settingsButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
             this.settingsButton.UseVisualStyleBackColor = false;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.settingsButton.Click += new System.EventHandler(this.OnSettingsButtonClicked);
             // 
             // tasksButton
             // 
@@ -112,7 +112,7 @@
             this.tasksButton.Text = "Tasks";
             this.tasksButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tasksButton.UseVisualStyleBackColor = false;
-            this.tasksButton.Click += new System.EventHandler(this.tasksButton_Click);
+            this.tasksButton.Click += new System.EventHandler(this.OnTasksButtonClicked);
             // 
             // homeButton
             // 
@@ -139,7 +139,7 @@
             this.homeButton.Text = "Home";
             this.homeButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
             this.homeButton.UseVisualStyleBackColor = false;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
+            this.homeButton.Click += new System.EventHandler(this.OnHomeButtonClicked);
             // 
             // exitButton
             // 
@@ -166,7 +166,7 @@
             this.exitButton.Text = "Exit";
             this.exitButton.TextColor = System.Drawing.SystemColors.ButtonHighlight;
             this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Click += new System.EventHandler(this.OnExitButtonClicked);
             // 
             // MainForm
             // 
@@ -182,7 +182,7 @@
             this.Name = "MainForm";
             this.Text = "ToDo App";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.menuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
