@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoApp.Controls
+namespace ToDoApp.Other
 {
     public class TasksLoadedEventArgs : EventArgs
     {

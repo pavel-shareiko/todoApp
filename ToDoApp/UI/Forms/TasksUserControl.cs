@@ -1,12 +1,13 @@
 ﻿using FontAwesome.Sharp;
 using Humanizer;
-using Logic.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controllers;
-using ToDoApp.Controls;
+using ToDoApp.Extensions;
+using ToDoApp.Other;
+using ToDoApp.Tasks;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
 

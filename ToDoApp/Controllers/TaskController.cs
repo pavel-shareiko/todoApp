@@ -1,14 +1,15 @@
-﻿using Logic.Tasks;
-using Logic.Utils;
-using NLog;
+﻿using NLog;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ToDoApp.Controls;
+using ToDoApp.Extensions;
+using ToDoApp.Other;
+using ToDoApp.Tasks;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
 using ToDoApp.UI.UserControls;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ToDoApp.UI
+namespace ToDoApp.Extensions
 {
     public static class ColorExtension
     {

@@ -20,16 +20,16 @@ namespace ToDoApp.UI.Themes
             {
                 case Theme.Windows:
                     Logger.Debug($"{applicationTheme} Theme factory will be applied to the application");
-                    return new WindowsThemePalette();
+                    return new WindowsColorPalette();
                 case Theme.Dark:
                     Logger.Debug($"{applicationTheme} Theme factory will be applied to the application");
-                    return new DarkThemePalette();
+                    return new DarkColorPalette();
                 case Theme.Light:
                     Logger.Debug($"{applicationTheme} Theme factory will be applied to the application");
-                    return new LightThemePalette();
+                    return new LightColorPalette();
                 default:
                     Logger.Warn($"{applicationTheme} is not a valid theme. Applying the default one. Please, fix the configuration file");
-                    return new WindowsThemePalette();
+                    return new WindowsColorPalette();
             }
         }
     }

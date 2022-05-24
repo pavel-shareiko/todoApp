@@ -1,13 +1,15 @@
-﻿using Logic.Utils;
-using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 using NLog;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoApp.Extensions;
+using ToDoApp.Tasks;
 using ToDoApp.UI;
 using ToDoApp.UI.Controls;
 using ToDoApp.UI.Forms;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Forms
 {

@@ -1,6 +1,6 @@
-﻿using Logic.Utils;
-using NLog;
+﻿using NLog;
 using System.Windows.Forms;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Controllers
 {

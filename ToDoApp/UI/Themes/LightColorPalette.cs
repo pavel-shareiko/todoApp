@@ -2,7 +2,7 @@
 
 namespace ToDoApp.UI.Themes
 {
-    public class LightThemePalette : IColorPalette
+    public class LightColorPalette : IColorPalette
     {
         public Color GetAccentColor()
         {

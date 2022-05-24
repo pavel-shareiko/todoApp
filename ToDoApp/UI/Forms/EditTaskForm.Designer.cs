@@ -1,4 +1,6 @@
-﻿namespace ToDoApp.Forms
+﻿using ToDoApp.Tasks;
+
+namespace ToDoApp.Forms
 {
     partial class EditTaskForm
     {
@@ -125,7 +127,7 @@
             // 
             // taskBindingSource
             // 
-            this.taskBindingSource.DataSource = typeof(Logic.Tasks.Task);
+            this.taskBindingSource.DataSource = typeof(Task);
             // 
             // contentPanel
             // 

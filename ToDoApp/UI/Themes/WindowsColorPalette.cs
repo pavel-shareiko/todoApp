@@ -3,14 +3,14 @@ using System.Runtime.InteropServices;
 
 namespace ToDoApp.UI.Themes
 {
-    public class WindowsThemePalette : IColorPalette
+    public class WindowsColorPalette : IColorPalette
     {
 
         [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
         public static extern bool ShouldSystemUseDarkMode();
 
         private readonly IColorPalette _colorPalette;
-        public WindowsThemePalette()
+        public WindowsColorPalette()
         {
             _colorPalette = GetColorPalette();
         }
@@ -19,10 +19,10 @@ namespace ToDoApp.UI.Themes
         {
             if (ShouldSystemUseDarkMode())
             {
-                return new DarkThemePalette();
+                return new DarkColorPalette();
             }
 
-            return new LightThemePalette();
+            return new LightColorPalette();
         }
 
         public Color GetAccentColor()

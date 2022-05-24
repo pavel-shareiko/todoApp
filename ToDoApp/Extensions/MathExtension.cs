@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToDoApp.UI
+namespace ToDoApp.Extensions
 {
     public static class MathExtension
     {

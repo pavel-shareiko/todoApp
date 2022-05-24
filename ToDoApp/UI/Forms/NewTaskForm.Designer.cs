@@ -1,4 +1,4 @@
-﻿using Logic.Tasks;
+﻿using ToDoApp.Tasks;
 
 namespace ToDoApp.Forms
 {
@@ -153,7 +153,7 @@ namespace ToDoApp.Forms
             // 
             // taskBindingSource
             // 
-            this.taskBindingSource.DataSource = typeof(Logic.Tasks.Task);
+            this.taskBindingSource.DataSource = typeof(Task);
             // 
             // controlsPanel
             // 

@@ -1,11 +1,9 @@
-﻿using Logic.Repositories;
-using Logic.Tasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tasks;
+using ToDoApp.Repositories;
 
-namespace ToDoApp
+namespace ToDoApp.Tasks
 {
     public static class TaskManager
     {

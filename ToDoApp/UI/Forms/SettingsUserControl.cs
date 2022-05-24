@@ -1,10 +1,11 @@
-﻿using Logic.Utils;
-using NLog;
+﻿using NLog;
 using System;
 using System.Linq;
 using System.Windows.Forms;
 using ToDoApp.Controllers;
+using ToDoApp.Extensions;
 using ToDoApp.UI;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Forms
 {

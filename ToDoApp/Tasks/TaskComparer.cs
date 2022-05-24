@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace ToDoApp.Controls
+namespace ToDoApp.Tasks
 {
-    public class TaskComparer : IComparer<Logic.Tasks.Task>
+    public class TaskComparer : IComparer<Task>
     {
-        public int Compare(Logic.Tasks.Task x, Logic.Tasks.Task y)
+        public int Compare(Task x, Task y)
         {
             // The comparison should be reversed because the list is sorted in descending order
             // The most important factor is the deadline, then comes the importance, and then the creation date

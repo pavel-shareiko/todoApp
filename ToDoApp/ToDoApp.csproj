@@ -56,13 +56,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DependsOnAttribute.cs" />
+    <Compile Include="Attributes\HiddenAttribute.cs" />
+    <Compile Include="Attributes\OrderAttribute.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Other\TaskComparer.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Tasks\Diary.cs" />
+    <Compile Include="Tasks\TaskComparer.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Other\TasksLoadedEventArgs.cs" />
+    <Compile Include="Repositories\DiaryFileRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\NotificationService.cs" />
-    <Compile Include="TaskManager.cs" />
+    <Compile Include="Tasks\TaskManager.cs" />
+    <Compile Include="Tasks\StateChangedEventArgs.cs" />
+    <Compile Include="Tasks\Task.cs" />
+    <Compile Include="Tasks\TaskImportance.cs" />
     <Compile Include="UI\Forms\EditTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,16 +132,19 @@
     <Compile Include="UI\UserControls\TaskView.Designer.cs">
       <DependentUpon>TaskView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\FormExtension.cs" />
     <Compile Include="Extensions\MathExtension.cs" />
     <Compile Include="UI\ApplicationStyle.cs" />
-    <Compile Include="UI\Themes\DarkThemePalette.cs" />
-    <Compile Include="UI\Themes\WindowsThemePalette.cs" />
-    <Compile Include="UI\Themes\LightThemePalette.cs" />
+    <Compile Include="UI\Themes\DarkColorPalette.cs" />
+    <Compile Include="UI\Themes\WindowsColorPalette.cs" />
+    <Compile Include="UI\Themes\LightColorPalette.cs" />
     <Compile Include="UI\Themes\Theme.cs" />
     <Compile Include="UI\Themes\IColorPalette.cs" />
     <Compile Include="UI\Themes\ColorPaletteFactory.cs" />
+    <Compile Include="Utils\ILoggable.cs" />
+    <Compile Include="Utils\JsonHelper.cs" />
+    <Compile Include="Utils\LogHelper.cs" />
+    <Compile Include="Utils\Preconditions.cs" />
     <EmbeddedResource Include="Controllers\TaskController.resx">
       <DependentUpon>TaskController.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +190,7 @@
     </None>
     <None Include="Properties\DataSources\Logic.Tasks.Task.datasource" />
     <None Include="Properties\DataSources\Session.datasource" />
+    <None Include="Properties\DataSources\ToDoApp.Tasks.Task.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -186,12 +200,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{7738d629-1083-40cc-b754-697e75fe68fd}</Project>
-      <Name>Logic</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Font.Awesome">
@@ -208,6 +216,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="NLog">
       <Version>5.0.0-rc2</Version>

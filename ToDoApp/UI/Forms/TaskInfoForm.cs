@@ -1,11 +1,12 @@
 ﻿using Humanizer;
-using Logic.Attributes;
-using Logic.Tasks;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using ToDoApp.Attributes;
+using ToDoApp.Extensions;
+using ToDoApp.Tasks;
 using ToDoApp.UI;
 
 namespace ToDoApp.Forms
