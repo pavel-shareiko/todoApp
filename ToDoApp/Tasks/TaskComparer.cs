@@ -6,10 +6,6 @@ namespace ToDoApp.Tasks
     {
         public int Compare(Task x, Task y)
         {
-            // The comparison should be reversed because the list is sorted in descending order
-            // The most important factor is the deadline, then comes the importance, and then the creation date
-            // Completed tasks have the lowest priority
-
             if (x.IsCompleted && !y.IsCompleted)
             {
                 return 1;

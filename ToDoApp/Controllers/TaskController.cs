@@ -16,11 +16,10 @@ namespace ToDoApp.Controllers
     public class TaskController : ILoggable, IDisposable
     {
         #region Fields
-        private readonly Panel tasksPanel;
+        private readonly Panel _tasksPanel;
 
         private int _page = 1;
         private int _pageSize = Properties.Settings.Default.PageSize;
-        private readonly Func<Task, bool> selector;
         #endregion
 
         #region Events
@@ -78,7 +77,7 @@ namespace ToDoApp.Controllers
             }
         }
 
-        public Func<Task, bool> Filter { get; internal set; }
+        public Func<Task, bool> Filter { get; set; }
 
         public int TotalPages => (int)Math.Ceiling(TaskManager.GetTasksCount(Filter) / (double)PageSize);
 
@@ -87,10 +86,10 @@ namespace ToDoApp.Controllers
 
         #region Constructors
 
-        public TaskController(Panel tasksPanel, Func<Task, bool> selector = null)
+        public TaskController(Panel tasksPanel, Func<Task, bool> initialFilter = null)
         {
-            this.tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
-            this.selector = selector;
+            this._tasksPanel = tasksPanel ?? throw new ArgumentNullException("Tasks panel cannot be null");
+            this.Filter = initialFilter;
         }
         #endregion
 
@@ -135,8 +134,8 @@ namespace ToDoApp.Controllers
 
         public async void ReloadTasksAsync()
         {
-            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * PageSize, PageSize, new TaskComparer(), selector ?? Filter);
-            tasksPanel.Controls.Clear();
+            var tasksToShowTask = TaskManager.GetTasksAsync((Page - 1) * PageSize, PageSize, new TaskComparer(), Filter);
+            _tasksPanel.Controls.Clear();
             var tasksToShow = await tasksToShowTask;
 
             if (tasksToShow.Count == 0)
@@ -151,7 +150,7 @@ namespace ToDoApp.Controllers
                 _page = 1;
             }
 
-            var controls = tasksPanel.Controls;
+            var controls = _tasksPanel.Controls;
             OnTasksLoading();
 
             await System.Threading.Tasks.Task.Run(() =>
@@ -164,14 +163,14 @@ namespace ToDoApp.Controllers
                         var view = CreateTaskViewForTask(tasksToShow[i]);
 
                         // window descriptor can be not loaded yet
-                        while (!tasksPanel.InvokeRequired)
+                        while (!_tasksPanel.InvokeRequired)
                         {
                             System.Threading.Thread.Sleep(10);
                         }
 
-                        tasksPanel.Invoke((MethodInvoker)delegate
+                        _tasksPanel.Invoke((MethodInvoker)delegate
                         {
-                            tasksPanel.Controls.Add(view);
+                            _tasksPanel.Controls.Add(view);
                         });
                     }
                 }
@@ -201,7 +200,7 @@ namespace ToDoApp.Controllers
                 {
                     Text = "No tasks to show",
                     AutoSize = false,
-                    Parent = tasksPanel,
+                    Parent = _tasksPanel,
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.TopCenter,
                     ForeColor = ApplicationStyle.BackgroundColor.GetContrastColor()
@@ -213,7 +212,7 @@ namespace ToDoApp.Controllers
 
         public void Dispose()
         {
-            tasksPanel.Controls.OfType<TaskView>().ToList().ForEach(x =>
+            _tasksPanel.Controls.OfType<TaskView>().ToList().ForEach(x =>
             {
                 x.Dispose();
             });
@@ -241,10 +240,10 @@ namespace ToDoApp.Controllers
             spinner = new Spinner()
             {
                 BackColor = Color.FromArgb(30, bgColor.R, bgColor.G, bgColor.B),
-                Size = tasksPanel.Size,
+                Size = _tasksPanel.Size,
                 Visible = true
             };
-            tasksPanel.Controls.Add(spinner);
+            _tasksPanel.Controls.Add(spinner);
 
             IsLoading = true;
 
@@ -255,7 +254,7 @@ namespace ToDoApp.Controllers
         {
             if (spinner != null)
             {
-                tasksPanel.Controls.Remove(spinner);
+                _tasksPanel.Controls.Remove(spinner);
                 spinner.Visible = false;
                 spinner.Dispose();
                 spinner = null;
